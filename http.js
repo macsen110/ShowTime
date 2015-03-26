@@ -1,10 +1,6 @@
 
-var //restify = require('restify'),
-    //ecstatic = require('ecstatic'),
-    url  = require("url"),
-    //path = require("path"),
+var url  = require("url"),
     http = require('http'),
-    //fs   = require("fs"),
     readUri = require('./readUri');
     server = new http.Server();
 
@@ -13,17 +9,23 @@ server.on('request',function(req,res,next){
     var pathname=__dirname+url.parse(req.url).pathname;
     var api = req.url;
     if (api.indexOf('api') === 1) {
+        if (api === '/api/promise') {
+            res.end('promise ok')
+        }
 
     }
     else{
-        if (api!=="/" && api.indexOf('.html') === -1) {
-            pathname+=".html";
+        if (api.indexOf('.') === -1) {
+            if (api!=="/") {
+                pathname+=".html";
+            }
+            else {
+                pathname += "index.html"
+            }
         }
-        else {
-            pathname += "index.html"
-        }
+        readUri.read(pathname,res);
     }
-    readUri.read(pathname,res);
+    
 
 })
 server.listen(3000,server.name, function() {

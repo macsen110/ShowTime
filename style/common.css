@@ -1,0 +1,76 @@
+/********base*******/
+*{ -webkit-text-size-adjust: none;-webkit-transform-origin-x: 0}
+html {font-size: 250%;/*10*4 ÷ 16 × 100% = 250%*/;}/********正常视口下根目录大小为40px**********/
+body {font-size: 0.9rem;/*1.4 × 10px = 14px */}/**********正常视口下body 默认字体大小36px*********/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,button,textarea,p,blockquote,th,td{
+    font-family: "Verdana","Helvetica","Hiragino Sans GB","Segoe UI","Microsoft Yahei","微软雅黑",Tahoma,Arial,STHeiti,sans-serif;margin:0;padding:0; list-style:none; color:#404040;outline:none;
+    line-height: 1.5;
+    box-sizing: border-box;
+}
+section { 
+	min-width: 320px; 
+	margin:0 auto
+}
+strong,
+em,
+i { 
+	font-weight:normal;
+	font-style:normal;
+	outline: medium none;
+}
+a,
+img,
+input,
+button {
+	border:none; 
+	outline: none
+}
+:focus {
+	outline: none
+}
+button { 
+	background: none
+}
+img { 
+	vertical-align:top
+}
+table { 
+	border-collapse: collapse; 
+	width: 100%;
+}
+body{ 
+	overflow-x: hidden
+}
+/********comm******/
+.l {
+	float:left
+}
+.r {
+	float:right
+}
+.clear{ 
+	zoom:1;
+}
+.clear:after { 
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+}
+.db{
+	display: block
+}
+.btn {
+	height:2.25rem; 
+	line-height: 2.25rem; 
+	padding:0 .8rem;
+	border-radius: 0.25rem; 
+	text-align: center; 
+	color: #fff; 
+	background: #37c685; 
+	font-size: 1.25rem
+}
+
+}
