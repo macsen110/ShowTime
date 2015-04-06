@@ -9,8 +9,8 @@ define(function(require, exports, module){
 			var _xhr = new XMLHttpRequest();
 			_xhr.open("GET",'api/promise');
 			_xhr.onload = function(){
-				if(_xhr.readyState == 4){
-					if(_xhr.status == 200){
+				if(_xhr.readyState === 4){
+					if(_xhr.status === 200){
 					 
 						//all is well. Our action is successfully completed.
 						// We should resolve our Promise.

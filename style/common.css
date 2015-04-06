@@ -1,10 +1,19 @@
 /********base*******/
 *{ -webkit-text-size-adjust: none;-webkit-transform-origin-x: 0}
-html {font-size: 250%;/*10*4 ÷ 16 × 100% = 250%*/;}/********正常视口下根目录大小为40px**********/
-body {font-size: 0.9rem;/*1.4 × 10px = 14px */}/**********正常视口下body 默认字体大小36px*********/
+html {
+	font-size: 62.5%;
+}
+body {
+	font-size: 1.4rem;
+}
+html,
+body {
+	height: 100%;
+}
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,button,textarea,p,blockquote,th,td{
     font-family: "Verdana","Helvetica","Hiragino Sans GB","Segoe UI","Microsoft Yahei","微软雅黑",Tahoma,Arial,STHeiti,sans-serif;margin:0;padding:0; list-style:none; color:#404040;outline:none;
     line-height: 1.5;
+    background: #eee;
     box-sizing: border-box;
 }
 section { 
@@ -59,6 +68,14 @@ body{
 	overflow: hidden;
 	visibility: hidden;
 }
+
+.wrap {
+	width: 90%;
+	height: 100%;
+	margin:0 auto;
+	background-color: #fff;
+	box-shadow: 0 0 .3rem rgba(0,0,0,.2)
+}
 .db{
 	display: block
 }
@@ -73,4 +90,7 @@ body{
 	font-size: 1.25rem
 }
 
+.title {
+	padding: 1.5rem 0;	
+	color: #999;	
 }
