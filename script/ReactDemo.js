@@ -1,6 +1,6 @@
 //console.log(typeof React);
 React.render(
-	<h1>hello,ReactJs</h1>,
+	<a href="http://www.baidu.com">hello,ReactJs</a>,
 	document.getElementById('hello-react')
 )
 //create a comment
@@ -68,16 +68,21 @@ React.render(
 )
 
 var CommentProp = React.createClass({
-  render: function() {
-    return (
-      <div className="comment">
-        <h2>
-          {this.props.author}
-        </h2>
-       {this.props.children}
-      </div>
-    );
-  }
+	selfAttr: 'My own Attr',
+	clickHandle: function() {
+		alert('oops')
+	},
+	render: function() {
+		return (
+		  <div className="comment">
+		    <h2>
+		      {this.props.author}
+		    </h2>
+		    <div onClick={this.clickHandle}>{this.selfAttr}</div>
+		   {this.props.children}
+		  </div>
+		);
+	}
 });
 React.render(
 	<CommentProp  author='Macsen2' children="ccc"/>,
@@ -100,9 +105,7 @@ var CommentPropItem = React.createClass({
 var CommentPropList = React.createClass({
   render: function() {
     return (
-
     	<CommentPropItem author="PropItem">this is text as child</CommentPropItem>
-
     );
   }
 });
@@ -115,15 +118,26 @@ React.render(
 
 var CommentUrl = React.createClass({
 	test: function() {console.log('test')},
+	getInitialState: function () {
+		return {
+			liked: false
+		}
+	}, 
 	componentDidMount: function() {
+		var that = this;
 		this.test();
+		setTimeout(function () {
+			that.setState({liked: !that.state.liked});
+		}, 2000)
 		console.log('oops')
 		var promise = new Promise( function(resolve, reject ){
+
 			var _xhr = new XMLHttpRequest();
-			_xhr.open("GET",'api/promise');
+			_xhr.open("GET", this.props.url);
 			_xhr.onload = function(){
 				if(_xhr.readyState === 4){
 					if(_xhr.status === 200){
+						console.log(that.props.url + ' ' + that.state.liked)
 					 
 						//all is well. Our action is successfully completed.
 						// We should resolve our Promise.
@@ -139,14 +153,14 @@ var CommentUrl = React.createClass({
 					 
 					}
 				}
-			}
+			};
 			_xhr.onerror = function(error){
 			 
 				console.log(error);
 			}
 			_xhr.send()		
 
-		})
+		}.bind(this))
 		promise.then(function(data) {
 			console.log('data:'+data)
 
@@ -157,12 +171,12 @@ var CommentUrl = React.createClass({
 	},
 	render: function() {
 		return (
-			<div className="url"></div>
+			<div className="url">{this.state.liked.toString()}</div>
 		)
 	}
 })
 
 React.render(
-  <CommentUrl url="comments.json" />,
+  <CommentUrl url="api/promise" />,
   document.getElementById('res-server')
 );

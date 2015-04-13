@@ -8,7 +8,6 @@ server.name = "www.showtime.com";
 server.on('request',function(req,res,next){
     var pathname=__dirname+url.parse(req.url).pathname;
     var api = req.url;
-    console.log(url.protocol);
     if (api.indexOf('api') === 1) {
         if (api === '/api/promise') {
             res.end('promise ok')

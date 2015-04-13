@@ -4,6 +4,26 @@ define(function(require, exports, module){
 	if(promiseBtn) {
 		promiseBtn.addEventListener('click',promiseGet,false)
 	}
+	document.onreadystatechange = function () {
+		if (document.readyState == "complete") {
+		//initApplication();
+			setTimeout(function() {
+				var p = document.createElement("p");
+				p.id = "Ansy";
+				p.innerText = "sss";
+				p.addEventListener('click',function() {
+					console.log('plice')
+				}, false)
+				document.body.appendChild(p)
+			},1000)
+		}
+	}
+	var ansyDom = document.getElementById('Ansy');
+	if (ansyDom) {
+		ansyDom.addEventListener('click',function () {
+			console.log(2222)
+		},false)
+	}
 	function promiseGet() {
 		var promise = new Promise(function(resolve,reject) {
 			var _xhr = new XMLHttpRequest();
