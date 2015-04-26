@@ -171,7 +171,8 @@ var CommentUrl = React.createClass({
 	},
 	render: function() {
 		return (
-			<div className="url">{this.state.liked.toString()}</div>
+			<div className="url">{this.state.liked.toString()}<div><input type="text" name="title" defaultValue="Untitled" /></div></div>
+			
 		)
 	}
 })
