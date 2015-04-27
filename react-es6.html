@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+...
+<body>
+<h1 id="message"></h1>
+
+<script src="script/react-with-addons.js"></script>
+<script type="text/javascript" src="script/JSXTransformer.js"></script>
+<script type="text/jsx;harmony=true">
+
+    React.render(<a href="http://www.baidu.com">hello,ReactJs</a>,document.getElementById('hello-react'));
+
+    class HelloMessage extends React.Component {
+      render() {
+        return <div>Hello {this.props.name}</div>;
+      }
+    }
+
+    React.render(<HelloMessage name="Sebastian" />, document.getElementById('hello-react2'));
+      class Greeter {
+        constructor(message) {
+          this.message = message;
+        }
+
+        greet() {
+          var element = document.querySelector('#message');
+          element.innerHTML = this.message;
+        }
+      };
+
+      var greeter = new Greeter('Hello, world!');
+      greeter.greet();
+      function* anotherGenerator(i) {
+    yield i + 1;
+    yield i + 2;
+    yield i + 3;
+}
+
+function* generator(i){
+    yield i;
+    yield* anotherGenerator(i);
+    yield i + 10;
+}
+
+var gen = generator(10);
+
+console.log(gen.next().value);
+    </script>
+...
+
+<div id="hello-react"></div>
+<div id="hello-react2"></div>
+</body>
+</html>
