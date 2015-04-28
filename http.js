@@ -8,8 +8,8 @@ server.name = "www.showtime.com";
 server.on('request',function(req,res,next){
     var pathname=__dirname+url.parse(req.url).pathname;
     var api = req.url;
-    if (api === '/testrouter') {
-        pathname = __dirname + '/reactrouter'
+    if (api.indexOf('router') != -1) {
+        pathname = __dirname + '/router'
         //res.end(pathname)
     }
     if (api.indexOf('api') === 1) {
