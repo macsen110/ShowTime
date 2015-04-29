@@ -11,11 +11,12 @@ var Redirect = Router.Redirect;
 var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
+var mockProp = {bar: 'bar'};
 
 var Index = React.createClass({
     render: function () {
         return (
-            <div className="wrap-container">
+            <div className="wrap-container" >
                 <RouteHandler/>
             </div>
         )
