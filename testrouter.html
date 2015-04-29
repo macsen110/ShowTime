@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type= "text/css" href="style/common.css">
+	<script src="script/react-with-addons.js"></script>
+	<script type="text/javascript" src="script/JSXTransformer.js"></script>
+	<script type="text/javascript" src="ReactRouter.min.js"></script>
+	<script type="text/jsx">
+		var Router = ReactRouter; // or var Router = ReactRouter; in browsers
+var DefaultRoute = Router.DefaultRoute;
+var Link = Router.Link;
+var Route = Router.Route;
+var RouteHandler = Router.RouteHandler;
+
+var App = React.createClass({
+  render: function () {
+    return (
+      <div>
+        <header>
+          <ul>
+            <li><Link to="app">Dashboard</Link></li>
+            <li><Link to="inbox">Inbox</Link></li>
+          </ul>
+          Logged in as Jane
+        </header>
+
+        {/* this is the important part */}
+        <RouteHandler/>
+      </div>
+    );
+  }
+});
+
+var routes = (
+  <Route name="app" path="/" handler={App}>
+    <Route name="inbox" handler={Inbox}/>
+ </Route>
+);
+
+Router.run(routes, function (Handler) {
+  React.render(<Handler/>, document.body);
+});
+	</script>
+
+
+</head>
+<body>
+
+
+
+		
+	
+
+</body>
+</html>
