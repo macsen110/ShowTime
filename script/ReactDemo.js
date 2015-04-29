@@ -112,7 +112,7 @@ var CommentPropItem = React.createClass({
 var CommentPropList = React.createClass({
   render: function() {
     return (
-    	<CommentPropItem author="PropItem">this is text as child</CommentPropItem>
+    	<CommentPropItem id={ 2>1 ? id = "sssss" : ''} author="PropItem">this is text as child</CommentPropItem>
     );
   }
 });
@@ -136,7 +136,6 @@ var CommentUrl = React.createClass({
 		setTimeout(function () {
 			that.setState({liked: !that.state.liked});
 		}, 2000)
-		console.log('oops')
 		var promise = new Promise( function(resolve, reject ){
 
 			var _xhr = new XMLHttpRequest();
@@ -144,7 +143,7 @@ var CommentUrl = React.createClass({
 			_xhr.onload = function(){
 				if(_xhr.readyState === 4){
 					if(_xhr.status === 200){
-						console.log(that.props.url + ' ' + that.state.liked)
+						console.log(this.props.url + ' ' + this.state.liked)
 					 
 						//all is well. Our action is successfully completed.
 						// We should resolve our Promise.
