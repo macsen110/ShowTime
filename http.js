@@ -16,6 +16,14 @@ server.on('request',function(req,res,next){
         if (api === '/api/promise') {
             res.end('promise ok')
         }
+        if (api === '/api/router') {
+            var obj = {
+                code: 0,
+                data: [1,2,3],
+                msg: 'ok'
+            }
+            res.end(JSON.stringify(obj))
+        }
 
     }
     else{
