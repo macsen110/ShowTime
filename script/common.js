@@ -64,7 +64,7 @@ define(function(require, exports, module){
 	}
 })
 
-//ĞòÁĞ»¯±íµ¥Êı¾İ
+//åºåˆ—åŒ–è¡¨å•æ•°æ®
 function serialize(form) {
     if (!form || form.nodeName !== "FORM") {
         return;
