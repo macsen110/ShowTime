@@ -96,6 +96,15 @@ testSet.add(1)
 console.log(testSet.has(1));
 
 let testSetArr = new Set([1,1,2,2,4]);
+
+
+
+for (let i of testSetArr) {
+    console.log('testSetArr'+ i)
+}
+
+testSetArr.forEach((value, key) => value*2 );
+
 console.log(typeof testSetArr);
 //很方便数组去重,貌似某些brower 不支持
 var uniqueArr = Array.from(new Set([1,4]));
@@ -103,3 +112,22 @@ console.log(uniqueArr);
 //另外的一种去重
 let uniqueArr2 = [...testSetArr];
 console.log(uniqueArr2)
+
+//实现交集,并集
+
+let a = new Set([1,2,3]);let b = new Set([4,3,2]);
+let union = new Set([...a, ...b]);
+console.log('并集实现' + [...union]);
+// [1,2,3,4]
+let intersect = new Set([...a].filter(x => b.has(x)));
+console.log('交集实现' + [...intersect]);
+
+//Map
+
+
+
+
+
+
+
+
