@@ -1,0 +1,1 @@
+var fs = require('fs');var src = fs.readFileSync('file.txt');alert(src)

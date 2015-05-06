@@ -4,18 +4,18 @@ React.render(
 	document.getElementById('hello-react')
 )
 //create a comment
-var mockProp = {bar: 'bar'};
-var Comment = React.createClass({
-	componentDidMount: function () {
-		alert(this.props.bar)
-	},
-	render: function() {
-		return (
-			<div className="box">Creat a Comment to Html</div>		
-		)
-	}
-})
-React.render(<Comment {...mockProp}/>,document.getElementById('commentBox'))
+//var mockProp = {bar: 'bar'};
+//var Comment = React.createClass({
+//	componentDidMount: function () {
+//		alert(this.props.bar)
+//	},
+//	render: function() {
+//		return (
+//			<div className="box">Creat a Comment to Html</div>
+//		)
+//	}
+//})
+//React.render(<Comment {...mockProp}/>,document.getElementById('commentBox'))
 
 //create a comment by another method
 

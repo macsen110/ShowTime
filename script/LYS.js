@@ -1,7 +1,7 @@
 /**********
  * Vision 1.1.
  * ***********/
-define(function(require, exports, module){
+//var LYS = function(require, exports, module){
     var LYS = LYS || function(q,c){return LYS.dom?LYS.dom(q,c):null};
     console.log(LYS);
     //设置global
@@ -42,8 +42,7 @@ define(function(require, exports, module){
     LYS.isArray =  function (unknow){
         return Object.prototype.toString.call(unknow) === '[object Array]';
     }
-    module.exports = LYS;
-})
-
+   //return LYS;
+//}
 
 
