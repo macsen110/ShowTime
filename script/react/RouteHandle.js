@@ -180,7 +180,7 @@ var NotFound = React.createClass({
 })
 
 var routes = (
-    <Route handler={Index} path="/router" >
+    <Route handler={Index} path="/reflux/" >
         <DefaultRoute handler={App} name="app" />
         <Route name="params" path="params/:messageId"  handler={Params} />
         <Redirect from="/router/redirect" to="params" params={{messageId:555}} />
