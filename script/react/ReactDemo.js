@@ -123,26 +123,30 @@ React.render(
 )
 
 var CommentUrl = React.createClass({
-	test: function() {console.log('test')},
+	statics: {
+		test: function () {
+			console.log(this.custom)
+		}
+	},
+	custom: '008',
 	getInitialState: function () {
+		console.log(this.custom + 'getInitialState');
 		return {
 			liked: false
 		}
 	}, 
 	componentDidMount: function() {
+		console.log(this.custom + 'componentDidMount');
 		var that = this;
-		this.test();
 		setTimeout(function () {
 			that.setState({liked: !that.state.liked});
 		}, 2000)
 		var promise = new Promise( function(resolve, reject ){
-
 			var _xhr = new XMLHttpRequest();
 			_xhr.open("GET", this.props.url);
 			_xhr.onload = function(){
 				if(_xhr.readyState === 4){
 					if(_xhr.status === 200){
-						console.log(this.props.url + ' ' + this.state.liked)
 					 
 						//all is well. Our action is successfully completed.
 						// We should resolve our Promise.
@@ -181,8 +185,9 @@ var CommentUrl = React.createClass({
 		)
 	}
 })
+CommentUrl.test();
 
 React.render(
-  <CommentUrl url="api/promise" />,
+  <CommentUrl url="/api/promise" />,
   document.getElementById('res-server')
 );

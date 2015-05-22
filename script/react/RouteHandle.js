@@ -4,7 +4,7 @@
 
 * **********/
 
-'use strict'
+'use strict';
 
 var Router = ReactRouter; // or var Router = ReactRouter; in browsers
 var DefaultRoute = Router.DefaultRoute;
@@ -13,6 +13,11 @@ var Redirect = Router.Redirect;
 var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
+
+
+
+
+
 
 var Index = React.createClass({
     render: function () {
@@ -24,71 +29,68 @@ var Index = React.createClass({
     }
 });
 
-function getJSON(url) {
-  if (getJSON._cache[url])
-    return Promise.resolve(getJSON._cache[url]);
+//function getJSON(url) {
+//    if (getJSON._cache[url]) {
+//       // return Promise.resolve(getJSON._cache[url]);
+//    }
+//    return new Promise((resolve, reject) => {
+//        var req = new XMLHttpRequest();
+//        req.onload = function () {
+//          if (req.status === 404) {
+//            reject(new Error('not found'));
+//          } else {
+//            // fake a slow response every now and then
+//            setTimeout(function () {
+//              var data = JSON.parse(req.response);
+//              resolve(data);
+//              getJSON._cache[url] = data;
+//            }, 2000);
+//          }
+//        };
+//        req.open('GET', url);
+//        req.send();
+//    });
+//}
+//
+//getJSON._cache = {};
+//
+//getJSON('/api/router').then(function (res) {console.log(res)});
 
-  return new Promise((resolve, reject) => {
-    var req = new XMLHttpRequest();
-    req.onload = function () {
-      if (req.status === 404) {
-        reject(new Error('not found'));
-      } else {
-        // fake a slow response every now and then
-        setTimeout(function () {
-          var data = JSON.parse(req.response);
-          resolve(data);
-          getJSON._cache[url] = data;
-        }, 2000);
-      }
-    };
-    req.open('GET', url);
-    req.send();
-  });
-}
-
-getJSON._cache = {};
-
-getJSON('/api/router').then(function (res) {console.log(res)});
-
-function testObj() {
-    var dd;
-    var c = new Promise((resolve, reject) => {
-        var req = new XMLHttpRequest();
-        req.onload = function () {
-          if (req.status === 404) {
-            reject(new Error('not found'));
-          } else {
-            // fake a slow response every now and then
-            setTimeout(function () {
-              var data = JSON.parse(req.response);
-              resolve(data);
-              getJSON._cache[url] = data;
-            }, 2000);
-          }
-        };
-        req.open('GET', url);
-        req.send();
-
-    });
-    c.then(function(obj) {
-        dd = obj
-    })
-    return dd;
-}
+//function testObj() {
+//    var dd;
+//    var c = new Promise((resolve, reject) => {
+//        var req = new XMLHttpRequest();
+//        req.onload = function () {
+//          if (req.status === 404) {
+//            reject(new Error('not found'));
+//          } else {
+//            // fake a slow response every now and then
+//            setTimeout(function () {
+//              var data = JSON.parse(req.response);
+//              resolve(data);
+//              getJSON._cache[url] = data;
+//            }, 2000);
+//          }
+//        };
+//        req.open('GET', url);
+//        req.send();
+//
+//    });
+//    c.then(function(obj) {
+//        dd = obj
+//    })
+//    return dd;
+//}
 
 
 var App = React.createClass({
     statics: {
-        aa: function () {
-            alert('boy')
-        },
         willTransitionTo: function (transition, params) {
-            console.log('ssss');
+            console.log('coming');
 
         },
         willTransitionFrom: function (transition, component) {
-            console.log('eeeee')
+            console.log('leaving')
         }
     },
     getInitialState: function () {
@@ -114,7 +116,6 @@ var App = React.createClass({
                        else{
                            var error = new Error("something went wrong");
                            reject(error);
-
                        }
                    }
                 };
@@ -180,7 +181,7 @@ var NotFound = React.createClass({
 })
 
 var routes = (
-    <Route handler={Index} path="/reflux/" >
+    <Route handler={Index} path="/" >
         <DefaultRoute handler={App} name="app" />
         <Route name="params" path="params/:messageId"  handler={Params} />
         <Redirect from="/router/redirect" to="params" params={{messageId:555}} />
@@ -188,6 +189,8 @@ var routes = (
     </Route>
 );
 
-Router.run(routes,Router.HistoryLocation, function (Handler, state) {
+//Router.HistoryLocation参数代表绝对地址链接
+
+Router.run(routes,function (Handler, state) {
     React.render(<Handler/>, document.body);
 });
