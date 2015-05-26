@@ -90,6 +90,16 @@ class Greeter {
 
 var greeter = new Greeter('Hello, world!');
 greeter.greet();
+
+class GreeterChild extends Greeter {
+	greet() {
+		var element = document.querySelector('#message');
+		element.innerHTML = this.message + 1;
+	}
+}
+
+var greeterChild = new GreeterChild('oops');
+greeterChild.greet();
 //set 是一种数据结构,类似于数组,类型为对象,不是数组
 let testSet = new Set();
 testSet.add(1)
@@ -105,7 +115,7 @@ for (let i of testSetArr) {
 
 testSetArr.forEach((value, key) => value*2 );
 
-console.log(typeof testSetArr);
+console.log(testSetArr);
 //很方便数组去重,貌似某些brower 不支持
 var uniqueArr = Array.from(new Set([1,4]));
 console.log(uniqueArr);
@@ -138,6 +148,26 @@ var g =f();
 console.log(g.next());
 console.log(g.next());
 console.log(g.next(true));
+
+//es6 js模板
+var tempVarible = 'i \'m ok';
+var c = `ssss
+<b>aa${tempVarible}aa</b>`;
+
+console.log(String.raw`aaa`);
+console.log(Array.of(1,2,3,4));
+let [DestructA,DestructB] = [0,1];
+console.log(DestructA);
+var {foo, bar} = {foo:'xxxx', bar:'yyyy'};
+
+//函数的默认参数
+function name(params = 0) {
+	alert(params)
+}
+name();
+
+//import module in es6
+
 
 
 

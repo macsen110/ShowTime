@@ -4,13 +4,17 @@ React.render(
 	document.getElementById('hello-react')
 )
 //create a comment
-var mockProp = {bar: 'bar'};
+var Mockbar = 'bar';
+var Mockfoo = 'foo'; 
+var mockProp = {Mockbar,Mockfoo};
 var Comment = React.createClass({
 	componentDidMount: function () {
+		console.log('refs',this.refs.aaa);
+		console.log(typeof React.findDOMNode(this.refs.aaa))
 	},
 	render: function() {
 		return (
-			<div className="box">Creat a Comment to Html</div>
+			<a className="box" ref="aaa" key={this.Mockbar} href="http://www.baidu.com">Creat a Comment to Html</a>
 		)
 	}
 })
@@ -35,29 +39,50 @@ React.render(
 
 var CommentList = React.createClass({
 	render: function() {
+		var self = this;
 		return (
-	      <div className="commentList">
-	        Hello, world! I am a CommentList.
+	      <div className="commentList" dangerouslySetInnerHTML={{__html:'<span>Hello, world! I am a CommentList' + self.props.index +'</span>'}}>
 	      </div>
 		)
 	}
 }) 
 
-var CommentForm = React.createClass({
-  render: function() {
-    return (
-      <div className="commentForm">
-        Hello, world! I am a CommentForm.
-      </div>
-    );
-  }
+var CommentForm = React.createClass({	
+	render: function() {
+		return (
+		  <div className="commentForm" >
+		    Hello, world! I am a CommentForm .
+		  </div>
+		);
+	}
 });
 
 var CommentMix = React.createClass({
+	getInitialState: function () {
+		return {
+			mockData: [1,2,3,4]
+		}
+		
+	},
+	componentWillMount: function (params) {
+		
+		this.setState({mockData:[1,2]})
+	},
+	componentDidMount: function () {
+		setTimeout(function () {
+			var pushArr = this.state.mockData;
+			pushArr.push(6);
+			this.setState({mockData:pushArr})	
+		}.bind(this), 1000)
+	},
 	render: function() {
+		var mockData = this.state.mockData;
+		var ccc = mockData.map(function (i) {
+			return <CommentList index={i} key={i} />
+		})
 		return (
 			<div className="CommentMix">
-				<CommentList />
+				{ccc}
 				<CommentForm />
 			</div>
 		)
@@ -85,13 +110,14 @@ var CommentProp = React.createClass({
 		    <div>{'First \u00b7 Second'}</div>
 			<div>{'First ' + String.fromCharCode(183) + ' Second'}</div>
 			<div>{['First ', <span>&middot;</span>, ' Second']}</div>
-		   {this.props.children}
+			{React.Children.count}
 		  </div>
 		);
 	}
 });
+
 React.render(
-	<CommentProp  author='Macsen2' children="ccc"/>,
+	<CommentProp  author='Macsen2'/>,
 	document.getElementById('use-props')
 )
 
@@ -147,24 +173,15 @@ var CommentUrl = React.createClass({
 			_xhr.onload = function(){
 				if(_xhr.readyState === 4){
 					if(_xhr.status === 200){
-					 
-						//all is well. Our action is successfully completed.
-						// We should resolve our Promise.
 						resolve(_xhr.response);
-					 
 					}
 					else{
-					 
-						//not so good. Something went wrong somewhere.
-						// We will reject the Promise made.
 						var error = new Error("something went wrong");
 						reject(error);
-					 
 					}
 				}
 			};
 			_xhr.onerror = function(error){
-			 
 				console.log(error);
 			}
 			_xhr.send()		
@@ -191,3 +208,84 @@ React.render(
   <CommentUrl url="/api/promise" />,
   document.getElementById('res-server')
 );
+
+var ChildComment = React.createClass({
+	
+	render: function () {
+		return (<div>child</div>)
+	}
+})
+
+var ParentComment = React.createClass({
+	clickFunKey: function (key) {
+		console.log(key)
+	},
+	render: function () {
+		return (
+		<div>
+			<div onClick = {this.clickFunKey.bind(this, this.props.key)}>1111</div>
+			parent
+			<ChildComment autor='string' />
+		</div>
+		)
+	}
+})
+
+React.render(
+	<ParentComment key="1" ikey="1"/>,
+	document.getElementById('react-parent')
+)
+
+
+//parnets and Child
+
+var SetIntervalMixin = {
+	componentWillMount: function() {
+		this.intervals = [];
+	},
+	setInterval: function() {
+		this.intervals.push(setInterval.apply(null, arguments));
+	},
+	componentWillUnmount: function() {
+		this.intervals.map(clearInterval);
+	}
+
+};
+
+var TickTock = React.createClass({
+  mixins: [SetIntervalMixin], // Use the mixin
+  getInitialState: function() {
+    return {seconds: 0};
+  },
+  componentDidMount: function() {
+    this.setInterval(this.tick, 1000); // Call a method on the mixin
+  },
+  tick: function() {
+    this.setState({seconds: this.state.seconds + 1});
+  },
+  render: function() {
+    return (
+      <p>
+        React has been running for {this.state.seconds} seconds.
+      </p>
+    );
+  }
+});
+
+React.render(
+  <TickTock />,
+  document.getElementById('react-mixins')
+);
+
+var PropsEle = React.createClass({
+	propTypes: function () {
+		aa: 'aaaaaa'
+	},
+	render: function () {
+		return (<div>{this.props.aa}</div>)
+	}
+	
+})
+
+React.render(<PropsEle aa="900" />, document.getElementById('prop-types'))
+
