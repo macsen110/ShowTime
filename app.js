@@ -10,7 +10,7 @@ server.on('request',function(req,res,next){
     if (api.indexOf('/api/') !== -1) {
         var apiHref = api.slice(api.indexOf('/api/')+5);
         console.log(apiHref);
-        res.end(handleApi(apiHref));
+        res.end(handleApi(apiHref,req));
 
     }
     else{
@@ -22,11 +22,11 @@ server.on('request',function(req,res,next){
     }
 })
 
-function handleApi(url) {
+function handleApi(url,req) {
     switch (url) {
         case 'promise' : 
             var demo = require('./api/reactdemo');
-            return demo(url);
+            return demo(url,req);
             break
         case 'router' :
             var router = require('./api/router');

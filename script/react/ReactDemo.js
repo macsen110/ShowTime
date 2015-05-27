@@ -13,10 +13,9 @@ var Comment = React.createClass({
 		console.log(typeof React.findDOMNode(this.refs.aaa))
 	},
 	render: function() {
-		return (
-			<a className="box" ref="aaa" key={this.Mockbar} href="http://www.baidu.com">Creat a Comment to Html</a>
-		)
-	}
+        React.renderToStaticMarkup(React.DOM.img());
+        return React.DOM.img({ alt: 'ref2' }, null);
+    }
 })
 React.render(<Comment {...mockProp}/>,document.getElementById('commentBox'))
 
@@ -47,16 +46,6 @@ var CommentList = React.createClass({
 	}
 }) 
 
-var CommentForm = React.createClass({	
-	render: function() {
-		return (
-		  <div className="commentForm" >
-		    Hello, world! I am a CommentForm .
-		  </div>
-		);
-	}
-});
-
 var CommentMix = React.createClass({
 	getInitialState: function () {
 		return {
@@ -83,7 +72,6 @@ var CommentMix = React.createClass({
 		return (
 			<div className="CommentMix">
 				{ccc}
-				<CommentForm />
 			</div>
 		)
 
@@ -289,3 +277,96 @@ var PropsEle = React.createClass({
 
 React.render(<PropsEle aa="900" />, document.getElementById('prop-types'))
 
+
+var CommentForm = React.createClass({
+  handleSubmit: function(e) {
+    e.preventDefault();
+    var author = React.findDOMNode(this.refs.author).value.trim();
+    var text = React.findDOMNode(this.refs.text).value.trim();
+    if (!text || !author) {
+		console.log('oops')
+      return;
+    }
+	console.log(React.findDOMNode(this.refs.text));
+	  var formData = new FormData(React.findDOMNode(this.refs.form))
+  	console.log(formData);
+	this.props.onCommentSubmit(formData);
+	//this.props.onCommentSubmit({author: author, text: text});
+    // TODO: send request to the server
+    React.findDOMNode(this.refs.author).value = '';
+    React.findDOMNode(this.refs.text).value = '';
+    return;
+  },
+  render: function() {
+    return (
+      <form className="commentForm" onSubmit={this.handleSubmit} ref = 'form'>
+        <input type="text" placeholder="Your name" ref="author"  name="autor"/>
+        <input type="text" placeholder="Say something..." ref="text" name="text" />
+        <input type="submit" value="Post" />
+      </form>
+    );
+  }
+});
+
+var CommentFormBox = React.createClass({
+  loadCommentsFromServer: function() {
+    var _xhr = new XMLHttpRequest();
+	_xhr.open("GET", this.props.url);
+	_xhr.onload = function(){
+		if(_xhr.readyState === 4){
+			if(_xhr.status === 200){
+				console.log(_xhr.response);
+			}
+			else{
+				var error = new Error("something went wrong");
+				console.log(error);
+			}
+		}
+	};
+	_xhr.onerror = function(error){
+		console.log(error);
+	}
+	_xhr.send()		
+  },
+  handleCommentSubmit: function(comment) {
+    var comments = this.state.data;
+    var newComments = comments.concat([comment]);
+    this.setState({data: newComments});
+    var _xhr = new XMLHttpRequest();
+	_xhr.open("POST", this.props.url);
+	_xhr.onload = function(){
+		if(_xhr.readyState === 4){
+			if(_xhr.status === 200){
+				console.log(_xhr.response);
+			}
+			else{
+				var error = new Error("something went wrong");
+				console.log(error);
+			}
+		}
+	};
+	_xhr.onerror = function(error){
+		console.log(error);
+	}
+	_xhr.send(comment);
+  },
+  getInitialState: function() {
+    return {data: []};
+  },
+  componentDidMount: function() {
+    this.loadCommentsFromServer();
+    //setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+  },
+  render: function() {
+    return (
+      <div className="commentBox">
+        <h1>Comments</h1>
+        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
+      </div>
+    );
+  }
+});
+
+
+
+React.render(<CommentFormBox pollInterval='5000' url='api/promise'  />, document.getElementById('react-form'))
