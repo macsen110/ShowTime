@@ -29,7 +29,8 @@ define(function(require, exports, module){
 	function promiseGet() {
 		var promise = new Promise(function(resolve,reject) {
 			var _xhr = new XMLHttpRequest();
-			_xhr.open("GET",'api/promise');
+			_xhr.timeout = 2000;
+			_xhr.open("GET",'http://www.xxxxxoooooxxssdddww.com');
 			_xhr.onload = function(){
 				if(_xhr.readyState === 4){
 					if(_xhr.status === 200){

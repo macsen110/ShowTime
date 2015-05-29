@@ -32,6 +32,13 @@ function handleApi(url,req) {
             var router = require('./api/router');
             return router(url);
             break;
+        case 'timeout':
+            //var timeout = require('./api/timeout');
+            setTimeout(function () {
+                return 'oops'
+            }, 6000);
+            //return timeout(url)
+            break
         default :
             break
     }
