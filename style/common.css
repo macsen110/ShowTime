@@ -107,3 +107,46 @@ body{
 	color: #666;
 	
 }
+
+
+/******css3 动画**/
+
+.trans {
+	width: 100px;
+	height: 100px;
+	background: red;
+	opacity: 1;
+	font-size: 18px;
+	transition: all 2s ease .2s;
+	-webkit-transition: all 2s ease  .2s;
+}
+.trans:hover {
+	opacity: 1;
+	background: blue;
+	animation: slidein 1s;
+	-webkit-animation: slidein 1s 10 alternate forwards;
+};
+
+@-webkit-keyframes slidein {
+  0% {
+    width: 100px; 
+  }
+
+  100% {
+    width: 300px;
+	font-size: 24px;
+
+  }
+}
+
+@keyframes slidein {
+  0% {
+    width: 100px; 
+  }
+
+  100% {
+    width: 300px;
+	font-size: 24px;
+
+  }
+}

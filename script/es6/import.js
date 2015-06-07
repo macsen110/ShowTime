@@ -1,4 +1,4 @@
-import { getUsefulContents } from "file.js";
+import { getUsefulContents } from "./module1.js";
 getUsefulContents("http://www.example.com", data => {
   doSomethingUseful(data);
 });
