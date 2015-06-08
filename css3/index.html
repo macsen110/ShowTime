@@ -12,6 +12,8 @@
 		aaaa
 	</div>
 	<div id="output"></div>
+	<div style="height:200px; background:orange" class="p1" id="p1"><div id="c1" style="height:100px;background:red"></div></div>
+	
 	
 </body>
 
@@ -38,6 +40,29 @@
 	  }
 	  document.getElementById("output").appendChild(l);
 	}
-	setup()
+	setup();
+	
+	// setTimeout(function() {
+	// 	document.body.insertAdjacentHTML('beforeend', '<div style="height:200px; background:orange" class="p1" id="p1"><div id="c1" style="height:100px;background:red"></div></div>')
+	// }, 1000);
+	
+	// document.body.addEventListener('click', function (e) {
+	// 	var id = e.target.id;
+	// 	switch (id) {
+	// 		case 'p1' :
+	// 			console.log('p')
+	// 			break;
+	// 		case 'c1' :
+	// 			console.log('c')
+	// 			break;
+	// 	}
+	// }, false)
+	
+	document.getElementById('p1').addEventListener('click', function () {
+		console.log('p1')
+	}, false)
+	document.getElementById('c1').addEventListener('click', function () {
+		console.log('c1')
+	}, true)
 </script>
 </html>

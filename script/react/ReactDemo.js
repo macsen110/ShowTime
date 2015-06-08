@@ -1,6 +1,6 @@
 //console.log(typeof React);
 React.render(
-	<a href="http://www.baidu.com">hello,ReactJs</a>,
+	<a href="http://www.baidu.com" aria-hidden={true}>hello,ReactJs</a>,
 	document.getElementById('hello-react')
 )
 //create a comment
@@ -90,7 +90,7 @@ var CommentProp = React.createClass({
 	},
 	render: function() {
 		return (
-		  <div className="comment">
+		  <div className="comment" >
 		    <h2>
 		      {this.props.author}
 		    </h2>
