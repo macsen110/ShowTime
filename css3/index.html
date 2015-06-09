@@ -12,7 +12,7 @@
 		aaaa
 	</div>
 	<div id="output"></div>
-	<div style="height:200px; background:orange" class="p1" id="p1"><div id="c1" style="height:100px;background:red"></div></div>
+	<div style="height:900px; background:orange" class="p1" id="p1"><div id="c1" style="height:100px;background:red"></div></div>
 	
 	
 </body>
@@ -64,5 +64,12 @@
 	document.getElementById('c1').addEventListener('click', function () {
 		console.log('c1')
 	}, true)
+	window.addEventListener('click', function (e) {
+		// for (var i in e) {
+		// 	console.log(i)
+		// }
+		console.log('pageY:'+ e.pageY + ' screenY:' + e.screenY + ' offsetY' + e.offsetY + ' clientY' + e.clientY )
+	})
 </script>
+
 </html>
