@@ -370,3 +370,24 @@ var CommentFormBox = React.createClass({
 
 
 React.render(<CommentFormBox pollInterval='5000' url='api/promise'  />, document.getElementById('react-form'))
+
+
+//key exple
+
+var KeyItem = React.createClass({
+	render: function () {
+		return (<li className="item">{this.props.data.info}</li>)
+	}
+	
+})
+
+var KeyList = React.createClass({
+	getInitialState: function () {
+		return {content:[{id:1,info:'aa'},{id:2,info:'bb'}]}
+	},
+	render: function () {		
+		return (<ul>{this.state.content.map(function (item) {return <KeyItem data={item} key={item.id} />})}</ul>)
+	}
+})
+
+React.render(<KeyList  />, document.getElementById('keyList'));
