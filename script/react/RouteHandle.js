@@ -15,10 +15,6 @@ var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 
 
-
-
-
-
 var Index = React.createClass({
     render: function () {
         return (
@@ -29,61 +25,48 @@ var Index = React.createClass({
     }
 });
 
-//function getJSON(url) {
-//    if (getJSON._cache[url]) {
-//       // return Promise.resolve(getJSON._cache[url]);
-//    }
-//    return new Promise((resolve, reject) => {
-//        var req = new XMLHttpRequest();
-//        req.onload = function () {
-//          if (req.status === 404) {
-//            reject(new Error('not found'));
-//          } else {
-//            // fake a slow response every now and then
-//            setTimeout(function () {
-//              var data = JSON.parse(req.response);
-//              resolve(data);
-//              getJSON._cache[url] = data;
-//            }, 2000);
-//          }
-//        };
-//        req.open('GET', url);
-//        req.send();
-//    });
-//}
-//
-//getJSON._cache = {};
-//
-//getJSON('/api/router').then(function (res) {console.log(res)});
+function getJSON(url) {
+   if (getJSON._cache[url]) {
+      // return Promise.resolve(getJSON._cache[url]);
+   }
+   return new Promise((resolve, reject) => {
+       var req = new XMLHttpRequest();
+       req.onload = function () {
+         if (req.status === 404) {
+           reject(new Error('not found'));
+         } else {
+           // fake a slow response every now and then
+           setTimeout(function () {
+             var data = JSON.parse(req.response);
+             resolve(data);
+             getJSON._cache[url] = data;
+           }, 2000);
+         }
+       };
+       req.open('GET', url);
+       req.send();
+   });
+}
 
-//function testObj() {
-//    var dd;
-//    var c = new Promise((resolve, reject) => {
-//        var req = new XMLHttpRequest();
-//        req.onload = function () {
-//          if (req.status === 404) {
-//            reject(new Error('not found'));
-//          } else {
-//            // fake a slow response every now and then
-//            setTimeout(function () {
-//              var data = JSON.parse(req.response);
-//              resolve(data);
-//              getJSON._cache[url] = data;
-//            }, 2000);
-//          }
-//        };
-//        req.open('GET', url);
-//        req.send();
-//
-//    });
-//    c.then(function(obj) {
-//        dd = obj
-//    })
-//    return dd;
-//}
+getJSON._cache = {};
 
+
+getJSON('/api/router').then(res => console.log(res));
+
+//ui for loading and loading end 
+
+function* generator () {
+    let i = 0;
+    yield 'loading...';
+    yield 'loading end';
+    return '9'
+}
+const generator = generator();
 
 var App = React.createClass({
+    testObjFun() {
+        console.log('testObjFun')
+    },
     statics: {
         willTransitionTo: function (transition, params) {
             console.log('coming');
@@ -102,16 +85,18 @@ var App = React.createClass({
     },
     componentDidMount: function () {
         var self = this;
+        self.testObjFun();
         var promise = new Promise( function(resolve, reject ){
             setTimeout(function () {
                 var _xhr = new XMLHttpRequest();
                 _xhr.open("GET", '/api/router');
-                _xhr.onload = function(){
-                   if(_xhr.readyState === 4){
-                       if(_xhr.status === 200){
+                _xhr.onload = function () {
+                   if (_xhr.readyState === 4) {
+                       if (_xhr.status === 200) {
                             var data = JSON.parse(_xhr.response).data;
                             self.setState({data: data})
-                            resolve(_xhr.response);
+                            console.log('data: '+data)
+                            resolve(data);
                        }
                        else{
                            var error = new Error("something went wrong");
@@ -128,40 +113,41 @@ var App = React.createClass({
             }, 1000)
 
         })
-        promise.then(function(obj) {
-
-        },function(error) {
-            console.log('error:'+error)
-        })
+        promise.then(obj => {
+            for (let i of obj) {
+                console.log(i)               
+            }
+        }, error => console.log(error))
 
     },
     render: function () {
         var html = '';
         var data = this.state.data;
         if (data.length > 0) {
-            var dataArr = [];
-            for(var i = 0; i < data.length;  i++) {
-                dataArr.push(data[i])
-            }
-            html = dataArr.join();
             return (
             <div>
+                <p>{generator.next().value}</p>
                 <header>
                     <ul>
                         <li><Link to="app">app</Link></li>
                         <li><Link to="params" params ={{messageId:"123"}}>params</Link></li>
                     </ul>
-                    {html}
                 </header>
+                <section>
+                    <ul className="list">
+                        {data.map(item => <li className="item" key={item}> {item}</li>)}
+                    </ul>
+                </section>
             </div>
         )
 
         }
-        return (<p>aaa</p>)
+        return (<p>{generator.next().value}</p>)
         
 
     }
 });
+
 
 var Params = React.createClass({
     contextTypes: {
