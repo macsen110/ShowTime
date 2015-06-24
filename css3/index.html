@@ -43,32 +43,35 @@
 	<ul class="list">
 		<li class="item">
 			<div class="clear">
-			<ul class="item-box-list">
-				<li>
-				<a href="">
-					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIW2NkAAIAAAoAAggA9GkAAAAASUVORK5CYII=" style="background-image:url(test.jpg)">
-				</a>
+				<ul class="item-box-list">
+					<li>
+						<a href="">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIW2NkAAIAAAoAAggA9GkAAAAASUVORK5CYII=" style="background-image:url(test.jpg)">
+						</a>
 					</li>
-			</ul>
-			<ul class="item-box-list">
-				<li class="item-box">
-					<a href="">
-					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIW2NkAAIAAAoAAggA9GkAAAAASUVORK5CYII=" style="background-image:url(test.jpg)"></a>
-				</li>
-				<li class="item-box">
-					<a href="">
-					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIW2NkAAIAAAoAAggA9GkAAAAASUVORK5CYII=" style="background-image:url(test.jpg)"></a>
-				</li>
-				<li class="item-box">
-					<a href="">
-					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIW2NkAAIAAAoAAggA9GkAAAAASUVORK5CYII=" style="background-image:url(test.jpg)"></a>
-				</li>
-				<li class="item-box">
-					<a href="">
-					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIW2NkAAIAAAoAAggA9GkAAAAASUVORK5CYII=" style="background-image:url(test.jpg)">
-					</a>
-				</li>
-			</ul>
+				</ul>
+				<ul class="item-box-list">
+					<li class="item-box">
+						<a href="">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIW2NkAAIAAAoAAggA9GkAAAAASUVORK5CYII=" style="background-image:url(test.jpg)">
+						</a>
+					</li>
+					<li class="item-box">
+						<a href="">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIW2NkAAIAAAoAAggA9GkAAAAASUVORK5CYII=" style="background-image:url(test.jpg)">
+						</a>
+					</li>
+					<li class="item-box">
+						<a href="">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIW2NkAAIAAAoAAggA9GkAAAAASUVORK5CYII=" style="background-image:url(test.jpg)">
+						</a>
+					</li>
+					<li class="item-box">
+						<a href="">
+							<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAC0lEQVQIW2NkAAIAAAoAAggA9GkAAAAASUVORK5CYII=" style="background-image:url(test.jpg)">
+						</a>
+					</li>
+				</ul>
 			</div>
 
 			<div class="clear">
@@ -90,6 +93,7 @@
 
 		</li>
 	</ul>
+
 	
 	
 </body>
@@ -141,5 +145,12 @@
 	document.getElementById('c1').addEventListener('click', function () {
 		console.log('c1')
 	}, true)
+	window.addEventListener('click', function (e) {
+		// for (var i in e) {
+		// 	console.log(i)
+		// }
+		console.log('pageY:'+ e.pageY + ' screenY:' + e.screenY + ' offsetY' + e.offsetY + ' clientY' + e.clientY )
+	})
 </script>
+
 </html>
