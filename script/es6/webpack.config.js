@@ -1,8 +1,8 @@
 module.exports = {
-  entry: './import.js',
+  entry: './ui.js',
   output: {
     path: __dirname,
-    filename: 'im.js'
+    filename: 'ui_trans.js'
 
   },
 
