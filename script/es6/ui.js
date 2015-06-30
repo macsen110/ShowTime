@@ -11,17 +11,17 @@ class baseUi {
 
 	}
 	open() {		
-		console.log('Zindex: ' + this.oops);
 		this.mark = this.mark || document.createElement('div');
 		document.body.appendChild(this.mark);
 	}
 }
 class ui_alert extends baseUi {
-	// constructor(options) {
-	// 	super(options)
-	// }
+	constructor(options) {
+		super(options)
+		console.log(this.x)
+	}
 	child_open() {
-		console.log('oops '+ this.oops)
+		console.log('oops '+ this.Zindex)
 	}
 	
 	

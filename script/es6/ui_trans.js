@@ -91,7 +91,6 @@
 		_createClass(baseUi, [{
 			key: 'open',
 			value: function open() {
-				console.log('Zindex: ' + this.oops);
 				this.mark = this.mark || document.createElement('div');
 				document.body.appendChild(this.mark);
 			}
@@ -101,22 +100,19 @@
 	})();
 
 	var ui_alert = (function (_baseUi) {
-		function ui_alert() {
+		function ui_alert(options) {
 			_classCallCheck(this, ui_alert);
 
-			_get(Object.getPrototypeOf(ui_alert.prototype), 'constructor', this).apply(this, arguments);
+			_get(Object.getPrototypeOf(ui_alert.prototype), 'constructor', this).call(this, options);
+			console.log(this.x);
 		}
 
 		_inherits(ui_alert, _baseUi);
 
 		_createClass(ui_alert, [{
 			key: 'child_open',
-
-			// constructor(options) {
-			// 	super(options)
-			// }
 			value: function child_open() {
-				console.log('oops ' + this.oops);
+				console.log('oops ' + this.Zindex);
 			}
 		}]);
 
