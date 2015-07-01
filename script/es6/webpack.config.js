@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './ui.js',
+  entry: './ui_apply.js',
   output: {
     path: __dirname,
     filename: 'ui_trans.js'
@@ -8,7 +8,7 @@ module.exports = {
 
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader?optional=runtime' }
     ]
   }
 
