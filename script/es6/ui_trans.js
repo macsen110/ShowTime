@@ -54,44 +54,22 @@
 		function baseUi(options) {
 			_classCallCheck(this, baseUi);
 
-			this.x = 123;
 			if (typeof options === 'object') {
-				var arr = Object.keys(options);
+				Object.assign(this, options);
+				//var arr = Object.keys(options);
 				//let {[..arr]} = this;
-				var _iteratorNormalCompletion = true;
-				var _didIteratorError = false;
-				var _iteratorError = undefined;
-
-				try {
-					for (var _iterator = arr[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-						var i = _step.value;
-
-						this[i] = options[i];
-					}
-				} catch (err) {
-					_didIteratorError = true;
-					_iteratorError = err;
-				} finally {
-					try {
-						if (!_iteratorNormalCompletion && _iterator['return']) {
-							_iterator['return']();
-						}
-					} finally {
-						if (_didIteratorError) {
-							throw _iteratorError;
-						}
-					}
-				}
+				// for (let i of arr ){
+				// 	this[i] = options[i];
+				// }
 			}
 		}
 
 		_createClass(baseUi, [{
 			key: 'open',
 			value: function open() {
-				console.log(this.Zindex);
-
-				this.mark = this.mark || document.createElement('div');
-				document.body.appendChild(this.mark);
+				this.mask = this.mask || document.createElement('div');
+				this.mask.className = 'bg-mask-container';
+				document.body.appendChild(this.mask);
 			}
 		}]);
 

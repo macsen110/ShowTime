@@ -1,21 +1,20 @@
 "use strict";
 class baseUi {
 	constructor(options) {
-		this.x = 123;
 		if (typeof options === 'object') {
-			var arr = Object.keys(options);
+			Object.assign(this, options);
+			//var arr = Object.keys(options);
 			//let {[..arr]} = this;
-			for (let i of arr ){
-				this[i] = options[i];
-			}
+			// for (let i of arr ){
+			// 	this[i] = options[i];
+			// }
 		}
 
 	}
 	open() {
-		console.log(this.Zindex);
-
-		this.mark = this.mark || document.createElement('div');
-		document.body.appendChild(this.mark);
+		this.mask = this.mask || document.createElement('div');
+		this.mask.className = 'bg-mask-container';
+		document.body.appendChild(this.mask);
 	}
 }
 
