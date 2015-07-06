@@ -80,16 +80,31 @@
 			_classCallCheck(this, baseUi);
 
 			if (typeof options === 'object') {
+<<<<<<< HEAD
 				_Object$assign(this, options);
+=======
+				Object.assign(this, options);
+				//var arr = Object.keys(options);
+				//let {[..arr]} = this;
+				// for (let i of arr ){
+				// 	this[i] = options[i];
+				// }
+>>>>>>> 6a4d41778fe9c392b3e85fd4aef05a313270fdbc
 			}
 		}
 
 		_createClass(baseUi, [{
 			key: 'open',
 			value: function open() {
+<<<<<<< HEAD
 				console.log('COMMUI: ' + this.type);
 				this.mark = this.mark || document.createElement('div');
 				document.body.appendChild(this.mark);
+=======
+				this.mask = this.mask || document.createElement('div');
+				this.mask.className = 'bg-mask-container';
+				document.body.appendChild(this.mask);
+>>>>>>> 6a4d41778fe9c392b3e85fd4aef05a313270fdbc
 			}
 		}]);
 

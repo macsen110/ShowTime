@@ -4,12 +4,13 @@ class baseUi {
 		if (typeof options === 'object') {			
 			Object.assign(this, options)
 		}
-
 	}
 	open() {
-		console.log('COMMUI: ' + this.type)		
-		this.mark = this.mark || document.createElement('div');
-		document.body.appendChild(this.mark);
+
+		this.mask = this.mask || document.createElement('div');
+		this.mask.className = 'bg-mask-container';
+		document.body.appendChild(this.mask);
+
 	}
 }
 class ui_alert extends baseUi {
