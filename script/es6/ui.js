@@ -6,7 +6,6 @@ class baseUi {
 		}
 	}
 	open() {
-
 		this.mask = this.mask || document.createElement('div');
 		this.mask.className = 'bg-mask-container';
 		document.body.appendChild(this.mask);
