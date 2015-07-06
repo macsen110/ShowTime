@@ -6,9 +6,16 @@ class baseUi {
 		}
 	}
 	open() {
+		var body = document.body;
+		this.type = this.type || 'dialog';
+		this.container = this.container || `<div data-type=${this.type}>11111</div>`;
 		this.mask = this.mask || document.createElement('div');
 		this.mask.className = 'bg-mask-container';
-		document.body.appendChild(this.mask);
+		body.appendChild(this.mask);
+		body.insertAdjacentHTML('beforeend', this.container);
+		//console.log(document.querySelector('.bg-mask-container'))
+		//document.body.appendChild(this.container);
+		//document.body.appendChild(this.mask);
 
 	}
 }

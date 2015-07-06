@@ -52,7 +52,6 @@
 
 	var _uiJs2 = _interopRequireDefault(_uiJs);
 
-	_uiJs2['default'].base({ type: 'baseui' }).open();
 	_uiJs2['default'].ui_alert({ type: 'alert' }).open();
 
 /***/ },
@@ -101,9 +100,16 @@
 		_createClass(baseUi, [{
 			key: 'open',
 			value: function open() {
+				var body = document.body;
+				this.type = this.type || 'dialog';
+				this.container = this.container || '<div data-type=' + this.type + '>11111</div>';
 				this.mask = this.mask || document.createElement('div');
 				this.mask.className = 'bg-mask-container';
-				document.body.appendChild(this.mask);
+				body.appendChild(this.mask);
+				body.insertAdjacentHTML('beforeend', this.container);
+				//console.log(document.querySelector('.bg-mask-container'))
+				//document.body.appendChild(this.container);
+				//document.body.appendChild(this.mask);
 			}
 		}]);
 
