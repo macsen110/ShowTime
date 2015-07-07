@@ -9,9 +9,12 @@ class baseUi {
 		this.mask = '<div class="bg-dialog-mask"></div>'
 		this.container.innerHTML = this.main + this.mask;
 		if (typeof options === 'object') {			
-			Object.assign(this, options)
+			Object.assign(this, options);
 		}
 
+	}
+	handleEvent() {
+		this.close();
 	}
 	open() {
 		var body = document.body;
@@ -22,9 +25,7 @@ class baseUi {
 		//this replay for the current object in the event callback functions
 
 		//
-		this.container.addEventListener('click', function () {
-			self.close()
-		})
+		this.container.addEventListener('click',self)
 
 	}
 	close() {
