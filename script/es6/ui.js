@@ -80,6 +80,9 @@ class ui_alert extends baseUi {
 		//this.type = 'aaa';
 		this.action = "action";
 		this.title = "title";
+		if (typeof options === 'object') {			
+			Object.assign(this, options);
+		}
 		//this.action = `<div class="wrap-action"><button class="btn-ok"></button></div>`
 	}
 

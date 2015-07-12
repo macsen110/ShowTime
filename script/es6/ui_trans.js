@@ -54,7 +54,7 @@
 
 	var trrigerEle = document.getElementById('trrigerEle');
 	trrigerEle.addEventListener('click', function () {
-		_uiJs2['default'].ui_alert({ type: 'alert' }).open();
+		_uiJs2['default'].ui_alert({ type: 'alert', title: 'title2' }).open();
 	});
 
 /***/ },
@@ -190,6 +190,9 @@
 			//this.type = 'aaa';
 			this.action = 'action';
 			this.title = 'title';
+			if (typeof options === 'object') {
+				_Object$assign(this, options);
+			}
 			//this.action = `<div class="wrap-action"><button class="btn-ok"></button></div>`
 		}
 
