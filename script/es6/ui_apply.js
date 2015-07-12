@@ -1,2 +1,6 @@
 import COMMUI from './ui.js';
-COMMUI.ui_alert({type: 'alert'}).open()
+var trrigerEle = document.getElementById('trrigerEle');
+trrigerEle.addEventListener('click', function () {
+	COMMUI.ui_alert({type: 'alert'}).open()	
+})
+
