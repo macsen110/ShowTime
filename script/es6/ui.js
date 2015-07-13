@@ -1,7 +1,7 @@
 "use strict";
 let zIndex = 100;
 class baseUi {
-	constructor(options) {
+	constructor() {
 		this.title = '';
 		this.content = '';
 		this.action = '';
@@ -11,9 +11,13 @@ class baseUi {
 		this.container.id = 'dialog';
 		this.container.className = "wrap-dialog-container "+this.eleClass;
 		this.mask = '<div class="bg-mask"></div>'
+		return this;
+	}
+	config(options) {
 		if (typeof options === 'object') {			
 			Object.assign(this, options);
 		}
+		return this;
 	}
 	handleEvent(e) {
 		var target = e.target;
@@ -67,32 +71,24 @@ class baseUi {
 		//do something after the dialog close;
 	}
 	destory() {
-		var self = this;
-		console.log(self);
 		var body = document.body;
 		body.removeChild(this.container);
 	}
 }
 class ui_alert extends baseUi {
-	constructor(options) {
-		
+	constructor(options) {	
 		super(options);
-		//this.type = 'aaa';
-		this.action = "action";
 		this.title = "title";
-		if (typeof options === 'object') {			
-			Object.assign(this, options);
-		}
-		//this.action = `<div class="wrap-action"><button class="btn-ok"></button></div>`
+
 	}
 
 }
 
 export default {
 	base(options) {
-		return new baseUi(options)
+		return new baseUi().config(options)
 	},
 	ui_alert(options) {
-		return new ui_alert(options)
+		return new ui_alert().config(options)
 	}
 }

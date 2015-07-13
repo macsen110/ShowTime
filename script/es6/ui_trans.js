@@ -77,26 +77,23 @@
 
 	'use strict';
 
-	var _createClass = __webpack_require__(11)['default'];
+	var _createClass = __webpack_require__(3)['default'];
 
-	var _classCallCheck = __webpack_require__(14)['default'];
+	var _classCallCheck = __webpack_require__(8)['default'];
 
-	var _inherits = __webpack_require__(15)['default'];
+	var _inherits = __webpack_require__(9)['default'];
 
-	var _get = __webpack_require__(3)['default'];
-
-	var _Object$defineProperty = __webpack_require__(12)['default'];
+	var _get = __webpack_require__(12)['default'];
 
 	var _Object$assign = __webpack_require__(18)['default'];
 
-	_Object$defineProperty(exports, '__esModule', {
+	Object.defineProperty(exports, '__esModule', {
 		value: true
 	});
-
 	var zIndex = 100;
 
 	var baseUi = (function () {
-		function baseUi(options) {
+		function baseUi() {
 			_classCallCheck(this, baseUi);
 
 			this.title = '';
@@ -108,12 +105,18 @@
 			this.container.id = 'dialog';
 			this.container.className = 'wrap-dialog-container ' + this.eleClass;
 			this.mask = '<div class="bg-mask"></div>';
-			if (typeof options === 'object') {
-				_Object$assign(this, options);
-			}
+			return this;
 		}
 
 		_createClass(baseUi, [{
+			key: 'config',
+			value: function config(options) {
+				if (typeof options === 'object') {
+					_Object$assign(this, options);
+				}
+				return this;
+			}
+		}, {
 			key: 'handleEvent',
 			value: function handleEvent(e) {
 				var target = e.target;
@@ -172,8 +175,6 @@
 		}, {
 			key: 'destory',
 			value: function destory() {
-				var self = this;
-				console.log(self);
 				var body = document.body;
 				body.removeChild(this.container);
 			}
@@ -187,13 +188,7 @@
 			_classCallCheck(this, _ui_alert);
 
 			_get(Object.getPrototypeOf(_ui_alert.prototype), 'constructor', this).call(this, options);
-			//this.type = 'aaa';
-			this.action = 'action';
 			this.title = 'title';
-			if (typeof options === 'object') {
-				_Object$assign(this, options);
-			}
-			//this.action = `<div class="wrap-action"><button class="btn-ok"></button></div>`
 		}
 
 		_inherits(_ui_alert, _baseUi);
@@ -203,10 +198,10 @@
 
 	exports['default'] = {
 		base: function base(options) {
-			return new baseUi(options);
+			return new baseUi().config(options);
 		},
 		ui_alert: function ui_alert(options) {
-			return new _ui_alert(options);
+			return new _ui_alert().config(options);
 		}
 	};
 	module.exports = exports['default'];
@@ -221,46 +216,26 @@
 
 	"use strict";
 
-	var _Object$getOwnPropertyDescriptor = __webpack_require__(4)["default"];
+	var _Object$defineProperty = __webpack_require__(4)["default"];
 
-	exports["default"] = function get(_x, _x2, _x3) {
-	  var _again = true;
+	exports["default"] = (function () {
+	  function defineProperties(target, props) {
+	    for (var i = 0; i < props.length; i++) {
+	      var descriptor = props[i];
+	      descriptor.enumerable = descriptor.enumerable || false;
+	      descriptor.configurable = true;
+	      if ("value" in descriptor) descriptor.writable = true;
 
-	  _function: while (_again) {
-	    var object = _x,
-	        property = _x2,
-	        receiver = _x3;
-	    desc = parent = getter = undefined;
-	    _again = false;
-	    if (object === null) object = Function.prototype;
-
-	    var desc = _Object$getOwnPropertyDescriptor(object, property);
-
-	    if (desc === undefined) {
-	      var parent = Object.getPrototypeOf(object);
-
-	      if (parent === null) {
-	        return undefined;
-	      } else {
-	        _x = parent;
-	        _x2 = property;
-	        _x3 = receiver;
-	        _again = true;
-	        continue _function;
-	      }
-	    } else if ("value" in desc) {
-	      return desc.value;
-	    } else {
-	      var getter = desc.get;
-
-	      if (getter === undefined) {
-	        return undefined;
-	      }
-
-	      return getter.call(receiver);
+	      _Object$defineProperty(target, descriptor.key, descriptor);
 	    }
 	  }
-	};
+
+	  return function (Constructor, protoProps, staticProps) {
+	    if (protoProps) defineProperties(Constructor.prototype, protoProps);
+	    if (staticProps) defineProperties(Constructor, staticProps);
+	    return Constructor;
+	  };
+	})();
 
 	exports.__esModule = true;
 
@@ -275,9 +250,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var $ = __webpack_require__(6);
-	__webpack_require__(8);
-	module.exports = function getOwnPropertyDescriptor(it, key){
-	  return $.getDesc(it, key);
+	module.exports = function defineProperty(it, key, desc){
+	  return $.setDesc(it, key, desc);
 	};
 
 /***/ },
@@ -395,8 +369,128 @@
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+
+	exports["default"] = function (instance, Constructor) {
+	  if (!(instance instanceof Constructor)) {
+	    throw new TypeError("Cannot call a class as a function");
+	  }
+	};
+
+	exports.__esModule = true;
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _Object$create = __webpack_require__(10)["default"];
+
+	exports["default"] = function (subClass, superClass) {
+	  if (typeof superClass !== "function" && superClass !== null) {
+	    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+	  }
+
+	  subClass.prototype = _Object$create(superClass && superClass.prototype, {
+	    constructor: {
+	      value: subClass,
+	      enumerable: false,
+	      writable: true,
+	      configurable: true
+	    }
+	  });
+	  if (superClass) subClass.__proto__ = superClass;
+	};
+
+	exports.__esModule = true;
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(11), __esModule: true };
+
+/***/ },
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(6);
+	module.exports = function create(P, D){
+	  return $.create(P, D);
+	};
+
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var _Object$getOwnPropertyDescriptor = __webpack_require__(13)["default"];
+
+	exports["default"] = function get(_x, _x2, _x3) {
+	  var _again = true;
+
+	  _function: while (_again) {
+	    var object = _x,
+	        property = _x2,
+	        receiver = _x3;
+	    desc = parent = getter = undefined;
+	    _again = false;
+	    if (object === null) object = Function.prototype;
+
+	    var desc = _Object$getOwnPropertyDescriptor(object, property);
+
+	    if (desc === undefined) {
+	      var parent = Object.getPrototypeOf(object);
+
+	      if (parent === null) {
+	        return undefined;
+	      } else {
+	        _x = parent;
+	        _x2 = property;
+	        _x3 = receiver;
+	        _again = true;
+	        continue _function;
+	      }
+	    } else if ("value" in desc) {
+	      return desc.value;
+	    } else {
+	      var getter = desc.get;
+
+	      if (getter === undefined) {
+	        return undefined;
+	      }
+
+	      return getter.call(receiver);
+	    }
+	  }
+	};
+
+	exports.__esModule = true;
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(14), __esModule: true };
+
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var $ = __webpack_require__(6);
+	__webpack_require__(15);
+	module.exports = function getOwnPropertyDescriptor(it, key){
+	  return $.getDesc(it, key);
+	};
+
+/***/ },
+/* 15 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var $        = __webpack_require__(6)
-	  , $def     = __webpack_require__(9)
+	  , $def     = __webpack_require__(16)
 	  , isObject = $.isObject
 	  , toObject = $.toObject;
 	$.each.call(('freeze,seal,preventExtensions,isFrozen,isSealed,isExtensible,' +
@@ -423,7 +517,7 @@
 	    return fn(Object($.assertDefined(it)));
 	  } : ID == 8 ? function keys(it){
 	    return fn(toObject(it));
-	  } : __webpack_require__(10).get;
+	  } : __webpack_require__(17).get;
 	  try {
 	    fn('z');
 	  } catch(e){
@@ -433,7 +527,7 @@
 	});
 
 /***/ },
-/* 9 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var $          = __webpack_require__(6)
@@ -486,7 +580,7 @@
 	module.exports = $def;
 
 /***/ },
-/* 10 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
@@ -511,105 +605,6 @@
 	};
 
 /***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var _Object$defineProperty = __webpack_require__(12)["default"];
-
-	exports["default"] = (function () {
-	  function defineProperties(target, props) {
-	    for (var i = 0; i < props.length; i++) {
-	      var descriptor = props[i];
-	      descriptor.enumerable = descriptor.enumerable || false;
-	      descriptor.configurable = true;
-	      if ("value" in descriptor) descriptor.writable = true;
-
-	      _Object$defineProperty(target, descriptor.key, descriptor);
-	    }
-	  }
-
-	  return function (Constructor, protoProps, staticProps) {
-	    if (protoProps) defineProperties(Constructor.prototype, protoProps);
-	    if (staticProps) defineProperties(Constructor, staticProps);
-	    return Constructor;
-	  };
-	})();
-
-	exports.__esModule = true;
-
-/***/ },
-/* 12 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(13), __esModule: true };
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $ = __webpack_require__(6);
-	module.exports = function defineProperty(it, key, desc){
-	  return $.setDesc(it, key, desc);
-	};
-
-/***/ },
-/* 14 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	exports["default"] = function (instance, Constructor) {
-	  if (!(instance instanceof Constructor)) {
-	    throw new TypeError("Cannot call a class as a function");
-	  }
-	};
-
-	exports.__esModule = true;
-
-/***/ },
-/* 15 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var _Object$create = __webpack_require__(16)["default"];
-
-	exports["default"] = function (subClass, superClass) {
-	  if (typeof superClass !== "function" && superClass !== null) {
-	    throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
-	  }
-
-	  subClass.prototype = _Object$create(superClass && superClass.prototype, {
-	    constructor: {
-	      value: subClass,
-	      enumerable: false,
-	      writable: true,
-	      configurable: true
-	    }
-	  });
-	  if (superClass) subClass.__proto__ = superClass;
-	};
-
-	exports.__esModule = true;
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(17), __esModule: true };
-
-/***/ },
-/* 17 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var $ = __webpack_require__(6);
-	module.exports = function create(P, D){
-	  return $.create(P, D);
-	};
-
-/***/ },
 /* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -627,7 +622,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	// 19.1.3.1 Object.assign(target, source)
-	var $def = __webpack_require__(9);
+	var $def = __webpack_require__(16);
 	$def($def.S, 'Object', {assign: __webpack_require__(21)});
 
 /***/ },
