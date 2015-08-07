@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue</title>
+	<style>
+		.done {
+			color: red
+		}
+	</style>
+	<script src="vue.min.js"></script>
+	<script>
+
+	Vue.component('my-component', {
+  		template: '<p>A custom component!</p>'
+	})
+	Vue.component('child', {
+  // 声明 prop
+  	props: ['msg'],
+  // prop 可以在模板内部被使用，
+  // 也可以类似 `this.msg` 这样来赋值
+  	template: '<span>{{msg}}</span>'
+	})
+	</script>
+</head>
+<body>
+	<div id="demo">
+  <h1>{{title | uppercase}}</h1>
+  <div v-text="title"></div>
+  <ul>
+    <li
+      v-repeat="todos"
+      v-on="click: done = !done"
+      class="{{done ? 'done' : ''}}">
+      {{content}}
+    </li>
+  </ul>
+  <child msg="hello!"></child>
+</div>
+
+
+
+	<script>
+
+		var mockData = {
+		    title: 'todos',
+		    todos: [
+		      {
+		        done: true,
+		        content: 'Learn JavaScript'
+		      },
+		      {
+		        done: false,
+		        content: 'Learn Vue.js'
+		      }
+		    ],
+			setTitle: function (value) {
+				this.title = value
+			}
+	  	}
+	  	setTimeout(function () {
+			  mockData.setTitle('oops')
+		  }, 4000)
+		var demo = new Vue({
+		  el: '#demo',
+		  data: mockData
+		})
+		
+	</script>
+</body>
+</html>

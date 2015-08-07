@@ -6,7 +6,7 @@
 
 'use strict';
 
-var Router = ReactRouter; // or var Router = ReactRouter; in browsers
+var Router = ReactRouter;
 var DefaultRoute = Router.DefaultRoute;
 var NotFoundRoute = Router.NotFoundRoute;
 var Redirect = Router.Redirect;
@@ -177,6 +177,6 @@ var routes = (
 
 //Router.HistoryLocation参数代表绝对地址链接
 
-Router.run(routes,function (Handler, state) {
-    React.render(<Handler/>, document.body);
+Router.run(routes,Router.HistoryLocation,function (Handler, state) {
+    React.render(<Handler/>, document.getElementById('router_container'));
 });
