@@ -300,8 +300,8 @@ var CommentForm = React.createClass({
   render: function() {
     return (
       <form className="commentForm" onSubmit={this.handleSubmit} ref = 'form'>
-        <input type="text" placeholder="Your name" ref="author"  name="autor"/>
-        <input type="text" placeholder="Say something..." ref="text" name="text" />
+        <input type="text" placeholder="Your name" value="11"ref="author"  name="autor"/>
+        <input type="text" placeholder="Say something..." value="ii" ref="text" name="text" />
         <input type="submit" value="Post" />
       </form>
     );
