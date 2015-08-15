@@ -4,12 +4,14 @@ function CommJump() {
     
 }
 
-function back() {
-    history.back()
+function back(prevLink) {
+    if (location.hash) history.back();
+    else location.hash = prevLink;
+
 }
 
-function nextPage(hash) {
-    window.location.hash = hash;
+function nextPage(nextLink) {
+    window.location.hash = nextLink;
 }
 
 
@@ -28,8 +30,8 @@ class C_start extends React.Component {
 
 //用户信息,
 class C_info extends React.Component {
-    handleSubmit() {
-        nextPage('/api/research/question1')
+    handleSubmit(postUrl, nextLink) {
+        nextPage(nextLink)
     }
     render() {
         var props = this.props;
@@ -39,7 +41,7 @@ class C_info extends React.Component {
                 <C_info_container dataArr={props.dataArr} />
                 <div className = "flex">
                     <button className="btn sub" onClick={back}>返回</button>
-                    <button className="btn" onClick={this.handleSubmit}>马上开始</button>
+                    <button className="btn" onClick={this.handleSubmit.bind(this, null, props.nextLink)}>马上开始</button>
                 </div>
             </div>
         )
@@ -64,9 +66,9 @@ class C_info_container extends React.Component {
     }
 }
 
-//用户需要输入信息的类型
 
-//输入型
+
+//填写用户信息---输入型
 class C_info_ipt extends React.Component {
     render() {
         var props = this.props;
@@ -79,7 +81,7 @@ class C_info_ipt extends React.Component {
         )
     } 
 }
-//选择型---单选
+//填写用户信息---选择型---单选
 class C_info_radio extends React.Component {
     
 }
@@ -88,24 +90,26 @@ class C_info_radio extends React.Component {
 //问题类型,单选题
 class C_question_radio extends React.Component {
     render() {
-            return (
-                <div className="comm-box-radio">
-                    <p className="title">{this.props.title}</p>
-                    <p>*注：本题最多能选1个答案</p>
-                    <ul>
-                        {this.props.data.map((val, index) => <li className="item" key={index}><input type="radio" name="checkColor" value={val} />{val}</li>)}
-                    </ul>
-                    <div className ="flex">
-                        <button className="btn sub" onClick={back}>上一题</button>
-                        <button className="btn" onClick={this.handleSubmit}>下一题</button>
-                    </div>
+        var props = this.props;
+
+        return (
+            <div className="comm-box-radio">
+                <p className="title">{props.title}</p>
+                <p>*注：本题最多能选1个答案</p>
+                <ul>
+                    {props.data.map((val, index) => <li className="item" key={index}><input type="radio" name="checkColor" value={val} />{val}</li>)}
+                </ul>
+                <div className ="flex">
+                    <button className="btn sub" onClick={back.bind(null,props.btns[0].link)}>{props.btns[0].text}</button>
+                    <button className="btn" onClick={this.handleSubmit.bind(this, null, props.btns[1].link)}>{props.btns[1].text}</button>
                 </div>
-            )
+            </div>
+        )
         
 
     }
-    handleSubmit() {
-        nextPage('/api/research/question2')
+    handleSubmit(postUrl, nextLink) {
+        nextPage(nextLink)
     }
 }
 
@@ -207,11 +211,13 @@ class All extends React.Component {
             url:url,
             done: function (obj) {
                 if (obj.code == 0) {
-                    self.setState({
-                        ready: true,
-                        componentName: obj.componentName,
-                        dataObj: obj.dataObj
-                    })
+                    if (location.hash.slice(1) === url) {
+                        self.setState({
+                            ready: true,
+                            componentName: obj.componentName,
+                            dataObj: obj.dataObj
+                        })
+                    }
 
                 }                              
             }
@@ -282,5 +288,5 @@ class All extends React.Component {
 
 
 
-React.render(<All />, document.body)
+React.render(<All />, document.getElementById('wrap-app'))
 

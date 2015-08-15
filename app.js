@@ -22,6 +22,7 @@ server.on('request',function(req,res,next){
             code: 0,
             componentName: 'Information',
             dataObj: {
+                nextLink: '/api/research/question_radio',
                 dataArr:[
                     {type:'ipt',name:'姓名',keys:'name'},
                     {type:'ipt',name:'手机号码',keys:'phone'}
@@ -30,28 +31,26 @@ server.on('request',function(req,res,next){
         }),'utf-8');
     }
     
-    if (api === '/api/research/question1') {
+    if (api === '/api/research/question_radio') {
         res.end(JSON.stringify({
             code: 0,
             componentName: 'Question_radio',
             dataObj: {
                 title: 'Question_radio component',
-                data: [1,2,3]
+                data: [1,2,3],
+                btns: [
+                    {
+                        link: "/api/research/info",
+                        text: "返回",
+                    },
+                    {
+                        link: "/api/research/question_checkbox",
+                        text: "下一题",
+                    }
+                ]
             }
         }),'utf-8');
     }
-    
-    if (api === '/api/research/question2') {
-        res.end(JSON.stringify({
-            code: 0,
-            componentName: 'Question_input',
-            dataObj: {
-                title: 'Question_input component',
-                data: [1,2,3]
-            }
-        }),'utf-8');
-    }
-    
     if (api === '/api/research/question_checkbox') {
         res.end(JSON.stringify({
             code: 0,
@@ -62,6 +61,18 @@ server.on('request',function(req,res,next){
             }
         }),'utf-8');
     }
+    if (api === '/api/research/question_input') {
+        res.end(JSON.stringify({
+            code: 0,
+            componentName: 'Question_input',
+            dataObj: {
+                title: 'Question_input component',
+                data: [1,2,3]
+            }
+        }),'utf-8');
+    }
+    
+
     
     if (api === '/api/research/suggest') {
         res.end(JSON.stringify({
