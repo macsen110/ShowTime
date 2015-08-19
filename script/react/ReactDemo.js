@@ -113,26 +113,38 @@ var CommentPropItem = React.createClass({
   render: function() {
     return (
       <div className="CommentPropItem">
+      <p>aaaaaaaa</p>
         <h2>
           {this.props.author}
         </h2>
-       {this.props.children}
+
       </div>
     );
   }
 });
-
 var CommentPropList = React.createClass({
-  render: function() {
-    return (
-    	<CommentPropItem id={ 2>1 ? id = "sssss" : ''} author="PropItem">this is text as child</CommentPropItem>
-    );
+	getInitialState: function () {
+		return {
+			author: 'macsen'
+		}
+	},
+	componentDidMount: function () {
+		setTimeout(function () {
+			this.setState({
+				author: 'macsen2'
+			})
+		}.bind(this), 2000)
+	},
+  	render: function() {
+	    return (
+	    	<CommentPropItem id={ 2>1 ? id = "sssss" : ''} author={this.state.author} />
+	    );
   }
 });
 
 
 React.render(
-	<CommentPropList  author='Macsen2'/>,
+	<CommentPropList />,
 	document.getElementById('use-props-list')
 )
 
