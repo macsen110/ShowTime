@@ -3,15 +3,16 @@ var url  = require("url"),
     readUri = require('./readUri'),
     server = new http.Server();
 
-server.name = "www.showtime.com";
+server.name = "172.16.2.77";
 server.on('request',function(req,res,next){
     var pathname=__dirname+url.parse(req.url).pathname;
     var api = req.url;
     if (api === '/api/research/start') {
         res.end(JSON.stringify({
             code: 0,
-            componentName: 'Start',
             dataObj: {
+                body_bg: 'http://pic.nipic.com/2008-05-07/20085722191339_2.jpg',
+                catagory: 'Start',
                 desc: '开始'
             }
         }),'utf-8');
@@ -20,24 +21,67 @@ server.on('request',function(req,res,next){
     if (api === '/api/research/info') {
         res.end(JSON.stringify({
             code: 0,
-            componentName: 'Information',
             dataObj: {
-                nextLink: '/api/research/question_radio',
-                dataArr:[
-                    {type:'ipt',name:'姓名',keys:'name'},
-                    {type:'ipt',name:'手机号码',keys:'phone'}
+                catagory: 'Information',
+                postUrl: '/api/research/info_post',
+                btns: [
+                    {
+                        link: "/api/research/start",
+                        text: "返回",
+                    },
+                    {
+                        link: "/api/research/question_radio",
+                        text: "马上开始",
+                    }
+                ],
+                data:[
+                    {
+                        type:'text',
+                        name:'姓名',
+                        keys:'name'
+                    },
+                    {
+                        type:'text',
+                        name:'手机号码',
+                        keys:'phone'
+                    }
                 ]
             },
         }),'utf-8');
     }
-    
+    if (api === '/api/research/info_post') {
+        var postData = '';
+        req.on('data', function (data) {
+            postData += data;
+        })
+        req.on('end', function (data) {
+            console.log(postData)
+            res.end(JSON.stringify({
+                code: 0
+            },'utf-8'))
+        })
+        return false;
+    }
     if (api === '/api/research/question_radio') {
         res.end(JSON.stringify({
             code: 0,
-            componentName: 'Question_radio',
             dataObj: {
+                catagory: 'Question_radio',
                 title: 'Question_radio component',
-                data: [1,2,3],
+                q_id: '3',
+                postUrl: '/api/research/question_radio_post',
+                data: [
+                    {
+                        value : '1',
+                        checked:  true                 
+                    },
+                    {
+                        value : '2'
+                    },
+                    {
+                        value : '3',
+                    }
+                ],
                 btns: [
                     {
                         link: "/api/research/info",
@@ -51,42 +95,122 @@ server.on('request',function(req,res,next){
             }
         }),'utf-8');
     }
+    if (api === '/api/research/question_radio_post') {
+        var postData = '';
+        req.on('data', function (data) {
+            postData += data;
+        })
+        req.on('end', function (data) {
+            console.log(postData)
+            res.end(JSON.stringify({
+                code: 0
+            },'utf-8'))
+        })
+        return false;
+    }
     if (api === '/api/research/question_checkbox') {
         res.end(JSON.stringify({
             code: 0,
-            componentName: 'Question_checkbox',
             dataObj: {
+                q_id: 4,
                 title: 'Question_checkbox component',
-                data: [1,2,3]
-            }
-        }),'utf-8');
-    }
-    if (api === '/api/research/question_input') {
-        res.end(JSON.stringify({
-            code: 0,
-            componentName: 'Question_input',
-            dataObj: {
-                title: 'Question_input component',
-                data: [1,2,3]
+                postUrl: '/api/research/question_checkbox_post',
+                catagory: 'Question_checkbox',
+                data: [
+                    {
+                        value : '1',
+                        checked:  true                 
+                    },
+                    {
+                        value : '2'
+                    },
+                    {
+                        value : '3',
+                    }
+                    
+                ],
+                btns: [
+                    {
+                        link: "/api/research/question_radio",
+                        text: "上一题",
+                    },
+                    {
+                        link: "/api/research/question_input",
+                        text: "下一题",
+                    }
+                ]
             }
         }),'utf-8');
     }
     
+    if (api === '/api/research/question_checkbox_post') {
+        var postData = '';
+        req.on('data', function (data) {
+            postData += data;
+        })
+        req.on('end', function (data) {
+            console.log(postData)
+            res.end(JSON.stringify({
+                code: 0
+            },'utf-8'))
+        })
+        return false;
+    }
+    
+    
+    if (api === '/api/research/question_input') {
+        res.end(JSON.stringify({
+            code: 0,
+            dataObj: {
+                catagory: 'Question_input',
+                q_id: 5,
+                title: 'Question_input component',
+                defaultValue: 'defaultVaule',
+                postUrl: '/api/research/question_input_post',
+                btns: [
+                    {
+                        link: "/api/research/question_checkbox",
+                        text: "上一题",
+                    },
+                    {
+                        link: "/api/research/suggest",
+                        text: "下一题",
+                    }
+                ]
+            }
+        }),'utf-8');
+    }
+    if (api === '/api/research/question_input_post') {
+        var postData = '';
+        req.on('data', function (data) {
+            postData += data;
+        })
+        req.on('end', function (data) {
+            console.log(postData)
+            res.end(JSON.stringify({
+                code: 0
+            },'utf-8'))
+        })
+        return false;
+    }
 
     
     if (api === '/api/research/suggest') {
         res.end(JSON.stringify({
             code: 0,
-            componentName: 'Suggest',
+            dataObj: {
+                catagory: 'Suggest'
+            }
+
         }),'utf-8');
     }
     
     if (api === '/api/research/end') {
         res.end(JSON.stringify({
             code: 0,
-            componentName: 'End',
             dataObj: {
-                desc: 'End',
+                catagory: 'End',
+                desc: 'End'
             }
         }),'utf-8');
     }

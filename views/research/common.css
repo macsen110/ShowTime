@@ -28,8 +28,8 @@ body {
 	min-width: 320px;
 	margin: 0 auto;
 	padding: 7%;
-	background:url(../imgs/bg_body.png) no-repeat bottom #2f81d2;
-	background-size: 100% auto
+	background:#2f81d2;
+	background-size: cover
 }
 
 .comm-box {
@@ -260,6 +260,7 @@ input:-webkit-autofill:focus {
 }
 
 .btn.sub {
+	color: #959494;
 	background-color: #e9e9e9;
 }
 
@@ -317,17 +318,19 @@ input:-webkit-autofill:focus {
 /************************/
 
 /**************问题--radio***********/
-.comm-box-radio input[type="radio"] {
+.comm-box-radio input[type="radio"],
+.comm-box-check input[type="checkbox"] {
 	display: inline-block;
 	height: 1.4rem;
 	width: 1.4rem;
 	margin-right: .8rem;
 	vertical-align: middle;
-	background: url(../imgs/icon_radio.png) no-repeat 0 0;
+	background: url(../imgs/icon_radio.png) no-repeat 0 0 gray;
 	background-size: 100% auto;
 }
-.comm-box-radio input[type="radio"]:checked {
-	background: url(../imgs/icon_radio.png) 0 100% no-repeat;
+.comm-box-radio input[type="radio"]:checked,
+.comm-box-check input[type="checkbox"]:checked {
+	background: url(../imgs/icon_radio.png) 0 100% no-repeat red;
 	background-size: 100% auto;
 }
 
@@ -370,4 +373,18 @@ input:-webkit-autofill:focus {
 .comm-box-end p{ 
 	line-height: 2;
 	text-align: justify	
+}
+/**********loading**************/
+.loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+	z-index: 100;
+    height: 6rem;
+    width: 6rem;
+    background: url(../imgs/oval.svg) no-repeat;
+    background-size: cover;
+    margin-left: -3rem;
+    margin-top: -3rem;
+
 }
