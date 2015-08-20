@@ -59,7 +59,7 @@
 	var _getIterator = __webpack_require__(45)['default'];
 
 	var marked0$0 = [generator].map(_regeneratorRuntime.mark);
-	var Router = ReactRouter; // or var Router = ReactRouter; in browsers
+	var Router = ReactRouter;
 	var DefaultRoute = Router.DefaultRoute;
 	var NotFoundRoute = Router.NotFoundRoute;
 	var Redirect = Router.Redirect;
@@ -310,8 +310,8 @@
 
 	//Router.HistoryLocation参数代表绝对地址链接
 
-	Router.run(routes, function (Handler, state) {
-	    React.render(React.createElement(Handler, null), document.body);
+	Router.run(routes, Router.HistoryLocation, function (Handler, state) {
+	    React.render(React.createElement(Handler, null), document.getElementById('router_container'));
 	});
 
 	// return Promise.resolve(getJSON._cache[url]);
