@@ -58,7 +58,6 @@
 
 	var _Promise = __webpack_require__(22)['default'];
 
-
 	var _interopRequireDefault = __webpack_require__(50)['default'];
 
 	var _react = __webpack_require__(51);
@@ -67,14 +66,23 @@
 
 	var _xhr = __webpack_require__(205);
 
-
 	var _xhr2 = _interopRequireDefault(_xhr);
 
 	var startUrl = '/api/research/start';
-	function back(prevLink) {
-	    if (location.hash) history.back();else location.hash = prevLink;
-	}
+	var initRequestNum = 0;
+	var initRequestNum2 = 0;
 
+	function loading() {
+	    var loadingDom = document.getElementById('loading_container');
+	    loadingDom ? loadingDom.classList.remove('hidden') : '';
+	}
+	function hideLoading() {
+	    var loadingDom = document.getElementById('loading_container');
+	    loadingDom ? loadingDom.classList.add('hidden') : '';
+	}
+	function prevPage(prevLink) {
+	    location.hash ? history.back() : location.hash = prevLink;
+	}
 	function nextPage(nextLink) {
 	    window.location.hash = nextLink;
 	}
@@ -83,7 +91,6 @@
 	    var curLink = location.href;
 	    return link === curLink;
 	}
-
 	function getJson(arr) {
 	    var obj = {};
 	    arr.forEach(function (item) {
@@ -107,7 +114,8 @@
 	                    if (obj.code == 0) {
 	                        resolve(nextLink);
 	                    } else {
-	                        reject(obj.msg);
+	                        alert(obj.msg);
+	                        loadingDom.classList.contains('hidden') ? loadingDom.classList.remove('hidden') : '';
 	                    }
 	                }
 	            }
@@ -150,6 +158,7 @@
 	    _createClass(C_start, [{
 	        key: 'render',
 	        value: function render() {
+	            var props = this.props;
 	            return _react2['default'].createElement(
 	                'div',
 	                { className: 'comm-box-start' },
@@ -163,7 +172,7 @@
 	                    { className: 'flex' },
 	                    _react2['default'].createElement(
 	                        'button',
-	                        { onClick: nextPage.bind(null, '/api/research/info'), className: 'btn' },
+	                        { onClick: props.loadAnsyData.bind(null, props.btns[0].link, 1), className: 'btn' },
 	                        '开始答题'
 	                    )
 	                )
@@ -203,7 +212,7 @@
 	                    { className: 'flex' },
 	                    _react2['default'].createElement(
 	                        'button',
-	                        { className: 'btn sub', onClick: back.bind(null, props.btns[0].link) },
+	                        { className: 'btn sub', onClick: props.loadAnsyData.bind(null, props.btns[0].link, -1) },
 	                        props.btns[0].text
 	                    ),
 	                    _react2['default'].createElement(
@@ -215,8 +224,14 @@
 	            );
 	        }
 	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate() {
+	            document.body.style.backgroundSize = 'cover';
+	        }
+	    }, {
 	        key: 'handleSubmit',
 	        value: function handleSubmit(postUrl, nextLink) {
+	            var props = this.props;
 	            var container = _react2['default'].findDOMNode(this.refs.container);
 	            var ipts = container.querySelectorAll('.ipt');
 	            var flag = true;
@@ -242,10 +257,9 @@
 
 	            if (flag) {
 	                postAnswer(postUrl, getJson([].slice.call(ipts)), nextLink).then(function (value) {
-	                    return nextPage(value);
+	                    return props.loadAnsyData(value, 1);
 	                });
 	            }
-	            //nextPage(nextLink)
 	        }
 	    }]);
 
@@ -380,7 +394,7 @@
 	                    { className: 'flex' },
 	                    _react2['default'].createElement(
 	                        'button',
-	                        { className: 'btn sub', onClick: back.bind(null, props.btns[0].link) },
+	                        { className: 'btn sub', onClick: props.loadAnsyData.bind(null, props.btns[0].link, -1) },
 	                        props.btns[0].text
 	                    ),
 	                    _react2['default'].createElement(
@@ -398,12 +412,12 @@
 	            var container = _react2['default'].findDOMNode(this.refs.container);
 	            var checkEle = container.querySelector('[type="radio"]:checked');
 	            if (!checkEle) {
-	                alert('please select one!');
+	                alert('请至少勾选一个选型!');
 	                return false;
 	            }
 	            var postData = JSON.stringify({ q_id: props.q_id, value: checkEle.value });
 	            postAnswer(postUrl, postData, nextLink).then(function (value) {
-	                return nextPage(value);
+	                return props.loadAnsyData(value, 1);
 	            });
 	        }
 	    }]);
@@ -430,7 +444,7 @@
 	            var checkEles = container.querySelectorAll('[type="checkbox"]:checked');
 	            var checkboxData = [];
 	            if (!checkEles.length) {
-	                alert('please select one!');
+	                alert('请至少勾选一个选型!');
 	                return false;
 	            }
 	            [].forEach.call(checkEles, function (item) {
@@ -438,7 +452,7 @@
 	            });
 	            var postData = JSON.stringify({ q_id: props.q_id, value: checkboxData });
 	            postAnswer(postUrl, postData, nextLink).then(function (value) {
-	                return nextPage(value);
+	                return props.loadAnsyData(value, 1);
 	            });
 	        }
 	    }, {
@@ -475,7 +489,7 @@
 	                    { className: 'flex' },
 	                    _react2['default'].createElement(
 	                        'button',
-	                        { className: 'btn sub', onClick: back.bind(null, props.btns[0].link) },
+	                        { className: 'btn sub', onClick: props.loadAnsyData.bind(null, props.btns[0].link, -1) },
 	                        props.btns[0].text
 	                    ),
 	                    _react2['default'].createElement(
@@ -505,16 +519,21 @@
 	    _createClass(C_question_ipt, [{
 	        key: 'handleSubmit',
 	        value: function handleSubmit(postUrl, nextLink) {
+	            console.log(postUrl);
 	            var props = this.props;
 	            var container = _react2['default'].findDOMNode(this.refs.container);
 	            var iptEle = container.querySelector('textarea');
 	            if (iptEle.value === '') {
-	                alert('please say something!');
+	                alert('填写内容不能为空!');
+	                iptEle.focus();
 	                return false;
 	            }
-	            var postData = JSON.stringify({ q_id: props.q_id, value: iptEle.value });
+	            var postData = JSON.stringify({
+	                q_id: props.q_id,
+	                value: iptEle.value
+	            });
 	            postAnswer(postUrl, postData, nextLink).then(function (value) {
-	                return nextPage(value);
+	                return props.loadAnsyData(value, 1);
 	            });
 	        }
 	    }, {
@@ -527,7 +546,7 @@
 	                _react2['default'].createElement(
 	                    'p',
 	                    { className: 'title' },
-	                    this.props.title
+	                    props.title
 	                ),
 	                _react2['default'].createElement(
 	                    'p',
@@ -544,7 +563,7 @@
 	                    { className: 'flex' },
 	                    _react2['default'].createElement(
 	                        'button',
-	                        { className: 'btn sub', onClick: back.bind(null, props.btns[0].link) },
+	                        { className: 'btn sub', onClick: props.loadAnsyData.bind(null, props.btns[0].link, -1) },
 	                        props.btns[0].text
 	                    ),
 	                    _react2['default'].createElement(
@@ -573,15 +592,24 @@
 
 	    _createClass(C_user_suggest, [{
 	        key: 'handleSubmit',
-	        value: function handleSubmit() {
-	            nextPage('/api/research/end');
+	        value: function handleSubmit(postUrl, nextLink) {
+	            var props = this.props;
+	            var container = _react2['default'].findDOMNode(this.refs.container);
+	            var iptEle = container.querySelector('textarea');
+	            var postData = JSON.stringify({
+	                content: iptEle.value
+	            });
+	            postAnswer(postUrl, postData, nextLink).then(function (value) {
+	                return props.loadAnsyData(value, 1);
+	            });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var props = this.props;
 	            return _react2['default'].createElement(
 	                'div',
-	                { className: 'comm-box-suggest' },
+	                { className: 'comm-box-suggest', ref: 'container' },
 	                _react2['default'].createElement(
 	                    'p',
 	                    { className: 't-c' },
@@ -597,13 +625,13 @@
 	                    { className: 'flex' },
 	                    _react2['default'].createElement(
 	                        'button',
-	                        { className: 'btn sub', onClick: back },
-	                        '返回'
+	                        { className: 'btn sub', onClick: props.loadAnsyData.bind(null, props.btns[0].link, -1) },
+	                        props.btns[0].text
 	                    ),
 	                    _react2['default'].createElement(
 	                        'button',
-	                        { className: 'btn', onClick: this.handleSubmit },
-	                        '完成'
+	                        { className: 'btn', onClick: this.handleSubmit.bind(this, props.postUrl, props.btns[1].link) },
+	                        props.btns[1].text
 	                    )
 	                )
 	            );
@@ -643,10 +671,10 @@
 	        _classCallCheck(this, All);
 
 	        _get(Object.getPrototypeOf(All.prototype), 'constructor', this).call(this, props);
-	        var curLink = location.hash ? location.hash.slice(1) : startUrl;
+	        this.loadAnsyData = this.loadAnsyData.bind(this);
 	        this.state = {
-	            ready: false,
-	            curLink: curLink
+	            isMounted: true,
+	            componentName: null
 	        };
 	    }
 
@@ -654,24 +682,36 @@
 
 	    _createClass(All, [{
 	        key: 'loadAnsyData',
-	        value: function loadAnsyData(url) {
-	            this.setState({
-	                ready: false
-	            });
+	        value: function loadAnsyData(url, flag) {
+	            //参数flag代表用户点击链接跳转,1代表下一步,-1代表上一步
 	            var curlocation = location.href;
 	            var self = this;
+	            loading();
 	            new _xhr2['default']({
 	                url: url,
 	                done: function done(obj) {
+	                    //链接跟当前链接一样时,防止用户连续点击回退
 	                    if (isLocationSame(curlocation)) {
 	                        if (obj.code == 0) {
-	                            if (location.hash.slice(1) === url || !location.hash) {
+	                            hideLoading();
+
+	                            if (self.state.isMounted) {
+	                                if (obj.dataObj.body_bg) {
+	                                    document.documentElement.style.backgroundImage = 'url(' + obj.dataObj.body_bg + ')';
+	                                }
 	                                self.setState({
-	                                    ready: true,
 	                                    componentName: obj.dataObj.catagory,
 	                                    dataObj: obj.dataObj
 	                                });
+
+	                                if (flag) {
+	                                    ++initRequestNum;
+	                                    flag === 1 ? nextPage(url) : prevPage(url);
+	                                }
 	                            }
+	                        } else {
+	                            alert(obj.msg);
+	                            hideLoading();
 	                        }
 	                    }
 	                }
@@ -680,68 +720,61 @@
 	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            var self = this;
-	            new _xhr2['default']({
-	                url: self.state.curLink,
-	                done: function done(obj) {
-	                    if (obj.code == 0) {
-	                        if (obj.dataObj.body_bg) {
-	                            document.body.style.backgroundImage = 'url(' + obj.dataObj.body_bg + ')';
-	                        }
-	                        self.setState({
-	                            componentName: obj.dataObj.catagory,
-	                            ready: true,
-	                            dataObj: obj.dataObj
-	                        });
-	                    }
-	                }
-	            });
+
+	            var curLink = location.hash ? location.hash.slice(1) : startUrl;
+	            this.loadAnsyData(curLink);
 	            window.addEventListener('hashchange', (function () {
 	                var url = location.hash ? location.hash.slice(1) : startUrl;
-	                this.loadAnsyData(url);
+	                if (initRequestNum2 === initRequestNum) this.loadAnsyData(url);else initRequestNum2 = initRequestNum;
 	            }).bind(this));
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            this.setState({
+	                isMounted: false
+	            });
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            if (this.state.ready) {
+	            if (this.state.componentName) {
 	                var componentName = this.state.componentName;
 	                var dataObj = this.state.dataObj;
 	                var component;
 	                switch (componentName) {
 	                    case 'Start':
-	                        console.log('start');
-	                        component = _react2['default'].createElement(C_start, dataObj);
+	                        component = _react2['default'].createElement(C_start, _extends({}, dataObj, { loadAnsyData: this.loadAnsyData }));
 	                        break;
 	                    case 'Information':
-	                        component = _react2['default'].createElement(C_info, dataObj);
+	                        component = _react2['default'].createElement(C_info, _extends({}, dataObj, { loadAnsyData: this.loadAnsyData }));
 	                        break;
 	                    case 'Question_radio':
-	                        component = _react2['default'].createElement(C_question_radio, dataObj);
+	                        component = _react2['default'].createElement(C_question_radio, _extends({}, dataObj, { loadAnsyData: this.loadAnsyData }));
 	                        break;
 	                    case 'Question_checkbox':
-	                        component = _react2['default'].createElement(C_question_checkbox, dataObj);
+	                        component = _react2['default'].createElement(C_question_checkbox, _extends({}, dataObj, { loadAnsyData: this.loadAnsyData }));
 	                        break;
 	                    case 'Question_input':
-	                        component = _react2['default'].createElement(C_question_ipt, dataObj);
+	                        component = _react2['default'].createElement(C_question_ipt, _extends({}, dataObj, { loadAnsyData: this.loadAnsyData }));
 	                        break;
 	                    case 'Suggest':
-	                        component = _react2['default'].createElement(C_user_suggest, null);
+	                        component = _react2['default'].createElement(C_user_suggest, _extends({}, dataObj, { loadAnsyData: this.loadAnsyData }));
 	                        break;
 	                    case 'End':
-	                        component = _react2['default'].createElement(C_end, dataObj);
+	                        component = _react2['default'].createElement(C_end, _extends({}, dataObj, { loadAnsyData: this.loadAnsyData }));
 	                        break;
 	                    default:
+	                        component = _react2['default'].createElement('div', null);
 	                        break;
 	                }
-
 	                return _react2['default'].createElement(
 	                    'div',
 	                    { className: 'comm-box' },
 	                    component
 	                );
 	            }
-	            return _react2['default'].createElement(Loading, null);
+	            return _react2['default'].createElement('div', null);
 	        }
 	    }]);
 
@@ -2113,7 +2146,6 @@
 /* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 
 	var React = __webpack_require__(53);
@@ -20915,8 +20947,6 @@
 /* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
-=======
->>>>>>> 67dff3d1ac5d60d4b539952a87e27699f400960f
 	'use strict';
 
 	var _createClass = __webpack_require__(12)['default'];

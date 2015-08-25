@@ -5,11 +5,14 @@
 	<title>第二届微盟微商论坛成都站 邀请函</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<script>
+
         //自适应设备
 		(function (doc, win) {
 			var docEl = doc.documentElement,
 					recalc = function () {
 						var clientWidth = docEl.clientWidth;
+
+
 						if (!clientWidth) return;
 						clientWidth = clientWidth > 640 ? 640 : clientWidth;
 						clientWidth = clientWidth < 320 ? 320 : clientWidth;
@@ -38,9 +41,16 @@
 	<link rel="stylesheet" href="common.css" type="text/css">
 </head>
 <body>
+	<script>
+		(function () {
+			var clientHeight = window.innerHeight;
+			document.body.style.minHeight = clientHeight + 'px';    
+			}
+		());
+	</script>
 	<div id="wrap-app"></div>
+	<div id="loading_container"><div class="loading"></div></div>
+	<p class="copy-right">由“微盟”平台提供</p>
 	<script src="/script/react/research/bundle.js"></script>
-
-
 </body>
 </html>

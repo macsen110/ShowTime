@@ -1,22 +1,30 @@
 import React from 'react';
 import xhr from './xhr';
 const startUrl = '/api/research/start';
-function back(prevLink) {
-    if (location.hash) history.back();
-    else location.hash = prevLink;
+var initRequestNum = 0;
+var initRequestNum2 = 0;
 
+
+
+function loading() {
+    var loadingDom = document.getElementById('loading_container');
+    loadingDom ? loadingDom.classList.remove('hidden') : '';
 }
-
+function hideLoading() {
+    var loadingDom = document.getElementById('loading_container');
+    loadingDom ? loadingDom.classList.add('hidden') : '';
+}
+function prevPage(prevLink) {
+    location.hash ? history.back() : location.hash = prevLink;   
+}
 function nextPage(nextLink) {
-    window.location.hash = nextLink;
+    window.location.hash = nextLink;    
 }
 
 function isLocationSame(link) {
     var curLink = location.href;
     return link === curLink;
 }
-
-
 function getJson(arr) {
     var obj = {};
     arr.forEach(function (item) {
@@ -41,7 +49,9 @@ function postAnswer(postUrl, postData, nextLink, link = location.href) {
                         resolve(nextLink)
                     }
                     else {
-                        reject(obj.msg)
+                        alert(obj.msg);
+                        loadingDom.classList.contains('hidden') ? loadingDom.classList.remove('hidden') : '';
+                        
                     }
                 }
             }
@@ -60,10 +70,11 @@ class Loading extends React.Component {
 //开始答题,说明
 class C_start extends React.Component {
     render() {
+        var props = this.props;
         return (
             <div className = "comm-box-start" >
                 <p className="desc">{this.props.desc}</p>
-                <p className="flex"><button onClick= {nextPage.bind(null,'/api/research/info')} className="btn">开始答题</button></p>              
+                <p className="flex"><button onClick= {props.loadAnsyData.bind(null, props.btns[0].link, 1)} className="btn">开始答题</button></p>              
             </div>
                         
         )
@@ -79,13 +90,18 @@ class C_info extends React.Component {
                 <p className="title t-c">请先填写您的资料</p>
                 <C_info_container data={props.data} />
                 <div className = "flex">
-                    <button className="btn sub" onClick={back.bind(null,props.btns[0].link)}>{props.btns[0].text}</button>
-                    <button className="btn" onClick={this.handleSubmit.bind(this, props.postUrl, props.btns[1].link)}>{props.btns[1].text}</button>
+                    <button className="btn sub" onClick= {props.loadAnsyData.bind(null, props.btns[0].link, -1)}>{props.btns[0].text}</button>
+                    <button className="btn" onClick= {this.handleSubmit.bind(this, props.postUrl, props.btns[1].link)}>{props.btns[1].text}</button>
                 </div>
             </div>
         )
     }
+    componentDidUpdate() {
+        document.body.style.backgroundSize = 'cover';
+        
+    }
     handleSubmit(postUrl, nextLink) {
+        var props = this.props;
         var container = React.findDOMNode(this.refs.container);
         var ipts = container.querySelectorAll('.ipt');
         var flag = true;
@@ -110,9 +126,10 @@ class C_info extends React.Component {
         })
 
         if (flag) {
-            postAnswer(postUrl, getJson([].slice.call(ipts)), nextLink).then((value) => nextPage(value));
+            postAnswer(postUrl, getJson([].slice.call(ipts)), nextLink).then(
+                (value) => props.loadAnsyData(value, 1)
+            );
         }
-        //nextPage(nextLink)
     }
 }
 
@@ -168,7 +185,7 @@ class C_question_radio extends React.Component {
                     {props.data.map((item, index) => <li className="item" key={index}><input name="select-radio" type="radio" defaultChecked = {item.checked ? true : false} value={item.value} />{item.value}</li>)}
                 </ul>
                 <div className ="flex">
-                    <button className="btn sub" onClick={back.bind(null,props.btns[0].link)}>{props.btns[0].text}</button>
+                    <button className="btn sub" onClick={props.loadAnsyData.bind(null, props.btns[0].link, -1)}>{props.btns[0].text}</button>
                     <button className="btn" onClick={this.handleSubmit.bind(this, props.postUrl, props.btns[1].link)}>{props.btns[1].text}</button>
                 </div>
             </div>
@@ -181,11 +198,11 @@ class C_question_radio extends React.Component {
         var container = React.findDOMNode(this.refs.container);
         var checkEle = container.querySelector('[type="radio"]:checked');
         if (!checkEle) {
-            alert('please select one!')
+            alert('请至少勾选一个选型!')
             return false;
         }
         var postData = JSON.stringify({q_id: props.q_id,value: checkEle.value})
-        postAnswer(postUrl, postData, nextLink).then((value) => nextPage(value))
+        postAnswer(postUrl, postData, nextLink).then((value) => props.loadAnsyData(value, 1))
 
         
     }
@@ -199,14 +216,14 @@ class C_question_checkbox extends React.Component {
         var checkEles = container.querySelectorAll('[type="checkbox"]:checked');
         var checkboxData = []
         if (!checkEles.length) {
-            alert('please select one!')
+            alert('请至少勾选一个选型!')
             return false;
         }
         [].forEach.call(checkEles, function(item) {
             checkboxData.push(item.value)
         })
         var postData = JSON.stringify({q_id: props.q_id,value: checkboxData})
-        postAnswer(postUrl, postData, nextLink).then((value) => nextPage(value))
+        postAnswer(postUrl, postData, nextLink).then((value) => props.loadAnsyData(value, 1))
 
     }
     render() {
@@ -219,7 +236,7 @@ class C_question_checkbox extends React.Component {
                         {props.data.map((item, index) => <li className="item" key={index}><input name="select-checkbox" type="checkbox" defaultChecked = {item.checked ? true : false} value={item.value} />{item.value}</li>)}
                     </ul>
                 <div className = "flex">
-                    <button className="btn sub" onClick={back.bind(null,props.btns[0].link)}>{props.btns[0].text}</button>
+                    <button className="btn sub" onClick={props.loadAnsyData.bind(null, props.btns[0].link, -1)}>{props.btns[0].text}</button>
                     <button className="btn" onClick={this.handleSubmit.bind(this, props.postUrl, props.btns[1].link)}>{props.btns[1].text}</button>
                 </div>
             </div>
@@ -230,27 +247,32 @@ class C_question_checkbox extends React.Component {
 //问题类型,填写内容
 class C_question_ipt extends React.Component {
     handleSubmit(postUrl, nextLink) {
+        console.log(postUrl);
         var props = this.props;
         var container = React.findDOMNode(this.refs.container);
         var iptEle = container.querySelector('textarea');
         if (iptEle.value === '') {
-            alert('please say something!')
+            alert('填写内容不能为空!');
+            iptEle.focus();
             return false;
         }
-        var postData = JSON.stringify({q_id: props.q_id,value: iptEle.value})
-        postAnswer(postUrl, postData, nextLink).then((value) => nextPage(value))
+        var postData = JSON.stringify({
+            q_id: props.q_id,
+            value: iptEle.value
+        })
+        postAnswer(postUrl, postData, nextLink).then((value) => props.loadAnsyData(value, 1))
     }
     render() {
         var props = this.props;
         return (
             <div className="comm-box-input" ref = "container">
-                <p className="title">{this.props.title}</p>
+                <p className="title">{props.title}</p>
                 <p>请输入:</p>
                 <div className="wrap-ipt">
                     <textarea defaultValue = {props.defaultValue ? props.defaultValue : ''} />
                 </div>
                 <div className = "flex">
-                    <button className="btn sub" onClick={back.bind(null,props.btns[0].link)}>{props.btns[0].text}</button>
+                    <button className="btn sub" onClick={props.loadAnsyData.bind(null, props.btns[0].link, -1)}>{props.btns[0].text}</button>
                     <button className="btn" onClick={this.handleSubmit.bind(this, props.postUrl, props.btns[1].link)}>{props.btns[1].text}</button>
                 </div>
             </div>
@@ -260,19 +282,26 @@ class C_question_ipt extends React.Component {
 
 //用户建议,
 class C_user_suggest extends React.Component {
-    handleSubmit() {
-        nextPage('/api/research/end')
+    handleSubmit(postUrl, nextLink) {
+        var props = this.props;
+        var container = React.findDOMNode(this.refs.container);
+        var iptEle = container.querySelector('textarea');
+        var postData = JSON.stringify({
+            content: iptEle.value
+        })
+        postAnswer(postUrl, postData, nextLink).then((value) => props.loadAnsyData(value, 1))
     }
     render() {
+        var props = this.props;
         return (
-            <div className="comm-box-suggest">
+            <div className="comm-box-suggest" ref = "container">
                 <p className="t-c">感谢您的参与</p>
                 <div className="wrap-ipt">
                     <textarea placeholder="有什么建议留给我们？" />
                 </div>
                 <div className = "flex">
-                    <button className="btn sub" onClick={back}>返回</button>
-                    <button className="btn" onClick={this.handleSubmit}>完成</button>
+                    <button className="btn sub" onClick={props.loadAnsyData.bind(null, props.btns[0].link, -1)}>{props.btns[0].text}</button>
+                    <button className="btn" onClick={this.handleSubmit.bind(this, props.postUrl, props.btns[1].link)}>{props.btns[1].text}</button>
                 </div>
             </div>
         )
@@ -292,101 +321,104 @@ class C_end extends React.Component {
 
 class All extends React.Component {
     constructor(props) {
-        super(props)
-        var curLink = location.hash ? location.hash.slice(1) : startUrl;
-        this.state =  {
-            ready: false,
-            curLink: curLink
+        super(props);
+        this.loadAnsyData = this.loadAnsyData.bind(this);
+        this.state = {
+            isMounted: true,
+            componentName: null
         };
     }
-    loadAnsyData(url) {
-       this.setState({
-           ready: false
-       })
-       var curlocation = location.href;
-       var self = this;
+    loadAnsyData(url, flag) { //参数flag代表用户点击链接跳转,1代表下一步,-1代表上一步
+        var curlocation = location.href;
+        var self = this;
+        loading();
         new xhr({
             url:url,
             done: function (obj) {
+                //链接跟当前链接一样时,防止用户连续点击回退
                 if (isLocationSame(curlocation)) {
                     if (obj.code == 0) {
-                        if (location.hash.slice(1) === url || !location.hash) {
-                            self.setState({
-                                ready: true,
-                                componentName: obj.dataObj.catagory,
-                                dataObj: obj.dataObj
-                            })
-                        }
+                            hideLoading();
+
+                            if (self.state.isMounted) {
+                                if (obj.dataObj.body_bg) {
+                                    document.documentElement.style.backgroundImage = 'url('+ obj.dataObj.body_bg +')';                            
+                                }
+                                self.setState({
+                                    componentName: obj.dataObj.catagory,
+                                    dataObj: obj.dataObj
+                                })
     
+                                if (flag) {
+                                    ++initRequestNum;
+                                    flag === 1 ? nextPage(url) : prevPage(url)                                                     
+                                }
+                            }
+
+                    }
+                    else {
+                        alert(obj.msg);
+                        hideLoading();
                     }                              
                 }
-
+    
             }
         })
         
     }
     componentDidMount() {
-        var self =this;
-        new xhr({
-            url: self.state.curLink,
-            done: function (obj) {
-                if (obj.code == 0) {
-                    if (obj.dataObj.body_bg) {
-                        document.body.style.backgroundImage = 'url(' + obj.dataObj.body_bg + ')';
-                    }
-                    self.setState({
-                        componentName: obj.dataObj.catagory,
-                        ready: true,
-                        dataObj: obj.dataObj
-                    })
-                }                              
-            }
-        })
+
+        var curLink = location.hash ? location.hash.slice(1) : startUrl;
+        this.loadAnsyData(curLink);
         window.addEventListener('hashchange', function () {                  
             var url = location.hash ? location.hash.slice(1) : startUrl
-            this.loadAnsyData(url)
+            if (initRequestNum2 === initRequestNum) this.loadAnsyData(url);
+            else initRequestNum2 = initRequestNum;
         }.bind(this))
     }
+    componentWillUnmount() {
+        this.setState({
+            isMounted: false
+        });
+    }
     render() {
-        if (this.state.ready) {
+        if (this.state.componentName) {
             var componentName = this.state.componentName;
             var dataObj = this.state.dataObj;
             var component;
             switch(componentName) {
                 case 'Start':
-                    console.log('start')
-                    component = <C_start {...dataObj} />
+                    component = <C_start {...dataObj} loadAnsyData = {this.loadAnsyData} />
                     break;
                 case 'Information':
-                    component = <C_info {...dataObj} />
+                    component = <C_info {...dataObj} loadAnsyData = {this.loadAnsyData} />
                     break;
                 case 'Question_radio':
-                    component = <C_question_radio {...dataObj} />
+                    component = <C_question_radio {...dataObj} loadAnsyData = {this.loadAnsyData} />
                     break;
                 case 'Question_checkbox':
-                    component = <C_question_checkbox {...dataObj} />
+                    component = <C_question_checkbox {...dataObj} loadAnsyData = {this.loadAnsyData} />
                     break;
                 case 'Question_input':
-                    component = <C_question_ipt {...dataObj} />
+                    component = <C_question_ipt {...dataObj} loadAnsyData = {this.loadAnsyData} />
                     break;
                 case 'Suggest':
-                    component = <C_user_suggest />
+                    component = <C_user_suggest {...dataObj} loadAnsyData = {this.loadAnsyData} />
                     break;
                 case 'End':
-                    component = <C_end {...dataObj} />
+                    component = <C_end {...dataObj} loadAnsyData = {this.loadAnsyData} />
                     break;
                 default: 
+                    component = <div />
                     break;
             }
-
             return (
                 <div className="comm-box">               
                     {component}
                 </div>
             )
         }
-        return (<Loading />)
-
+        return (<div />)
     }
 }
 

@@ -11,9 +11,15 @@ server.on('request',function(req,res,next){
         res.end(JSON.stringify({
             code: 0,
             dataObj: {
-                body_bg: 'http://pic.nipic.com/2008-05-07/20085722191339_2.jpg',
+                body_bg: 'http://img3.cache.netease.com/photo/0003/2015-06-30/ATCDPPU800AJ0003.jpg',
                 catagory: 'Start',
-                desc: '开始'
+                desc: '开始',
+                btns: [
+                    {
+                        link: "/api/research/info",
+                        text: "返回",
+                    }
+                ]
             }
         }),'utf-8');
 
@@ -199,7 +205,18 @@ server.on('request',function(req,res,next){
         res.end(JSON.stringify({
             code: 0,
             dataObj: {
-                catagory: 'Suggest'
+                catagory: 'Suggest',
+                postUrl: '/api/research/question_input_post',
+                btns: [
+                    {
+                        link: "/api/research/question_checkbox",
+                        text: "返回",
+                    },
+                    {
+                        link: "/api/research/end",
+                        text: "完成",
+                    }
+                ]
             }
 
         }),'utf-8');

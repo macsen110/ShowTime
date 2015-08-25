@@ -110,6 +110,9 @@ React.render(
 )
 
 var CommentPropItem = React.createClass({
+	componentWillReceiveProps: function () {
+		console.log('componentWillReceiveProps CommentPropList')
+	},
   render: function() {
     return (
       <div className="CommentPropItem">
@@ -117,27 +120,55 @@ var CommentPropItem = React.createClass({
         <h2>
           {this.props.author}
         </h2>
+		<h2>{this.props.test}</h2>
 
       </div>
     );
   }
 });
 var CommentPropList = React.createClass({
-	getInitialState: function () {
+	getDefaultProps: function () {
+		console.log('getDefaultProps CommentPropList')
 		return {
-			author: 'macsen'
+			test: 'test props'
 		}
 	},
+	getInitialState: function () {
+		console.log('getInitalState CommentPropList')
+		return {
+			author: this.props.test
+		}
+	},
+	shouldComponentUpdate: function () {
+
+		console.log('shouldComponentUpdate CommentPropList');
+		return true;
+	},
+	componentWillReceiveProps: function () {
+		console.log('componentWillReceiveProps CommentPropList')
+	},
+	componentWillMount: function () {
+		console.log('componentWillMount CommentPropList')	
+	},
+	componentWillUpdate: function () {
+		console.log('componentWillUpdate CommentPropList')
+	},
+	componentWillUpdate: function () {
+		console.log('componentWillUpdate CommentPropList')
+	},
 	componentDidMount: function () {
+		console.log('mouted ' + this.isMounted());
+		console.log('componentDidMount CommentPropList');
 		setTimeout(function () {
 			this.setState({
 				author: 'macsen2'
 			})
-		}.bind(this), 2000)
+		
+		}.bind(this), 3000)
 	},
   	render: function() {
 	    return (
-	    	<CommentPropItem id={ 2>1 ? id = "sssss" : ''} author={this.state.author} />
+	    	<CommentPropItem id={ 2>1 ? id = "sssss" : ''} author={this.state.author} test={this.props.test}  />
 	    );
   }
 });
@@ -197,7 +228,7 @@ var CommentUrl = React.createClass({
 	},
 	render: function() {
 		return (
-			<div className="url">{this.state.liked.toString()}<div><input type="text" name="title" defaultValue="Untitled" /></div></div>
+			<div className="url">{this.state.liked.toString()}<div><input type="text" name="title" defaultValue="default" /></div></div>
 			
 		)
 	}
