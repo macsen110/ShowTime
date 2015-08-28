@@ -434,3 +434,55 @@ var KeyList = React.createClass({
 })
 
 React.render(<KeyList  />, document.getElementById('keyList'));
+
+
+var Grandparent = React.createClass({
+
+    childContextTypes: {
+         foo: React.PropTypes.string.isRequired
+    },
+
+    getChildContext: function() {
+         return { foo: "I m the grandparent" };
+    },
+
+    render: function() {
+         return <Parent />;
+    }
+});
+
+
+var Parent = React.createClass({
+
+    childContextTypes: {
+         bar: React.PropTypes.string.isRequired
+    },
+
+    getChildContext: function() {
+         return { bar: "I am the parent" };
+    },
+
+    render: function() {
+         return <Child />;
+    }
+});
+
+var Child = React.createClass({
+
+    contextTypes: {
+        foo: React.PropTypes.string.isRequired,
+        bar: React.PropTypes.string.isRequired
+    },
+
+    render: function() {
+        return (
+          <div>
+            <div>My name is: {this.context.foo}</div>
+            <div>My name is: {this.context.bar}</div>
+          </div>
+        )
+    }
+});
+
+// Finally you render the grandparent
+React.render(<Grandparent />, document.getElementById('contextTypes'));
