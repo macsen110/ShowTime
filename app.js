@@ -3,7 +3,7 @@ var url  = require("url"),
     readUri = require('./readUri'),
     server = new http.Server();
 
-server.name = "172.16.2.77";
+server.name = "127.0.0.1";
 server.on('request',function(req,res,next){
     var pathname=__dirname+url.parse(req.url).pathname;
     var api = req.url;
