@@ -1,0 +1,17 @@
+/**********
+配置样式
+.timer-container 容器
+.timer-container .item 显示时间子item
+.timer-container .day 显示天item
+.timer-container .hour 显示小时item
+.timer-container .minute 显示分钟item
+.timer-container .second 显示秒item 
+
+*********/
+.timer_container {
+	width: 400px;
+	margin: 20px auto 0;
+	padding: 20px;
+	border-radius: 10px;
+	background: #ccc;
+}
