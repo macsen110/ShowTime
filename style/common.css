@@ -12,8 +12,13 @@ body {
 
 }
 
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,button,textarea,p,blockquote,th,td{
-    font-family: "Verdana","Helvetica","Hiragino Sans GB","Segoe UI","Microsoft Yahei","微软雅黑",Tahoma,Arial,STHeiti,sans-serif;margin:0;padding:0; list-style:none; color:#404040;outline:none;
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,button,textarea,p,blockquote,th,td {
+    font-family: "Verdana","Helvetica","Hiragino Sans GB","Segoe UI","Microsoft Yahei","微软雅黑",Tahoma,Arial,STHeiti,sans-serif;
+    margin:0;
+    padding:0; 
+    list-style:none; 
+    color:#404040;
+    outline:none;
     line-height: 1.5;
 	font-size: 1.4rem;
     box-sizing: border-box;

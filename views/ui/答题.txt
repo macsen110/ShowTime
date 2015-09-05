@@ -1,15 +1,13 @@
-这段时间比较忙,周末要加班,
-晚上抽时间来尽量做一下面试习题
-（真正的代码实现只是写了一个slider组件(也可以用es6来写,详见slider.html）,
-很多不足望原谅,以下是自己的一些个观点
-
-首先站点是以ng做的一个SPA，
+抽时间来尽量做一下面试习题
+ui icon方面我只是简单的用背景颜色加以区分,没有严格采用字体图标的形式
+脚本中主要写了slider, tabChange两个构造函数
+以下是自己的一些个观点
 1.对于html,结构来讲body部分我可能会分为
-header,section,footer三部分,section构建内容的主体部分
-2.logo部分我们用了h1 tag,理论上来讲会对seo友好,与logo同级的3个a tag,我会采用ul>li列表来设计
-里面能用列表形式的地方我会更多使用列表,如ng-view里面的.premium-rstbox部分
-3.页面的用户体验部分,我觉得做的很好,我没什么好提的意见,值得学习
-4.对于瀑布流,列表展现的部分(首屏后端render,并传递第二页的数据,下拉加载使用懒加载方式)
+header,section,footer三部分,section构建内容的主体部分,样式表全局使用了{box-sizing: border-box}
+个人认为这样会清晰布局页面
+2.logo部分我们用了h1 tag,理论上来讲会对seo友好,与logo同级的3个a tag,
+我采用ul>li列表来设计，个人习惯吧,也谈不上好坏
+3.在goods-list > item里面,我使用了上下两个div来划分布局,这样可以清晰的使时间和右面的icons 处于同一水平
 
 
 
@@ -23,7 +21,7 @@ header,section,footer三部分,section构建内容的主体部分
 像现在的新技术(es6,react, react-native, Polymer, meteor, flux, relax, redux, angular2.0),我都想尝试下,
 个人倾向于es6+react+react-router+redux+css module 架构，目前阶段一直对此在实践中
 
-(有点不喜欢低版本ie)
+
 
 
 
