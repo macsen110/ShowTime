@@ -4,7 +4,7 @@ import CounterApp from './CounterApp';
 import configureStore from '../store/configureStore';
 
 const store = configureStore();
-
+console.log(store.getState())
 export default class Root extends Component {
   render() {
     return (

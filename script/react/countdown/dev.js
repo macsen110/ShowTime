@@ -1,7 +1,10 @@
+/*************
+ * 
+ * a countDown timer use ES6 React
+************** */
 import React, { Component, PropTypes } from 'react';
 import ReactDom from 'react-dom';
 import style from './style.css';
-
 class WrapTimer extends Component {
 	constructor(props, context) {
 		super(props, context);
