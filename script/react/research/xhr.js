@@ -4,6 +4,7 @@ class xhr {
 		this.method = 'GET';
 		this.aysc = true;
 		this.sendData = null;
+		this.timeout = 3000;
 		if (typeof opt === 'object') {
 			Object.assign(this, opt);
 		}
@@ -13,13 +14,15 @@ class xhr {
 	}
 	send() {
 	    var _xhr = new XMLHttpRequest();
+	    if (this.timeout) {
+	    	_xhr.timeout = this.timeout;
+	    }
 	    _xhr.open(this.method, this.url, this.aysc);
 	    if (this.setHeader) {
 	    	_xhr.setRequestHeader("Content-Type", this.setHeader);	
 	    
 	    }
-
-	    _xhr.onload = function () {
+	    _xhr.onload = () => {
 	       if (_xhr.readyState === 4) {
 	           if (_xhr.status === 200) {
 	           		var sucData;
@@ -33,11 +36,12 @@ class xhr {
 	               reject(error);
 	           }
 	       }
-	    }.bind(this);
-	    _xhr.onerror = function(error){
+	    }
+	    _xhr.onerror = (error) => {
 	       console.log(error);
 	       this.faild(error);
-	    }.bind(this)
+	    }
+	    _xhr.ontimeout = () => { console.log("Timed out!!!") };
 	    _xhr.send(this.sendData)
 	}
 	done(data) {

@@ -14,10 +14,6 @@ module.exports = function (url,req) {
                 POST[_data[0]] = _data[1];
             }
             console.log(POST);
-//		console.log(qs.parse(data));
-//		for (i in qs.parse(data)) {
-//			console.log(i)
-//		}
 	})
 	
 	return url

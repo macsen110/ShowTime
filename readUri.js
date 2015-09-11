@@ -1,8 +1,8 @@
-exports.read = function(pathname,res) {
+exports.read = function (pathname, res) {
 	var fs = require('fs');
 	var path = require('path');
-	    fs.exists(pathname,function(exists){
-        if(exists){
+    fs.exists(pathname, function (exists) {
+        if (exists) {
             switch(path.extname(pathname)){
                 case ".html":
                     res.writeHead(200, {"Content-Type": "text/html"});
@@ -29,12 +29,13 @@ exports.read = function(pathname,res) {
                     res.writeHead(200, {"Content-Type": "application/octet-stream"});
             }
 
-            fs.readFile(pathname,function (err,data){
+            fs.readFile(pathname, function (err,data){
                 res.end(data);
             });
-        } else {
+        } 
+        else {
             res.writeHead(404, {"Content-Type": "text/html"});
-            res.end("<h5>404 Not Found</h5>");
+            res.end("<h5>oops, 404 Not Found</h5>");
         }
     })
 }

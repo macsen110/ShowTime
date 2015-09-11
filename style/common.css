@@ -1,5 +1,8 @@
 /********base*******/
-*{ -webkit-text-size-adjust: none;-webkit-transform-origin-x: 0}
+* { 
+	-webkit-text-size-adjust: none;
+	-webkit-transform-origin-x: 0
+}
 html {
 	font-size: 62.5%;
 	-webkit-text-size-adjust: 100%;
@@ -38,14 +41,14 @@ a,
 img,
 input,
 button {
-	border:none; 
-	outline: none
+	border: inherit; 
+	outline: inherit;
 }
 :focus {
-	outline: none
+	outline: inherit
 }
 button { 
-	background: none
+	background: inherit
 }
 img { 
 	vertical-align:top
@@ -114,13 +117,9 @@ body{
 	border-radius: 0;
 }
 
-.directory-list .list .item a {
-	text-indent: 2em;
-	display: block;
-	color: #666;
-	
+.directory-list .list .item {
+	padding-left: 20px
 }
-
 
 /******css3 动画**/
 

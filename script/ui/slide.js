@@ -93,4 +93,3 @@ Slider.prototype = {
 	}
 }
 
-new Slider();

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab change</title>
+	<link rel="stylesheet" type= "text/css" href="/style/common.css">
+
+	<style type="text/css">
+		.wrap-tab-container .tab-nav-container {
+			overflow: hidden;
+		}
+		.wrap-tab-container .tab-nav-container>.item {
+			float: left;
+			padding: 20px;
+			font-size: 18px;
+			border-bottom: 3px solid #f7f7f7;
+			cursor: pointer;
+		}
+
+		.wrap-tab-container .tab-nav-container>.on {
+			border-color: #0089dc;
+			color: #0089dc;
+
+		}
+
+		.wrap-tab-container .tab-con-container>.item {
+			display: none;
+		}
+
+		.wrap-tab-container .tab-con-container>.on {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrapTabContainer" class="wrap-tab-container">
+		<ul class="tab-nav-container">
+			<li class="item on">nav01</li>
+			<li class="item">nav02</li>
+			<li class="item">nav03</li>
+		</ul>
+		<ul class="tab-con-container">
+			<li class="item on">con01</li>
+			<li class="item">con02</li>
+			<li class="item">con03</li>
+		</ul>
+	</div>
+	<script type="text/javascript" src="/script/ui/tab.js"></script>
+	<script type="text/javascript">
+		new TabChange();
+	</script>
+
+</body>
+</html>

@@ -9,7 +9,6 @@ fs.writeFile('test.js', str, function (err) {
   if (err) throw err;
   console.log('It\'s saved!');
 });
-//fs.mkdir('/aaa/bbb/');
 //创建多层文件夹 同步
 function mkdirsSync(dirpath, mode) { 
     if (!fs.existsSync(dirpath)) {
