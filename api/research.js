@@ -46,6 +46,7 @@ exports.handle = function (api, req, res) {
                 ]
             },
         }),'utf-8');
+        return false;
     }
     if (api === '/api/research/info_post') {
         var postData = '';

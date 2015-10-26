@@ -192,9 +192,23 @@ body{
 
 }
 
+.test-rect-parent {
+	height: 300px;
+}
 
+.test-rect {
+	width: 40%;
+	padding: 40% 0 0 0;
+	position: relative;
+	background-color: red;
+}
 
-
+.test-rect span {
+	position: absolute;
+	left: 0;
+	top: 0;
+	color: #fff;
+}
 
 
 

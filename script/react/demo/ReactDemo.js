@@ -352,7 +352,7 @@ var CommentForm = React.createClass({
 var CommentFormBox = React.createClass({
   loadCommentsFromServer: function() {
     var _xhr = new XMLHttpRequest();
-	_xhr.open("GET", this.props.url);
+	_xhr.open("GET", 'http://127.0.0.1:3000/api/research/info');
 	_xhr.onload = function(){
 		if(_xhr.readyState === 4){
 			if(_xhr.status === 200){
