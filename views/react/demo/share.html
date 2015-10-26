@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>share</title>
+	<link rel="stylesheet" type= "text/css" href="/style/common.css">
+	<style>
+		.title {
+			font-size: 20px;
+		}
+		.line {
+			padding: 2px 0;
+			
+		}
+		strong {
+			color: #ff0000
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<p class="title">组件的生命周期,<strong>一个组件中render方法是必不可少的</strong></p>
+		<p><strong>以下方法仅执行一次,在初始化的时候,具有先后顺序之分<strong></p>
+		<div style="padding: 20px">
+			<p class="line">getDefaultProps</p>
+			<p class="line">getInitialState</p>
+			<p class="line">componentWillMount</p>
+			<p class="line">render<strong>render 方法执行以后代表组件装载完毕</strong></p>
+			<p>componentDidMount</p>
+		</div>
+		<p><strong>以下方法是在组件初始化以后,开始执行,无先后顺序,多次调用<strong></p>
+		<div style="padding:20px">
+			<p class="line">shouldComponentUpdate<strong>组件监听到自身state有变化就会执行此方法,默认返回true,里面有两个参数nextProps, nextState</strong></p>
+			<p class="line">componentWillReceiveProps<strong>组件接收到新的 props 的时候调用</strong></p>
+			<p class="line">componentWillUpdate <strong>接收到新的 props 或者 state 之前立刻调用</strong></p>
+			
+		</div>
+		<p>组件移除</p>
+		<div style="padding: 20px">
+			<p class="line">componentWillUnmount</p>
+			<p>在组件从 DOM 中移除的时候立刻被调用。</p>
+			<p>在该方法中执行任何必要的清理，比如无效的定时器，或者清除在 componentDidMount 中创建的 DOM 元素。</p>
+		</div>
+
+		
+	</div>
+	<p class="title">以下是一个简单组件演示:</p>
+	<div id="lifeCircle"></div>
+	<script src="/script/react/demo/react-with-addons.js"></script>
+	<script src="/script/react/demo/JSXTransformer.js"></script>
+	<script type="text/jsx" harmony="true" src="/script/react/demo/share.js"></script>
+	
+</body>
+</html>

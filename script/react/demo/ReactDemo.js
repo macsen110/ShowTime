@@ -120,7 +120,7 @@ var CommentPropItem = React.createClass({
         <h2>
           {this.props.author}
         </h2>
-		<h2>{this.props.test}</h2>
+		<h2 >{this.props.test}</h2>
 
       </div>
     );
@@ -139,7 +139,7 @@ var CommentPropList = React.createClass({
 			author: this.props.test
 		}
 	},
-	shouldComponentUpdate: function () {
+	shouldComponentUpdate: function (nextProps, nextState) {
 
 		console.log('shouldComponentUpdate CommentPropList');
 		return true;
@@ -149,9 +149,6 @@ var CommentPropList = React.createClass({
 	},
 	componentWillMount: function () {
 		console.log('componentWillMount CommentPropList')	
-	},
-	componentWillUpdate: function () {
-		console.log('componentWillUpdate CommentPropList')
 	},
 	componentWillUpdate: function () {
 		console.log('componentWillUpdate CommentPropList')
@@ -484,3 +481,31 @@ var Child = React.createClass({
 
 // Finally you render the grandparent
 React.render(<Grandparent />, document.getElementById('contextTypes'));
+
+var NestComponent = React.createClass({
+	render: function () {
+		return (
+			<div>
+				<p>111</p>
+				{this.props.children}
+			</div>
+		)
+	}
+})
+
+var NestChildren = React.createClass({
+	render: function () {
+		return (
+			<div>test nestChildren</div>
+		)
+	}
+})
+
+React.render(<NestComponent><NestChildren /></NestComponent>, document.getElementById('nestComponent'));
+
+
+//React with context
+
+var Context = React.createClass({
+		
+})

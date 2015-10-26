@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>regular test</title>
+	<link rel="stylesheet" type= "text/css" href="/style/common.css">
+	<style type="text/css">
+		input {
+			height: 40px;
+			width: 200px;
+			display: block;
+			line-height: 40px;
+
+		}
+		button {
+			height: 30px;
+			text-align: center;
+			width: 70px;
+			border-radius: 6px;
+			background: #f7f7f7;
+			color: #444;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" id="regDemo">
+	<button id="regBtn">click</button>
+	<script type="text/javascript">
+		var reg = /\w+@\w+\.\w+/i;
+		var regBtn = document.getElementById('regBtn');
+		regBtn.addEventListener('click', function () {
+			var value = document.getElementById('regDemo').value;
+			console.log(reg.test(value));
+		})
+	</script>
+</body>
+</html>

@@ -12,6 +12,7 @@ server.on('request', function (req,res,next) {
         if (api.indexOf('.') === -1) {
             pathname += "index.html"
         }
+
         readUri.read(pathname,res);
     }
 })

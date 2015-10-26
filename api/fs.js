@@ -12,9 +12,7 @@ fs.writeFile('test.js', str, function (err) {
 //创建多层文件夹 同步
 function mkdirsSync(dirpath, mode) { 
     if (!fs.existsSync(dirpath)) {
-		console.log(0)
         var pathtmp;
-		//console.log(dirpath.split('/'));
         dirpath.split('/').forEach(function(dirname) {
             if (pathtmp) {
                 pathtmp = path.join(pathtmp, dirname);
@@ -22,7 +20,6 @@ function mkdirsSync(dirpath, mode) {
             else {
                 pathtmp = dirname;
             }
-            console.log(pathtmp);
             if (!fs.existsSync(pathtmp)) {
                 if (!fs.mkdirSync(pathtmp, mode)) {
                     return false;

@@ -47,6 +47,58 @@
 	    height: 100px;
 	    margin: 5px;
 	}
+	
+	/******css3 动画**/
+
+	.trans {
+		width: 100px;
+		height: 100px;
+		background: red;
+		opacity: 1;
+		font-size: 18px;
+		transition: all 2s ease .2s;
+		-webkit-transition: all 2s ease  .2s;
+	}
+	.trans:hover {
+		opacity: 1;
+		background: blue;
+		animation: slidein 1s;
+		-webkit-animation: slidein 1s 10 alternate forwards;
+	};
+	
+	@-webkit-keyframes slidein {
+	0% {
+		width: 100px; 
+	}
+	
+	100% {
+		width: 300px;
+		font-size: 24px;
+	
+	}
+	}
+	
+	@keyframes slidein {
+	0% {
+		width: 100px; 
+	}
+	
+	100% {
+		width: 300px;
+		font-size: 24px;
+	
+	}
+	}
+
+	.slider ul {
+	  max-height: 0;
+	  overlow: hidden;
+	}
+
+	.slider:hover ul {
+	  max-height: 1000px;
+	  transition: .3s ease; /* animate to max-height */
+	}
 
 	</style>
 
@@ -112,7 +164,9 @@
 		</li>
 	</ul>
 
-	
+	<div class="slider">
+		<ul></ul>
+	</div>
 	
 </body>
 
@@ -122,7 +176,6 @@
 		e.addEventListener("animationstart", listener, false);
 		e.addEventListener("animationend", listener, false);
 		e.addEventListener("animationiteration", listener, false);
-		//e.className = "slidein";
 	}
 	function listener(e) {
 	  var l = document.createElement("li");
@@ -140,23 +193,6 @@
 	  document.getElementById("output").appendChild(l);
 	}
 	setup();
-	
-	// setTimeout(function() {
-	// 	document.body.insertAdjacentHTML('beforeend', '<div style="height:200px; background:orange" class="p1" id="p1"><div id="c1" style="height:100px;background:red"></div></div>')
-	// }, 1000);
-	
-	// document.body.addEventListener('click', function (e) {
-	// 	var id = e.target.id;
-	// 	switch (id) {
-	// 		case 'p1' :
-	// 			console.log('p')
-	// 			break;
-	// 		case 'c1' :
-	// 			console.log('c')
-	// 			break;
-	// 	}
-	// }, false)
-	
 	document.getElementById('p1').addEventListener('click', function () {
 		console.log('p1')
 	}, false)
@@ -164,9 +200,6 @@
 		console.log('c1')
 	}, true)
 	window.addEventListener('click', function (e) {
-		// for (var i in e) {
-		// 	console.log(i)
-		// }
 		console.log('pageY:'+ e.pageY + ' screenY:' + e.screenY + ' offsetY' + e.offsetY + ' clientY' + e.clientY )
 	})
 </script>
