@@ -5,60 +5,247 @@
 	<title>css3</title>
 	<link rel="stylesheet" type= "text/css" href="/style/common.css">
 	<style>
+		.title {
+			padding-bottom: 1.5rem;
+			text-align: center
+		}
+		
+		.box-container, 
+		.flex-container {
+			width: 400px;
+			margin: 0 auto;
+			border: 1px solid #dcc;
+			border-radius: 10px;
+			padding: 10px;			
+		}
+		.flex,
+		.box {
+			height: 300px;
+			background-color: Silver;
+		}
+		.flex {
+			display: -webkit-flex;
+			display: -webkit-flexbox;
+			display: flex;				
+		}
+		.flex-align {
+			-webkit-align-items: flex-end;
+			-webkit-flex-align: end;
+			align-items: flex-end
+		}
+		.flex-direction {
+			-webkit-flex-direction: column;
+			flex-direction: column;
+		}
+		.flex-item {
+					/* Pepperidge Farm remembers. */
+			-webkit-box-flex: 1;
+			/* IE10, ugh */
+			-ms-flex: 1;
+			/* Unprefixed */
+			flex: 1;
+			/* prefixed webkit syntax */
+			-webkit-flex: 1;
+			-webkit-box-flex: 1; 
+			-webkit-flex-grow: 1;
+			flex-basis: 0; 
+			flex-grow: 1;
+			height: 100px;
+			margin: 5px;
+			background-color: DeepSkyBlue;
+			overflow: hidden;
+		}
+		
+* {
+    margin: 0;
+    padding: 0
+}
+
+li {
+    list-style: none
+}
+
+* {
+    box-sizing: border-box
+}
 
 
+body {
+    font-size: 100%;
+    line-height: 1.6
+}
 
-	.flex-container {
-	    display: -webkit-flex;
-	    display: flex;
-	    flex-wrap: wrap;
-/*	    -webkit-flex-direction: column;
-	    flex-direction: column;
-*/	    background-color: Silver;
-	}
+* {
+    margin: 0;
+    padding: 0
+}
 
-	.flex-item {
-	    background-color: DeepSkyBlue;
-	    /*width: 100%;*/
-	    width: 100px;
-	    height: 100px;
-	    margin: 5px;
-	}
+li {
+    list-style: none
+}
 
-	.main-container {
-		/*margin:0 0 auto;*/
-	}
+* {
+    box-sizing: border-box
+}
 
-	footer.flex-item {
-		/*-webkit-align-self: flex-end;
-		align-self: flex-end;*/
-	}
-	.flex-test1 {
-		width: 500px;
-		height: 500px;
-		background-color: #ccc;
-	}
-	.flex-test2 {
-		width: 300px;
-		height: 300px;
-		background-color: #ddd;
-	}
 
+body {
+    font-size: 100%;
+    line-height: 1.6
+}
+
+.d-container:first-child {
+    margin-top: 0
+}
+
+.d-container {
+    background: #f7f7f7;
+    border-bottom: 1px solid #eee;
+    margin: 2em auto;
+    padding: 2em 5%;
+    width: 100%
+}
+
+.d-container:after {
+    clear: both;
+    content: "";
+    display: table
+}
+
+.d-container>h1 {
+    color: #333;
+    font-size: 2em;
+    line-height: 1.2;
+    margin: 0 0 .5em;
+    text-align: center
+}
+
+.d-flex {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0 auto;
+    box-sizing: border-box;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap
+}
+
+.d-flex,.d-flex li {
+   
+}
+
+.d-flex li {
+    color: #fff;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    list-style: none;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 1em
+}
+
+.d-flex li:nth-of-type(1) {
+    background: #484281
+}
+
+.d-flex li:nth-of-type(2) {
+    background: #5248af
+}
+
+.d-flex li:nth-of-type(3) {
+    background: #786bfa
+}
+
+.d-flex li:nth-of-type(4) {
+    background: #aba3f9
+}
+
+.d-flex li:nth-of-type(5) {
+    background: #a303cb
+}
+.d-ex3{
+    max-width: 1000px
+}
+
+.d-ex3 li {
+	overflow: hidden;
+	width: 300px;
+	height: 100px;
+}
+
+.d-ex3 li:nth-of-type(1) {
+
+}
+
+.d-ex3 li:nth-of-type(2) {
+
+}
+
+.d-ex3 li:nth-of-type(3) {
+
+}
 	</style>
 
 </head>
-<body class="flex-container">
-
-	<div class="main-container flex-item">
-		<p>123</p>
-		<p>456</p>
+<body>
+	<p class="title">flex布局</p>
+	<div class="flex-container">
+		<p class="title">flex align items 影响子item 在垂直方向上的排列, </p>
+		<div class="flex flex-align">
+			<div class="flex-item">
+				<p>flex align  flex align items 影响子item 在垂直方向上的排列flex align items 影响子item 在垂直方向上的排列flex align items 影响子item 在垂直方向上的排列flex align items 影响子item 在垂直方向上的排列</p>
+			</div>
+			<div class="flex-item">
+				<p>456</p>
+			</div>
+		</div>
+		<p class="title">flex direction 影响子item 的排列方式(垂直,或水平)</p>
+		<div class="flex flex-direction">
+			<div class="flex-item">
+				<p>111</p>
+			</div>
+			<div class="flex-item">
+				<p>456</p>
+			</div>
+		</div>
 	</div>
-	<!--<div class="flex-item flex-test1"></div>
-	<div class="flex-item flex-test2"></div>-->
-	<footer class="flex-item">
-		<p>123</p>
-		<p>456</p>
-	</footer>
+	<p class="title">之前的box布局</p>
+	<div class="box-container">
+		<div class="box-item">
+			<p>123</p>
+			<p>456</p>
+		</div>
+		<div class="box-item">
+			<p>123</p>
+			<p>456</p>
+		</div>
+	</div>
+
+<figure class="d-container">
+  <ul class="d-flex d-ex3">
+    <li>3 / 0 / 0;</li>
+    <li>1 / 0 / 0;</li>
+    <li>2 / 0 / 0;</li>
+	<li>3 / 0 / 0;</li>
+    <li>1 / 0 / 0;</li>
+    <li>2 / 0 / 0;</li>
+		<li>3 / 0 / 0;</li>
+    <li>1 / 0 / 0;</li>
+    <li>2 / 0 / 0;</li>
+  </ul>
+</figure>
 
 	
 	

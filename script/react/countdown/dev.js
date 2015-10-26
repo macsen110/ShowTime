@@ -5,6 +5,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDom from 'react-dom';
 import style from './style.css';
+
 class WrapTimer extends Component {
 	constructor(props, context) {
 		super(props, context);
@@ -27,6 +28,7 @@ class WrapTimer extends Component {
 
 	}
 	render() {	
+		
 		var alltime = this.state.alltime;
 		var timer = alltime > 0 ? <Timer secondsRemaining = {alltime} /> : '';	
 		console.log(timer);

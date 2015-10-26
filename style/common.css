@@ -96,7 +96,7 @@ body{
 	background-color: #fff;
 	box-shadow: 0 0 .3rem rgba(0,0,0,.2)
 }
-.db{
+.db {
 	display: block
 }
 .btn {
@@ -113,7 +113,6 @@ body{
 .title {
 	padding: 1.5rem 0 0;	
 	color: orange;	
-	display: flex;
 	border-radius: 0;
 }
 
@@ -121,76 +120,10 @@ body{
 	padding-left: 20px
 }
 
-/******css3 动画**/
 
-.trans {
-	width: 100px;
-	height: 100px;
-	background: red;
-	opacity: 1;
-	font-size: 18px;
-	transition: all 2s ease .2s;
-	-webkit-transition: all 2s ease  .2s;
-}
-.trans:hover {
-	opacity: 1;
-	background: blue;
-	animation: slidein 1s;
-	-webkit-animation: slidein 1s 10 alternate forwards;
-};
-
-@-webkit-keyframes slidein {
-  0% {
-    width: 100px; 
-  }
-
-  100% {
-    width: 300px;
-	font-size: 24px;
-
-  }
-}
-
-@keyframes slidein {
-  0% {
-    width: 100px; 
-  }
-
-  100% {
-    width: 300px;
-	font-size: 24px;
-
-  }
-}
 
   /***********ui 组件******/
 
-.wrap-dialog-container {
-	position: absolute;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-}
-.wrap-dialog-container .bg-mask {
-	height: 100%;
-	width: 100%;
-	background-color: rgba(0,0,0,.4);
-}
-	
-.wrap-dialog-container .dialog-container {
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	width: 50%;
-	height: 100px;
-	background-color: #fff;
-	transform: translate(-50%, -50%);
-}
-
-.wrap-dialog-container .dialog-title {
-
-}
 
 .test-rect-parent {
 	height: 300px;

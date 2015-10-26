@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './style1.css';
 import style from './style1.css';
+console.log(style)
 class DemoCss1 extends Component {
 	render() {
 		return (
