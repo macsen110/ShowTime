@@ -4,68 +4,118 @@
 	<meta charset="UTF-8">
 	<title>vue</title>
 	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			
+		}
+		.title {
+			padding: 20px 0 0;
+		}
+		
 		.done {
 			color: red
 		}
 	</style>
-	<script src="vue.min.js"></script>
-	<script>
-
-	Vue.component('my-component', {
-  		template: '<p>A custom component!</p>'
-	})
-	Vue.component('child', {
-  // 声明 prop
-  	props: ['msg'],
-  // prop 可以在模板内部被使用，
-  // 也可以类似 `this.msg` 这样来赋值
-  	template: '<span>{{msg}}</span>'
-	})
-	</script>
+	<script src="http://127.0.0.1:3000/script/vue/vue.js"></script>
 </head>
 <body>
-	<div id="demo">
-  <h1>{{title | uppercase}}</h1>
+<div id="demo">
+  <h1>{{* title | uppercase}}</h1>
   <div v-text="title"></div>
+  <div v-html="title"></div>
   <ul>
-    <li
-      v-repeat="todos"
-      v-on="click: done = !done"
-      class="{{done ? 'done' : ''}}">
-      {{content}}
-    </li>
+	<li v-for="item in todos">
+		{{{item.content}}}
+	</li>
   </ul>
-  <child msg="hello!"></child>
+</div>
+<p class="title">test vue Component</p>
+<div id="testComponent">
+	<child></child>
+	<input v-model="parentMsg" lazy>
+  	<br>
+  	<child-bind :msg1="parentMsg" />
+
 </div>
 
+<!-- template for child -->
+<template id="child-template">
+  <input v-model="msg2">
+  <button v-on:click="notify">Dispatch Event</button>
+</template>
 
+<!-- template for parent -->
+<div id="events-example">
+  <p>Messages: {{ messages | json }}</p>
+  <child-component></child-component>
+</div>
 
-	<script>
+<p class="title">test 指令</p>
+<div id="example-2">
+  <p v-if="greeting">Hello! v-if {{msg}}</p>
+</div>
+<div id="testDirective" v-my-directive="text">{{text}}</div>
 
-		var mockData = {
-		    title: 'todos',
-		    todos: [
-		      {
-		        done: true,
-		        content: 'Learn JavaScript'
-		      },
-		      {
-		        done: false,
-		        content: 'Learn Vue.js'
-		      }
-		    ],
-			setTitle: function (value) {
-				this.title = value
-			}
-	  	}
-	  	setTimeout(function () {
-			  mockData.setTitle('oops')
-		  }, 4000)
-		var demo = new Vue({
-		  el: '#demo',
-		  data: mockData
-		})
-		
-	</script>
+<p class="title">综合练习</p>
+<div id="app">
+  <input v-model="newTodo" v-on:keyup.enter="addTodo">
+  <ul>
+    <li v-for="todo in todos">
+      <span>{{ todo.text }}</span>
+      <button v-on:click="removeTodo($index)">X</button>
+    </li>
+  </ul>
+</div>
+
+<p class="title">Vue.extend()</p>
+<div id="mount-point"></div>
+
+<p class="title">过滤器</p>
+<div v-text="message | reverse" id="testFilter"></div>
+
+<p class="title">交互应用</p>
+<div id="customOption"></div>
+<img id="testBindImage" :src="src" v-on:click="change('tmp/t2.jpg')"/>
+
+<p class="title">dynamic componnent (curentView)</p>
+<div id="dynamic">
+	<component :is="currentView"></component>
+</div>
+
+<p class="title">dynamic componnent2 (view)</p>
+<div id="dynamic2">
+	<div  :is="view"></div>
+</div>
+
+<template id="slot_parent_component">
+	<div>
+		<h1>This is my component!</h1>
+		<slot>
+			This will only be displayed if there is no content
+			to be distributed.
+		</slot>
+	</div>
+</template>
+	
+<template id="slot_child_component">
+	<p>This is some original content</p>
+	<p>This is some more original content</p>
+</template>
+
+<p class="title">slot componnent</p>
+<div id="slot"></div>
+
+<p class="title">slot name</p>
+<div id="slot_name"></div>
+
+<p class="title">nextTick</p>
+<div id="nextTick">{{msg}}</div>
+<p class="title">replaced</p>
+<div id="replace"></div>
+<p class="title">Transitions</p>
+
+<script src="http://127.0.0.1:3000/script/vue/demo.js"></script>
 </body>
 </html>

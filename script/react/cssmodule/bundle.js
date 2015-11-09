@@ -20081,8 +20081,6 @@
 
 	var _style1Css2 = _interopRequireDefault(_style1Css);
 
-	console.log(_style1Css2['default']);
-
 	var DemoCss1 = (function (_Component) {
 		function DemoCss1() {
 			_classCallCheck(this, DemoCss1);
@@ -20098,7 +20096,38 @@
 				return _react2['default'].createElement(
 					'div',
 					{ className: _style1Css2['default'].className },
-					'hello, demo css'
+					_react2['default'].createElement(
+						'h1',
+						{ className: _style1Css2['default'].blur + ' ' + _style1Css2['default'].sepia },
+						'hello, demo css'
+					),
+					_react2['default'].createElement(
+						'h2',
+						null,
+						'oops'
+					),
+					_react2['default'].createElement(
+						'a',
+						{ href: 'http://www.baidu.com' },
+						'test for baidu'
+					),
+					_react2['default'].createElement(
+						'table',
+						null,
+						_react2['default'].createElement(
+							'tbody',
+							null,
+							_react2['default'].createElement(
+								'tr',
+								null,
+								_react2['default'].createElement(
+									'td',
+									null,
+									'dddd'
+								)
+							)
+						)
+					)
 				);
 			}
 		}]);
@@ -20114,7 +20143,7 @@
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
-	module.exports = {"className":"style1__className___1w11i","otherClassName":"style1__otherClassName___2fcCY","blur":"style1__blur___eUiGZ","sepia":"style1__sepia___1cBr2"};
+	module.exports = {"className":"style1__className___1w11i","otherClassName":"style1__otherClassName___2fcCY","test":"style1__test___3rTGc","blur":"style1__blur___eUiGZ","sepia":"style1__sepia___1cBr2"};
 
 /***/ },
 /* 176 */

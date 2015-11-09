@@ -1,69 +1,108 @@
-:root {
-  --mainColor: red;
+body {
+    background: color(red a(90%))
 }
 
 a {
-  color: var(--mainColor);
+    color: var(--mainColor);
 }
+
 .className {
-  color:hwb(190, 35%, 20%);
-  background: red;
+    color: hwb(190, 35%, 20%);
+    background: red;
 }
 
 .otherClassName {
-  color: yellow;
+    color: yellow;
 }
+
 
 /* custom properties */
 :root {
---fontSize: 1rem;
---mainColor: #123458;
---highlightColor: hwb(190, 35%, 20%);
+    --fontSize: 1rem;
+    --mainColor: #123458;
+    --highlightColor: hwb(190, 35%, 20%);
+    --borderStyle: solid;
+    --heading: .selectors;
 }
+
 
 /* custom media queries */
-@custom-media --viewport-medium (width <= 50rem);
+
+@custom-media --viewport-medium (width <=50rem);
 
 /* some var() & calc() */
-body {
-color:hwb(90, 0%, 0%, 0.5);
 
-font-size: var(--fontSize);
-line-height: calc(var(--fontSize) * 1.5);
-padding: calc((var(--fontSize) / 2) + 1px);
+body {
+    color: hwb(90, 0%, 0%, 0.5);
+    font-size: var(--fontSize);
+    line-height: calc(var(--fontSize) * 1.5);
+    padding: calc((var(--fontSize) / 2) + 1px);
 }
+
 
 /* custom media query usage */
 @media (--viewport-medium) {
-body { font-size: calc(var(--fontSize) * 1.2); }
+    body {
+        font-size: calc(var(--fontSize) * 1.2);
+    }
 }
+
 
 /* custom selectors */
-@custom-selector :--heading h1, h2, h3, h4, h5, h6;
-:--heading { margin-top: 0 }
+@custom-selector :--heading h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.test;
+:--heading {
+    margin-top: 0
+}
+
 
 /* colors stuff */
+
 a {
-color: var(--highlightColor);
-transition: color 1s; /* autoprefixed ! */
+    color: var(--highlightColor);
+    transition: color 1s;
+    /* autoprefixed ! */
 }
-a:hover { color: gray(255, 50%) }
-a:active { color: rebeccapurple }
-a:any-link { color: color(var(--highlightColor) blackness(+20%)) }
+
+a:hover {
+    color: gray(255, 50%)
+}
+
+a:active {
+    color: rebeccapurple
+}
+
+a:any-link {
+   color: color(var(--highlightColor) blackness(+20%))
+}
+
 
 /* font stuff */
+
 h2 {
-font-variant-caps: small-caps;
+    background-color: color(red lightness(50%));
+    /* == color(red l(50%)); */
+    border-color: color(hsla(125, 50%, 50%, .4) saturation(+ 10%) w(- 20%));
+    border-width: var(--fontSize);
+    border-style: var(--borderStyle)
 }
 
 table {
-font-variant-numeric: lining-nums;
+    font-variant-numeric: lining-nums;
 }
 
+
 /* filters */
+
 .blur {
-filter: blur(4px);
+    filter: blur(4px);
 }
+
 .sepia {
-filter: sepia(.8);
+    filter: sepia(.8);
 }

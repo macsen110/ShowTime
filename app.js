@@ -3,7 +3,7 @@ var url  = require("url"),
     readUri = require('./readUri'),
     server = new http.Server();
 server.on('request', function (req,res,next) {
-    console.log(req)
+
     var pathname=__dirname+url.parse(req.url).pathname;
     var api = req.url;
     if (api.indexOf('/api/') !== -1) {

@@ -1,7 +1,9 @@
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 var autoprefixer = require('autoprefixer');
 var precss      = require('precss');
-var colorHwb = require("postcss-color-hwb")
+var colorHwb = require("postcss-color-hwb");
+var colorGray = require('postcss-color-gray');
+var colorRebeccapurple = require("postcss-color-rebeccapurple");
 module.exports = {
   entry: './dev',
   output: {
@@ -16,7 +18,14 @@ module.exports = {
       ]
   },
   postcss: function () {
-        return [autoprefixer, precss, colorHwb, require('autoprefixer-core')];
+        return [
+          autoprefixer,
+          precss, 
+          colorHwb,
+          colorGray,
+          colorRebeccapurple, 
+          require('autoprefixer-core')
+        ];
   },
   plugins: [
     new ExtractTextPlugin("test.css", { allChunks: true }),

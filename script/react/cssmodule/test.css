@@ -1,63 +1,97 @@
-a {
-  color:#123458;
+body {
+    background: rgba(255, 0, 0, 0.9)
 }
+
+a {
+    color: #123458;
+}
+
 .style1__className___1w11i {
-  color:rgb(89, 185, 204);
-  background: red;
+    color: rgb(89, 185, 204);
+    background: red;
 }
 
 .style1__otherClassName___2fcCY {
-  color: yellow;
+    color: yellow;
 }
 
+
 /* custom properties */
+
 
 /* custom media queries */
 
 /* some var() & calc() */
-body {
-color:rgba(128, 255, 0, 0.5);
 
-font-size:1rem;
-line-height:calc(1rem * 1.5);
-padding:calc((1rem / 2) + 1px);
+body {
+    color: rgba(128, 255, 0, 0.5);
+    font-size: 1rem;
+    line-height: calc(1rem * 1.5);
+    padding: calc((1rem / 2) + 1px);
 }
+
 
 /* custom media query usage */
 @media (max-width: 50rem) {
-body { font-size:calc(1rem * 1.2); }
+    body {
+        font-size: calc(1rem * 1.2);
+    }
 }
+
 
 /* custom selectors */
-h1, h2, h3, h4, h5, h6 { margin-top: 0 }
+h1, h2, h3, h4, h5, h6, .style1__test___3rTGc {
+    margin-top: 0
+}
+
 
 /* colors stuff */
+
 a {
-color:rgb(89, 185, 204);
--webkit-transition: color 1s;
-        transition: color 1s; /* autoprefixed ! */
+    color: rgb(89, 185, 204);
+    -webkit-transition: color 1s;
+            transition: color 1s;
+    /* autoprefixed ! */
 }
-a:hover { color: gray(255, 50%) }
-a:active { color: rebeccapurple }
-a:any-link { color:rgb(89, 142, 153) }
+
+a:hover {
+    color: rgba(255, 255, 255, 0.5)
+}
+
+a:active {
+    color: rgb(102, 51, 153)
+}
+
+a:any-link {
+   color: rgb(89, 142, 153)
+}
+
 
 /* font stuff */
+
 h2 {
-font-variant-caps: small-caps;
+    background-color: rgb(255, 0, 0);
+    /* == color(red l(50%)); */
+    border-color: rgba(0, 204, 17, 0.4);
+    border-width: 1rem;
+    border-style: solid
 }
 
 table {
-font-variant-numeric: lining-nums;
+    font-variant-numeric: lining-nums;
 }
 
+
 /* filters */
+
 .style1__blur___eUiGZ {
--webkit-filter: blur(4px);
-        filter: blur(4px);
+    -webkit-filter: blur(4px);
+            filter: blur(4px);
 }
+
 .style1__sepia___1cBr2 {
--webkit-filter: sepia(.8);
-        filter: sepia(.8);
+    -webkit-filter: sepia(.8);
+            filter: sepia(.8);
 }
 .style2__className___2_mXQ {
   color: green;
