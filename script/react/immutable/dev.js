@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
-import { Map, List } from 'immutable';
-
-var list1 = List.of(1, 2);
-var list2 = list1.push(3, 4, 5);
-var list3 = list2.unshift(0);
-var list4 = list1.concat(list2, list3);
-
-console.log(list1)
-console.log(list2)
-console.log(list3)
-console.log(list4)
+import { 
+  Map, 
+  List, 
+  fromJS, 
+  OrderedMap,
+  Seq 
+  } from 'immutable';
 
 
 class C1 extends Component {
@@ -53,4 +49,80 @@ class C1 extends Component {
 
 };
 
+class C2 extends Component {
+  constructor() {
+    super();
+    this.state = {value: { foo: 'bar' } }
+    this.onClick = this.onClick.bind(this)
+  }
+  onClick() {
+    var value = this.state.value;
+    value.foo += 'bar'; // ANTI-PATTERN!
+    this.setState({ value: value });
+  }
+  render() {
+    return (
+      <div>
+        <a onClick={this.onClick}>Component2: Click me</a>
+        <C2Inner value = {this.state.value} />
+      </div>
+    );
+  }
+}
+
+class C2Inner extends Component {
+  constructor() {
+    super()
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.value !== nextProps.value;
+  }
+  render() {
+    return <div>innerComponent2: {this.props.value.foo}</div>
+  } 
+}
+
+
+class C3 extends Component {
+  constructor() {
+    super();
+    this.state = {
+      value: Map({foo: 'bar'}) 
+    }
+    this.onClick = this.onClick.bind(this)
+  }
+  onClick() {
+    var value = this.state.value;
+    
+    this.setState(({value}) => {
+      return {
+        value: value.update('foo', v => v + 'bar')
+      }
+    });
+  }
+  render() {
+    return (
+      <div>
+        <a onClick={this.onClick}>Component3: Click me</a>
+        <C3Inner value = {this.state.value} />
+      </div>
+    );
+  }
+}
+
+class C3Inner extends Component {
+  constructor() {
+    super()
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.value !== nextProps.value;
+  }
+  render() {
+    console.log(this.props.value)
+    return <div>innerComponent3: {this.props.value.get('foo')}</div>
+  } 
+}
+
 ReactDom.render(<C1 />, document.getElementById('app'));
+ReactDom.render(<C2 />, document.getElementById('app2'));
+ReactDom.render(<C3 />, document.getElementById('app3'));

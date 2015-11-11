@@ -66,16 +66,6 @@
 
 	var _immutable = __webpack_require__(174);
 
-	var list1 = _immutable.List.of(1, 2);
-	var list2 = list1.push(3, 4, 5);
-	var list3 = list2.unshift(0);
-	var list4 = list1.concat(list2, list3);
-
-	console.log(list1);
-	console.log(list2);
-	console.log(list3);
-	console.log(list4);
-
 	var C1 = (function (_Component) {
 	  function C1() {
 	    _classCallCheck(this, C1);
@@ -159,7 +149,152 @@
 
 	;
 
+	var C2 = (function (_Component2) {
+	  function C2() {
+	    _classCallCheck(this, C2);
+
+	    _get(Object.getPrototypeOf(C2.prototype), 'constructor', this).call(this);
+	    this.state = { value: { foo: 'bar' } };
+	    this.onClick = this.onClick.bind(this);
+	  }
+
+	  _inherits(C2, _Component2);
+
+	  _createClass(C2, [{
+	    key: 'onClick',
+	    value: function onClick() {
+	      var value = this.state.value;
+	      value.foo += 'bar'; // ANTI-PATTERN!
+	      this.setState({ value: value });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2['default'].createElement(
+	        'div',
+	        null,
+	        _react2['default'].createElement(
+	          'a',
+	          { onClick: this.onClick },
+	          'Component2: Click me'
+	        ),
+	        _react2['default'].createElement(C2Inner, { value: this.state.value })
+	      );
+	    }
+	  }]);
+
+	  return C2;
+	})(_react.Component);
+
+	var C2Inner = (function (_Component3) {
+	  function C2Inner() {
+	    _classCallCheck(this, C2Inner);
+
+	    _get(Object.getPrototypeOf(C2Inner.prototype), 'constructor', this).call(this);
+	  }
+
+	  _inherits(C2Inner, _Component3);
+
+	  _createClass(C2Inner, [{
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return this.props.value !== nextProps.value;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2['default'].createElement(
+	        'div',
+	        null,
+	        'innerComponent2: ',
+	        this.props.value.foo
+	      );
+	    }
+	  }]);
+
+	  return C2Inner;
+	})(_react.Component);
+
+	var C3 = (function (_Component4) {
+	  function C3() {
+	    _classCallCheck(this, C3);
+
+	    _get(Object.getPrototypeOf(C3.prototype), 'constructor', this).call(this);
+	    this.state = {
+	      value: (0, _immutable.Map)({ foo: 'bar' })
+	    };
+	    this.onClick = this.onClick.bind(this);
+	  }
+
+	  _inherits(C3, _Component4);
+
+	  _createClass(C3, [{
+	    key: 'onClick',
+	    value: function onClick() {
+	      var value = this.state.value;
+
+	      this.setState(function (_ref3) {
+	        var value = _ref3.value;
+
+	        return {
+	          value: value.update('foo', function (v) {
+	            return v + 'bar';
+	          })
+	        };
+	      });
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2['default'].createElement(
+	        'div',
+	        null,
+	        _react2['default'].createElement(
+	          'a',
+	          { onClick: this.onClick },
+	          'Component3: Click me'
+	        ),
+	        _react2['default'].createElement(C3Inner, { value: this.state.value })
+	      );
+	    }
+	  }]);
+
+	  return C3;
+	})(_react.Component);
+
+	var C3Inner = (function (_Component5) {
+	  function C3Inner() {
+	    _classCallCheck(this, C3Inner);
+
+	    _get(Object.getPrototypeOf(C3Inner.prototype), 'constructor', this).call(this);
+	  }
+
+	  _inherits(C3Inner, _Component5);
+
+	  _createClass(C3Inner, [{
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps, nextState) {
+	      return this.props.value !== nextProps.value;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      console.log(this.props.value);
+	      return _react2['default'].createElement(
+	        'div',
+	        null,
+	        'innerComponent3: ',
+	        this.props.value.get('foo')
+	      );
+	    }
+	  }]);
+
+	  return C3Inner;
+	})(_react.Component);
+
 	_reactDom2['default'].render(_react2['default'].createElement(C1, null), document.getElementById('app'));
+	_reactDom2['default'].render(_react2['default'].createElement(C2, null), document.getElementById('app2'));
+	_reactDom2['default'].render(_react2['default'].createElement(C3, null), document.getElementById('app3'));
 
 /***/ },
 /* 1 */
