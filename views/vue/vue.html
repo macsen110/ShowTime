@@ -114,7 +114,13 @@
 <div id="nextTick">{{msg}}</div>
 <p class="title">replaced</p>
 <div id="replace"></div>
-<p class="title">Transitions</p>
+<p class="title">Event System</p>
+<template id="eventSystemChild1">
+	<p v-on:click = "childTest1()">click me</p>
+</template>
+<div id="event_system_root">
+	<event-system-child1></event-system-child1>
+</div>
 
 <script src="http://127.0.0.1:3000/script/vue/demo.js"></script>
 </body>

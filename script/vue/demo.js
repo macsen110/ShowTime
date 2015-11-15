@@ -332,3 +332,51 @@ new Vue({
   replace: false,
   template: '<p>replaced</p>'
 })
+
+/****
+***
+** Event System
+***/
+
+Vue.component('eventSystemChild1', {
+  template: '#eventSystemChild1',
+  events: {
+    'hook:created': function () {
+      console.log('created!')
+    },
+    greeting: function (msg) {
+      console.log(msg)
+    },
+    // can also use a string for methods
+    bye: 'childTest1'
+  },
+  methods: {
+    childTest1: function () {
+      console.log('childTest1')
+    }
+  },
+  created: function () {
+    var self = this;
+    setTimeout(function () {
+      console.log(self)
+      self.$dispatch('bye')
+    }, 2000)
+  }
+})
+
+new Vue({
+  el: '#event_system_root',
+  events: {
+    bye: function () {
+      console.log('this is parent response to the event bye')
+    }
+  },
+  methods: {
+    childTest1: function () {
+      console.log('childToParentTest1')
+    }
+  },
+  created: function () {
+    this.childTest1()
+  }
+})
