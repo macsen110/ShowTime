@@ -1,9 +1,14 @@
-//console.log(typeof React);
+/******
+React 直接渲染html 标签
+*****/
 React.render(
 	<a href="http://www.baidu.com" aria-hidden={true}>hello,ReactJs</a>,
 	document.getElementById('hello-react')
 )
-//create a comment
+
+/******
+React 创建图片标签
+********/
 var Mockbar = 'bar';
 var Mockfoo = 'foo'; 
 var mockProp = {Mockbar,Mockfoo};
@@ -14,12 +19,14 @@ var Comment = React.createClass({
 	},
 	render: function() {
         React.renderToStaticMarkup(React.DOM.img());
-        return React.DOM.img({ alt: 'ref2' }, null);
+        return React.DOM.img({ alt: 'ref2' , src: 'tmp/t1.jpg'}, null);
     }
 })
 React.render(<Comment {...mockProp}/>,document.getElementById('commentBox'))
 
-//create a comment by another method
+/**************
+原生创建组件
+**************/
 
 var Comment2 = React.createClass({
 	displayName:'CommentBox',
@@ -29,13 +36,16 @@ var Comment2 = React.createClass({
 		)
 	}
 })
-
 React.render(
-	//<Comment2/>,
 	React.createElement(Comment2,null),
 	document.getElementById('comment2')
 )
 
+/********
+**dangerouslySetInnerHTML 
+**渲染html
+**
+********/
 var CommentList = React.createClass({
 	render: function() {
 		var self = this;
@@ -45,7 +55,6 @@ var CommentList = React.createClass({
 		)
 	}
 }) 
-
 var CommentMix = React.createClass({
 	getInitialState: function () {
 		return {
@@ -53,8 +62,7 @@ var CommentMix = React.createClass({
 		}
 		
 	},
-	componentWillMount: function (params) {
-		
+	componentWillMount: function (params) {		
 		this.setState({mockData:[1,2]})
 	},
 	componentDidMount: function () {
@@ -66,8 +74,8 @@ var CommentMix = React.createClass({
 	},
 	render: function() {
 		var mockData = this.state.mockData;
-		var ccc = mockData.map(function (i) {
-			return <CommentList index={i} key={i} />
+		var ccc = mockData.map(function (value, index) {
+			return <CommentList index={value} key={index} />
 		})
 		return (
 			<div className="CommentMix">
@@ -83,6 +91,11 @@ React.render(
 	document.getElementById('CommentMix')
 )
 
+/****
+***
+React 对特某些殊符号的编译处理
+***
+****/
 var CommentProp = React.createClass({
 	selfAttr: 'My own Attr',
 	clickHandle: function() {
@@ -91,14 +104,12 @@ var CommentProp = React.createClass({
 	render: function() {
 		return (
 		  <div className="comment" >
-		    <h2>
-		      {this.props.author}
-		    </h2>
+		    <h2>{this.props.author}</h2>
 		    <div onClick={this.clickHandle}>{this.selfAttr}</div>
 		    <div>{'First \u00b7 Second'}</div>
 			<div>{'First ' + String.fromCharCode(183) + ' Second'}</div>
-			<div>{['First ', <span>&middot;</span>, ' Second']}</div>
-			{React.Children.count}
+			<div>{'First ', <span>&middot;</span>, ' Second'}</div>
+			
 		  </div>
 		);
 	}
@@ -109,53 +120,58 @@ React.render(
 	document.getElementById('use-props')
 )
 
+
+/***
+*
+*组件的'componentWillReceiveProps'方法
+*以及生命周期
+*
+********/
 var CommentPropItem = React.createClass({
 	componentWillReceiveProps: function () {
-		console.log('componentWillReceiveProps CommentPropList')
+		console.log('CommentPropItem componentWillReceiveProps CommentPropList')
 	},
-  render: function() {
-    return (
-      <div className="CommentPropItem">
-      <p>aaaaaaaa</p>
-        <h2>
-          {this.props.author}
-        </h2>
-		<h2 >{this.props.test}</h2>
-
-      </div>
-    );
-  }
+	render: function() {
+		return (
+		  <div className="CommentPropItem">
+		  	<p>aaaaaaaa</p>
+		    <h2>{this.props.author}</h2>
+			<h2>{this.props.test}</h2>
+			<h3>条件判断组件属性的值{this.props.test_id}</h3>
+		  </div>
+		);
+	}
 });
 var CommentPropList = React.createClass({
 	getDefaultProps: function () {
-		console.log('getDefaultProps CommentPropList')
+		console.log('CommentPropList getDefaultProps CommentPropList')
 		return {
 			test: 'test props'
 		}
 	},
 	getInitialState: function () {
-		console.log('getInitalState CommentPropList')
+		console.log('CommentPropList getInitalState CommentPropList')
 		return {
 			author: this.props.test
 		}
 	},
 	shouldComponentUpdate: function (nextProps, nextState) {
 
-		console.log('shouldComponentUpdate CommentPropList');
+		console.log('CommentPropList shouldComponentUpdate CommentPropList');
 		return true;
 	},
 	componentWillReceiveProps: function () {
-		console.log('componentWillReceiveProps CommentPropList')
+		console.log('CommentPropList componentWillReceiveProps CommentPropList')
 	},
 	componentWillMount: function () {
-		console.log('componentWillMount CommentPropList')	
+		console.log('CommentPropList componentWillMount CommentPropList')	
 	},
 	componentWillUpdate: function () {
-		console.log('componentWillUpdate CommentPropList')
+		console.log('CommentPropList componentWillUpdate CommentPropList')
 	},
 	componentDidMount: function () {
-		console.log('mouted ' + this.isMounted());
-		console.log('componentDidMount CommentPropList');
+		console.log('CommentPropList mouted ' + this.isMounted());
+		console.log('CommentPropList componentDidMount CommentPropList');
 		setTimeout(function () {
 			this.setState({
 				author: 'macsen2'
@@ -165,17 +181,20 @@ var CommentPropList = React.createClass({
 	},
   	render: function() {
 	    return (
-	    	<CommentPropItem id={ 2>1 ? id = "sssss" : ''} author={this.state.author} test={this.props.test}  />
+	    	<CommentPropItem test_id ={'2'<'1' ? '222' : null} author={this.state.author} test={this.props.test}  />
 	    );
   }
 });
-
-
 React.render(
 	<CommentPropList />,
 	document.getElementById('use-props-list')
 )
 
+
+/**
+**
+**** 与后端通信, XMLHttpRequest
+***************/
 var CommentUrl = React.createClass({
 	statics: {
 		test: function () {
@@ -225,20 +244,26 @@ var CommentUrl = React.createClass({
 	},
 	render: function() {
 		return (
-			<div className="url">{this.state.liked.toString()}<div><input type="text" name="title" defaultValue="default" /></div></div>
-			
+			<div className="url">
+				{this.state.liked.toString()}
+				<div><input type="text" name="title" defaultValue="default" /></div>
+			</div>		
 		)
 	}
 })
 CommentUrl.test();
-
 React.render(
   <CommentUrl url="/api/promise" />,
   document.getElementById('res-server')
 );
 
-var ChildComment = React.createClass({
-	
+
+
+/******
+**bind events and Practice 'key'
+**
+********/
+var ChildComment = React.createClass({	
 	render: function () {
 		return (<div>child</div>)
 	}
@@ -251,7 +276,7 @@ var ParentComment = React.createClass({
 	render: function () {
 		return (
 		<div>
-			<div onClick = {this.clickFunKey.bind(this, this.props.key)}>1111</div>
+			<div>1111</div>
 			parent
 			<ChildComment autor='string' />
 		</div>
@@ -265,8 +290,10 @@ React.render(
 )
 
 
-//parnets and Child
-
+/**
+**组件中的mix方法,
+**后续版本中将会被废除
+****/
 var SetIntervalMixin = {
 	componentWillMount: function() {
 		this.intervals = [];
@@ -305,17 +332,29 @@ React.render(
   document.getElementById('react-mixins')
 );
 
+
+
+/**
+**React propTypes , jsx parsing number
+**
+*************/
 var PropsEle = React.createClass({
-	propTypes: function () {
-		aa: 'aaaaaa'
+	propTypes: {
+		aa: React.PropTypes.number.isRequired
 	},
 	render: function () {
 		return (<div>{this.props.aa}</div>)
 	}
 	
 })
+React.render(<PropsEle aa = {2} />, document.getElementById('prop-types'))
 
-React.render(<PropsEle aa="900" />, document.getElementById('prop-types'))
+
+
+/**
+**React work with form 
+**
+************/
 var CommentForm = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
@@ -338,8 +377,8 @@ var CommentForm = React.createClass({
   render: function() {
     return (
       <form className="commentForm" onSubmit={this.handleSubmit} ref = 'form'>
-        <input type="text" placeholder="Your name" value="11"ref="author"  name="autor"/>
-        <input type="text" placeholder="Say something..." value="ii" ref="text" name="text" />
+        <input type="text" placeholder="Your name" defaultValue="11" ref="author"  name="autor"/>
+        <input type="text" placeholder="Say something..." defaultValue="ii" ref="text" name="text" />
         <input type="submit" value="Post" />
       </form>
     );
@@ -404,21 +443,16 @@ var CommentFormBox = React.createClass({
     );
   }
 });
-
-
-
 React.render(<CommentFormBox pollInterval='5000' url='api/promise'  />, document.getElementById('react-form'))
 
 
-//key exple
 
+//key exple
 var KeyItem = React.createClass({
 	render: function () {
 		return (<li className="item">{this.props.data.info}</li>)
-	}
-	
+	}	
 })
-
 var KeyList = React.createClass({
 	getInitialState: function () {
 		return {content:[{id:1,info:'aa'},{id:2,info:'bb'}]}
@@ -427,10 +461,14 @@ var KeyList = React.createClass({
 		return (<ul>{this.state.content.map(function (item) {return <KeyItem data={item} key={item.id} />})}</ul>)
 	}
 })
-
 React.render(<KeyList  />, document.getElementById('keyList'));
 
 
+
+/***
+**React context prictise
+**
+*****/
 var Grandparent = React.createClass({
 
     childContextTypes: {
@@ -445,8 +483,6 @@ var Grandparent = React.createClass({
          return <Parent />;
     }
 });
-
-
 var Parent = React.createClass({
 
     childContextTypes: {
@@ -463,12 +499,10 @@ var Parent = React.createClass({
 });
 
 var Child = React.createClass({
-
     contextTypes: {
         foo: React.PropTypes.string.isRequired,
         bar: React.PropTypes.string.isRequired
     },
-
     render: function() {
         return (
           <div>
@@ -482,6 +516,10 @@ var Child = React.createClass({
 // Finally you render the grandparent
 React.render(<Grandparent />, document.getElementById('contextTypes'));
 
+/**
+**React 嵌套组件
+**
+************/
 var NestComponent = React.createClass({
 	render: function () {
 		return (
@@ -492,7 +530,6 @@ var NestComponent = React.createClass({
 		)
 	}
 })
-
 var NestChildren = React.createClass({
 	render: function () {
 		return (
@@ -500,12 +537,56 @@ var NestChildren = React.createClass({
 		)
 	}
 })
-
 React.render(<NestComponent><NestChildren /></NestComponent>, document.getElementById('nestComponent'));
 
 
-//React with context
 
-var Context = React.createClass({
-		
+/**
+**稍微复杂的react嵌套
+**
+*********/
+var RadioOption = React.createClass({
+  render: function () {
+    return (
+      <label>
+        <input type="radio" value={this.props.value} name={this.props.name} />
+        {this.props.label}
+      </label>
+    )
+  }
 })
+
+var RadioGroup = React.createClass({
+  renderChildren: function () {
+    return React.Children.map(this.props.children, function (child) {
+      if (child.type === RadioOption)
+        return React.addons.cloneWithProps(child, {
+          name: this.props.name
+        })
+      else
+        return child
+    }.bind(this))
+  },
+  render: function () {
+    return (
+      <div className="radio-group">
+        {this.renderChildren()}
+      </div>
+    )
+  }
+})
+
+var WhereImUsingRadioGroups = React.createClass({
+  render: function () {
+    return (
+      <RadioGroup name="blizzard-games">
+        <RadioOption label="Warcraft 2" value="wc2" />
+        <RadioOption label="Warcraft 3" value="wc3" />
+        <RadioOption label="Starcraft 1" value="sc1" />
+        <RadioOption label="Starcraft 2" value="sc2" />
+      </RadioGroup>
+    )
+  }
+})
+
+React.render(<WhereImUsingRadioGroups />, document.getElementById('WhereImUsingRadioGroups'));
