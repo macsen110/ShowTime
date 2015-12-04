@@ -85,7 +85,9 @@
 
 <p class="title">dynamic componnent2 (view)</p>
 <div id="dynamic2">
-	<div  :is="view"></div>
+	<div :is="view"></div>
+	<home></home>
+	
 </div>
 
 <template id="slot_parent_component">
@@ -115,10 +117,15 @@
 <div id="replace"></div>
 <p class="title">Event System</p>
 <template id="eventSystemChild1">
-	<p v-on:click = "childTest1()">click me</p>
+	<p @click = "childTest1()">click me</p>
 </template>
 <div id="event_system_root">
 	<event-system-child1></event-system-child1>
+</div>
+
+<p class="title">reuseable vue constructor</p>
+<div id="reuseable_vue">
+	<Profiles :first-name="firstName"></Profiles>
 </div>
 
 <script src="http://127.0.0.1:3000/script/vue/demo.js"></script>
