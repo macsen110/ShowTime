@@ -23,6 +23,7 @@ function handleApi(url,req, res) {
         var research = require('./api/research');
         return research.handle(url, req, res);
     }
+    console.log(url)
     switch (url) {
         case 'promise' : 
             var demo = require('./api/reactdemo');

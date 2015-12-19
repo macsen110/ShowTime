@@ -9,8 +9,6 @@ var Mockfoo = 'foo';
 var mockProp = {Mockbar,Mockfoo};
 var Comment = React.createClass({
 	componentDidMount: function () {
-		console.log('refs',this.refs.aaa);
-		console.log(typeof React.findDOMNode(this.refs.aaa))
 	},
 	render: function() {
         React.renderToStaticMarkup(React.DOM.img());
@@ -113,18 +111,18 @@ var CommentPropItem = React.createClass({
 	componentWillReceiveProps: function () {
 		console.log('componentWillReceiveProps CommentPropList')
 	},
-  render: function() {
-    return (
-      <div className="CommentPropItem">
-      <p>aaaaaaaa</p>
-        <h2>
-          {this.props.author}
-        </h2>
-		<h2 >{this.props.test}</h2>
+	render: function() {
+		return (
+		  <div className="CommentPropItem">
+		  <p>aaaaaaaa</p>
+		    <h2>
+		      {this.props.author}
+		    </h2>
+			<h2 >{this.props.test}</h2>
 
-      </div>
-    );
-  }
+		  </div>
+		);
+	}
 });
 var CommentPropList = React.createClass({
 	getDefaultProps: function () {
@@ -230,7 +228,7 @@ var CommentUrl = React.createClass({
 		)
 	}
 })
-CommentUrl.test();
+
 
 React.render(
   <CommentUrl url="/api/promise" />,
@@ -325,12 +323,8 @@ var CommentForm = React.createClass({
 		console.log('oops')
       return;
     }
-	console.log(React.findDOMNode(this.refs.text));
-	  var formData = new FormData(React.findDOMNode(this.refs.form))
-  	console.log(formData);
+  	var formData = new FormData(React.findDOMNode(this.refs.form));
 	this.props.onCommentSubmit(formData);
-	//this.props.onCommentSubmit({author: author, text: text});
-    // TODO: send request to the server
     React.findDOMNode(this.refs.author).value = '';
     React.findDOMNode(this.refs.text).value = '';
     return;
@@ -338,8 +332,8 @@ var CommentForm = React.createClass({
   render: function() {
     return (
       <form className="commentForm" onSubmit={this.handleSubmit} ref = 'form'>
-        <input type="text" placeholder="Your name" value="11"ref="author"  name="autor"/>
-        <input type="text" placeholder="Say something..." value="ii" ref="text" name="text" />
+        <input type="text" placeholder="Your name" defaultValue="11"ref="author"  name="autor"/>
+        <input type="text" placeholder="Say something..." defaultValue="ii" ref="text" name="text" />
         <input type="submit" value="Post" />
       </form>
     );
@@ -348,23 +342,7 @@ var CommentForm = React.createClass({
 
 var CommentFormBox = React.createClass({
   loadCommentsFromServer: function() {
-    var _xhr = new XMLHttpRequest();
-	_xhr.open("GET", 'http://127.0.0.1:3000/api/research/info');
-	_xhr.onload = function(){
-		if(_xhr.readyState === 4){
-			if(_xhr.status === 200){
-				console.log(_xhr.response);
-			}
-			else{
-				var error = new Error("something went wrong");
-				console.log(error);
-			}
-		}
-	};
-	_xhr.onerror = function(error){
-		console.log(error);
-	}
-	_xhr.send()		
+
   },
   handleCommentSubmit: function(comment) {
     var comments = this.state.data;
@@ -386,14 +364,13 @@ var CommentFormBox = React.createClass({
 	_xhr.onerror = function(error){
 		console.log(error);
 	}
-	_xhr.send(comment);
+	_xhr.send(comments);
   },
   getInitialState: function() {
     return {data: []};
   },
   componentDidMount: function() {
     this.loadCommentsFromServer();
-    //setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
   render: function() {
     return (
@@ -418,7 +395,6 @@ var KeyItem = React.createClass({
 	}
 	
 })
-
 var KeyList = React.createClass({
 	getInitialState: function () {
 		return {content:[{id:1,info:'aa'},{id:2,info:'bb'}]}
@@ -506,6 +482,3 @@ React.render(<NestComponent><NestChildren /></NestComponent>, document.getElemen
 
 //React with context
 
-var Context = React.createClass({
-		
-})
