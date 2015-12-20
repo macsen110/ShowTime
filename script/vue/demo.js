@@ -32,6 +32,9 @@ new Vue({
   el: '#testComponent'
 })
 
+
+
+
 // register child, which dispatches an event with
 // the current message
 Vue.component('child-component', {
@@ -113,6 +116,7 @@ new Vue({
 })
 
 
+
 /*****
 *
 *Vue ToDo
@@ -148,18 +152,31 @@ new Vue({
 ****/
 // create reusable constructor
 var Profile = Vue.extend({
-  template: '<p>{{firstName}} {{lastName}} aka {{alias}}</p>'
+  props: ['firstName', 'lastName', 'alias'],
+  template: '<div><p>{{firstName}} {{lastName}} aka {{alias}}</p></div>',
+  
 })
-// create an instance of Profile
-var profile = new Profile({
+
+Vue.component('Profiles', Profile)
+new Vue({
+  el: '#reuseable_vue',
   data: {
     firstName: 'Walter',
     lastName: 'White',
     alias: 'Heisenberg'
-  }  
+  }
 })
-// mount it on an element
-profile.$mount('#mount-point');
+
+// // create an instance of Profile
+// var profile = new Profile({
+//   data: {
+//     firstName: 'Walter',
+//     lastName: 'White',
+//     alias: 'Heisenberg'
+//   }  
+// })
+// // mount it on an element
+//profile.$mount('#mount-point');
 
 
 /***
@@ -237,9 +254,11 @@ new Vue({
 new Vue({
   el: '#dynamic',
   data: {
-    currentView: 'posts'
+    currentView: 'posts',
+    firstName: 'firstName222'
   },
   aa: 'aaa',
+  //template: '<div>A custom component!</div>',
   created: function () {
     setTimeout(function () {
       this.currentView = 'home';
@@ -247,11 +266,9 @@ new Vue({
     }.bind(this), 4000)
   },
   components: {
-    home: {
-      template: '<p>this is home views</p>'
-    },
+    home: Profile,
     posts: { 
-      template: 'this is posts view'
+      template: 'this is posts view 111'
     },
     archive: { /* ... */ }
   }
@@ -270,10 +287,10 @@ new Vue({
   },
   components: {
     home: {
-      template: '<p>this is home views</p>'
+      template: '<p>this is home views 222</p>'
     },
     posts: { 
-      template: 'this is posts view'
+      template: 'this is posts view 222'
     },
     archive: { /* ... */ }
   }
@@ -332,3 +349,76 @@ new Vue({
   replace: false,
   template: '<p>replaced</p>'
 })
+
+/****
+***
+** Event System
+***/
+
+Vue.component('eventSystemChild1', {
+  template: '#eventSystemChild1',
+  events: {
+    'hook:created': function () {
+      console.log('created!')
+    },
+    greeting: function (msg) {
+      console.log(msg)
+    },
+    // can also use a string for methods
+    bye: 'childTest1'
+  },
+  methods: {
+    childTest1: function () {
+      console.log('childTest1')
+    }
+  },
+  created: function () {
+    var self = this;
+    setTimeout(function () {
+      console.log(self)
+      self.$dispatch('bye')
+    }, 2000)
+  }
+})
+
+new Vue({
+  el: '#event_system_root',
+  events: {
+    bye: function () {
+      console.log('this is parent response to the event bye')
+    }
+  },
+  methods: {
+    childTest1: function () {
+      console.log('childToParentTest1')
+    }
+  },
+  created: function () {
+    this.childTest1()
+  }
+})
+
+
+/**
+** 
+**
+***********/
+// extend and register in one step
+Vue.component('my-component', {
+  template: '<div>A custom component!</div>'
+})
+
+// also works for local registration
+var Parent = Vue.extend({
+  components: {
+    'my-component': {
+      template: '<div>A custom component!</div>'
+    }
+  }
+})
+
+/***
+**Parent-Child-Communication
+**
+***********/
+
