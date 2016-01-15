@@ -14,8 +14,6 @@ var Mockfoo = 'foo';
 var mockProp = {Mockbar,Mockfoo};
 var Comment = React.createClass({
 	componentDidMount: function () {
-		console.log('refs',this.refs.aaa);
-		console.log(typeof React.findDOMNode(this.refs.aaa))
 	},
 	render: function() {
         React.renderToStaticMarkup(React.DOM.img());
@@ -251,7 +249,7 @@ var CommentUrl = React.createClass({
 		)
 	}
 })
-CommentUrl.test();
+
 React.render(
   <CommentUrl url="/api/promise" />,
   document.getElementById('res-server')
@@ -364,12 +362,8 @@ var CommentForm = React.createClass({
 		console.log('oops')
       return;
     }
-	console.log(React.findDOMNode(this.refs.text));
-	  var formData = new FormData(React.findDOMNode(this.refs.form))
-  	console.log(formData);
+  	var formData = new FormData(React.findDOMNode(this.refs.form));
 	this.props.onCommentSubmit(formData);
-	//this.props.onCommentSubmit({author: author, text: text});
-    // TODO: send request to the server
     React.findDOMNode(this.refs.author).value = '';
     React.findDOMNode(this.refs.text).value = '';
     return;
@@ -387,23 +381,7 @@ var CommentForm = React.createClass({
 
 var CommentFormBox = React.createClass({
   loadCommentsFromServer: function() {
-    var _xhr = new XMLHttpRequest();
-	_xhr.open("GET", 'http://127.0.0.1:3000/api/research/info');
-	_xhr.onload = function(){
-		if(_xhr.readyState === 4){
-			if(_xhr.status === 200){
-				console.log(_xhr.response);
-			}
-			else{
-				var error = new Error("something went wrong");
-				console.log(error);
-			}
-		}
-	};
-	_xhr.onerror = function(error){
-		console.log(error);
-	}
-	_xhr.send()		
+
   },
   handleCommentSubmit: function(comment) {
     var comments = this.state.data;
@@ -425,14 +403,13 @@ var CommentFormBox = React.createClass({
 	_xhr.onerror = function(error){
 		console.log(error);
 	}
-	_xhr.send(comment);
+	_xhr.send(comments);
   },
   getInitialState: function() {
     return {data: []};
   },
   componentDidMount: function() {
     this.loadCommentsFromServer();
-    //setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
   render: function() {
     return (
@@ -538,6 +515,7 @@ var NestChildren = React.createClass({
 	}
 })
 React.render(<NestComponent><NestChildren /></NestComponent>, document.getElementById('nestComponent'));
+
 
 
 
