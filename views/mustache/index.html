@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mustache</title>
+    
+</head>
+<body>
+    <div id="readered">
+        
+    </div>
+    <script id="template" type="x-tmpl-mustache">
+        <div>Hello {{ name }}!</div>
+        <ul>
+            {{#beatles}}
+            <li>* {{getName}}.</li>
+            {{/beatles}}
+        </ul>
+    </script>
+    <script src="/script/mustache/mustache.min.js"></script>
+    <script>
+        var global = {
+            name: 'Luck',
+            "beatles": [
+                { "firstName": "John", "lastName": "Lennon" },
+                { "firstName": "Paul", "lastName": "McCartney" },
+                { "firstName": "George", "lastName": "Harrison" },
+                { "firstName": "Ringo", "lastName": "Starr" }
+            ],
+            "getName": function () {
+                return this.firstName + " " + this.lastName;
+            }
+        }
+        var template = document.getElementById('template').innerHTML;
+        document.getElementById('readered').innerHTML = Mustache.render(template, global);      
+      
+        
+    </script>
+</body>
+</html>

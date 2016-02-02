@@ -31,7 +31,6 @@ class WrapTimer extends Component {
 		
 		var alltime = this.state.alltime;
 		var timer = alltime > 0 ? <Timer secondsRemaining = {alltime} /> : '';	
-		console.log(timer);
 		return (
 			<div className="wrap-timer">
 				<ul ref = "container">

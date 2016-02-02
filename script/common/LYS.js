@@ -2,8 +2,7 @@
  * Vision 1.1.
  * ***********/
 //var LYS = function(require, exports, module){
-    var LYS = LYS || function(q,c){return LYS.dom?LYS.dom(q,c):null};
-    console.log(LYS);
+    var LYS = LYS || function(q,c) { return LYS.dom ? LYS.dom(q,c) :null };
     //设置global
     LYS.global = LYS.global || (function() {
         var global = global || {};
@@ -41,7 +40,53 @@
     //数组与一般对象的判断稍微不一样
     LYS.isArray =  function (unknow){
         return Object.prototype.toString.call(unknow) === '[object Array]';
+    }    
+    //监听页面加载完毕
+    LYS.ready = function (fn) {
+        var readyState = document.readyState;
+        if (readyState === 'interactive' || readyState === 'complete') {
+            setTimeout(fn, 0);
+        } else {
+            window.addEventListener('DOMContentLoaded', fn);
+        }
     }
+    
+    LYS.getDomByEle = function (curentEl, selector) {
+        var sign = selector[0];
+        function getId() {
+           while (curentEl) {
+               if (curentEl.id === selector.slice(1)) return curentEl
+                curentEl = curentEl.parentNode;
+           }
+           return undefined
+        }
+        function getClass() {
+            while (curentEl) {
+               if (curentEl.classList.contains(selector.slice(1))) return curentEl;
+               curentEl = curentEl.parentNode;
+            }
+            return undefined
+        }
+        function getEleName() {
+            while (curentEl) {
+               if (curentEl.tagName === selector.toUpperCase()) return curentEl;
+               curentEl = curentEl.parentNode;
+            }
+            return undefined
+        }
+        switch (sign) {
+            case '.':
+                return getClass()
+            case '#':
+                return getId()
+            default:        
+                return getEleName();
+        }
+        
+    }
+
+    
+    
    //return LYS;
 //}
 

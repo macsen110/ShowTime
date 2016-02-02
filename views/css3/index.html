@@ -99,7 +99,61 @@
 	  max-height: 1000px;
 	  transition: .3s ease; /* animate to max-height */
 	}
-
+    
+    .inline-list { 
+        -webkit-column-count:3;  /*Safari and Chrome */
+        column-count:3;
+        /*text-align: justify*/
+        /*-webkit-column-width:100px;*/
+    }
+    .inline-list .item {
+        display: block;
+        width: 100%;
+        height: 80px;
+        background-color: orange;
+        
+    }
+    .inline-list .item:last-child:nth-child(2n) {
+        float: right
+    }
+    .inline-list .item:nth-last-child(-n+2) {
+        
+    }
+    /***
+    **选择器'+' 和'~'
+    **
+    **********************/
+    .aaa + .bbb {
+        color: red
+    }
+    
+    .aaa ~ .bbb {
+        color: blue
+    }
+    
+    /******box order******/
+        .box-order {
+            display: -webkit-box;
+        }
+        .box-order .item {
+            display: block;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            margin: 0 10px 0;
+            background-color: orange;
+            -webkit-box-ordinal-group: 2;
+        }
+        .box-order .item1 {
+            -webkit-box-ordinal-group: 1; 
+            box-ordinal-group: 1;
+        }
+        
+        /********vh, vw**********/
+        .vh {
+            height: 100vh;
+            background-color: blue;         
+        }
 	</style>
 
 </head>
@@ -167,7 +221,24 @@
 	<div class="slider">
 		<ul></ul>
 	</div>
+    <ul class="inline-list">
+        <li class="item"></li>
+        <li class="item"></li>
+        <li class="item"></li>
+        <li class="item"></li>
+        <li class="item"></li>
+        <li class="item"></li>
+    </ul>
 	
+    <div><p class="aaa">aaa</p></div>
+    <div></div>
+    <p class="bbb">bbb</p>
+    <ul class="box-order">
+        <li class="item">1</li>
+        <li class="item1 item">2</li>
+    </ul>
+    <div class="vh"></div>
+    
 </body>
 
 <script>

@@ -3,7 +3,6 @@ var url  = require("url"),
     readUri = require('./readUri'),
     server = new http.Server();
 server.on('request', function (req,res,next) {
-
     var pathname=__dirname+url.parse(req.url).pathname;
     var api = req.url;
     if (api.indexOf('/api/') !== -1) {
@@ -23,7 +22,6 @@ function handleApi(url,req, res) {
         var research = require('./api/research');
         return research.handle(url, req, res);
     }
-    console.log(url)
     switch (url) {
         case 'promise' : 
             var demo = require('./api/reactdemo');
