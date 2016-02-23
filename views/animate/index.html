@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>animate</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0
+        }
+        #animate {
+            height: 100px;
+            width: 100px;
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="animate"></div>
+    <script>
+        var animate = document.getElementById('animate');
+        var player = animate.animate([{'background': 'red'}, {'background': 'green'}], {
+            duration: 2500,         //ms
+            delay: 0,               //ms
+            iterations: 2,   //1, 2, 3 ... Infinity
+            direction: 'alternate', //'normal', 'reverse'等
+            easing: 'ease-in-out',  //'linear', 'ease-in'等
+            fill: 'both',       //'backwards', 'both', 'none', 'auto'
+        });
+        player.onfinish = function () {
+            console.log('finish')
+        }
+    </script>
+</body>
+</html>
