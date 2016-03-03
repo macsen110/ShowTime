@@ -12,7 +12,7 @@ class WrapTimer extends Component {
 		this.state = {
 			alltime: null
 		}
-		this.saveTimer = this.saveTimer.bind(this);
+		// this.saveTimer = this.saveTimer.bind(this);
 	}
 	saveTimer() {
 		var div = this.refs.container;
@@ -27,19 +27,22 @@ class WrapTimer extends Component {
 		})
 
 	}
+    toParent() {
+        console.log(this.state)
+    }
 	render() {	
 		
 		var alltime = this.state.alltime;
-		var timer = alltime > 0 ? <Timer secondsRemaining = {alltime} /> : '';	
-		console.log(timer);
+		var timer = alltime > 0 ? <Timer toParent={() => this.toParent()} secondsRemaining = {alltime} /> : '';	
 		return (
 			<div className="wrap-timer">
 				<ul ref = "container">
-					<li><input placeholder="day" data-name="day" className="ipt" /></li>
-					<li><input placeholder="hour" data-name="hour" className="ipt" /></li>
-					<li><input placeholder="minute" data-name="minute" className="ipt" /></li>
-					<li><input placeholder="second" data-name="second" className="ipt" /></li>
-					<li><input className="btn" onClick = {this.saveTimer} value="Set" /></li>
+					<li><input placeholder="day" data-name="day" className="ipt" defaultValue="1" /></li>
+					<li><input placeholder="hour" data-name="hour" className="ipt" defaultValue="1" /></li>
+					<li><input placeholder="minute" data-name="minute" className="ipt" defaultValue="1" /></li>
+					<li><input placeholder="second" data-name="second" className="ipt" defaultValue="1" /></li>
+					<li><input className="btn" onClick = {()=> this.saveTimer()} defaultValue="Set" /></li>
+                    
 				</ul>
 				{timer}
 			</div>
@@ -96,12 +99,15 @@ class Timer extends Component {
 	render() {
 		var leftTime = this.countLeftTime(this.state.secondsRemaining);
 		return (
-			<ul className={style.timer_container}>
-				{leftTime.dd > 0 ? <li className="item day"><span className="text">{leftTime.dd}</span>天</li> : ''}
-				{leftTime.hh > 0 ? <li className="item hour"><span className="text">{leftTime.hh}</span>小时</li> : ''}
-				{leftTime.mm > 0 ? <li className="item minute"><span className="text">{leftTime.mm}</span>分钟</li> : ''}
-				{leftTime.ss > 0 ? <li className="item second"><span className="text">{leftTime.ss}</span>秒</li> : '0秒'}
-			</ul>
+			<div>
+                <ul className={style.timer_container}>
+                    {leftTime.dd > 0 ? <li className="item day"><span className="text">{leftTime.dd}</span>天</li> : ''}
+                    {leftTime.hh > 0 ? <li className="item hour"><span className="text">{leftTime.hh}</span>小时</li> : ''}
+                    {leftTime.mm > 0 ? <li className="item minute"><span className="text">{leftTime.mm}</span>分钟</li> : ''}
+                    {leftTime.ss > 0 ? <li className="item second"><span className="text">{leftTime.ss}</span>秒</li> : '0秒'}
+                </ul>
+                <p onClick={this.props.toParent}>child comminute to parent</p>
+            </div>
 		)
 	}
 } 
