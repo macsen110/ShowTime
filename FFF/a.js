@@ -18,15 +18,19 @@ define(['zepto', 'FFF'],function ($, FFF) {
         className: {
             value: 'dialog-container'
         },
-        title: {
-            value: '110'
-        },
         isMask: {
             value: true
         },
         isIcon: {
             value: true
-        }     
+        },
+        title: {
+            value: '110'
+        },
+        content: {
+            value: ''
+        }
+             
     }
 
     F.extend(Modol,Widget,{
@@ -67,9 +71,9 @@ define(['zepto', 'FFF'],function ($, FFF) {
             var isIcon = that.getIsIcon();
             var widgetHtml = '<div class="widget">'
                                     +'<div class="head"></div>'
-                                    +'<div class="content">ds</div>'
+                                    +'<div class="content">'+ that.getContent() +'</div>'
                                     +'<div class="foot"></div>'
-                                    +(isIcon ? '<div class="icon"></div>' : '')
+                                    +(isIcon ? '<div class="icon">icon</div>' : '')
                             +'</div>'
             that.getBoundingBox().append(widgetHtml)
         },
