@@ -4,11 +4,12 @@
 define(['zepto', 'FFF'],function ($, FFF) {
     var F = FFF.FFF;   
     var Widget = F.Widget; 
-    F.on('dialogClose', function (cls) {
-        $('.' + cls).remove()
-    })   
+    F.on('dialogClose', function ($dom) {
+        $dom.remove()
+    })
+     
     function Modol(){
-        Widget.apply(this,arguments)
+        //Widget.apply(this,arguments)
     }
     
     Modol.ATTRS = {
@@ -36,15 +37,8 @@ define(['zepto', 'FFF'],function ($, FFF) {
     F.extend(Modol,Widget,{
         initialize: function () {
             var that = this;          
-            //this.prevboundingBox =this.getBoundingBox();            
             that.getBoundingBox().addClass(that.getClassName());
-            if (that.getIsMask()) {
-               that.getBoundingBox().append('<div class="mask">sdf</div>') 
-            }
-            var $mask = that.getBoundingBox().find('.mask');
-            $mask.on('click', function () {
-                F.trigger('dialogClose', that.getClassName())
-            })              
+                          
         },
         renderUI: function () {
             
@@ -58,16 +52,18 @@ define(['zepto', 'FFF'],function ($, FFF) {
     }
     
     Dialog.ATTRS = {
-        isMask: {
-            value: true
-        }    
+           
     } 
     F.extend(Dialog, Modol,{
         initialize: function () {
            // this.subboundingBox = this.getBoundingBox()
         },
         renderUI: function () {
-            var that = this;           
+            var that = this; 
+            var $widget = that.getBoundingBox();
+            if (that.getIsMask()) {
+               $widget.append('<div class="mask">mask</div>') 
+            }         
             var isIcon = that.getIsIcon();
             var widgetHtml = '<div class="widget">'
                                     +'<div class="head"></div>'
@@ -75,12 +71,18 @@ define(['zepto', 'FFF'],function ($, FFF) {
                                     +'<div class="foot"></div>'
                                     +(isIcon ? '<div class="icon">icon</div>' : '')
                             +'</div>'
-            that.getBoundingBox().append(widgetHtml)
+            $widget.append(widgetHtml)
         },
         bindUI: function () {
-            var that = this;         
-            that.getBoundingBox().on('click', function () {
-                F.trigger('dialogClose', that.getClassName())
+            var that = this; 
+            var $widget = that.getBoundingBox();
+            var $mask = $widget.find('.mask');
+            var $closeIcon = $widget.find('.close-icon');
+            $mask.on('click', function () {
+                F.trigger('dialogClose', $widget)
+            })         
+            $closeIcon.on('click', function () {
+                F.trigger('dialogClose', $widget)
             })
         } 
         

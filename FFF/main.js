@@ -1,5 +1,5 @@
 require.config({
-        baseUrl: 'scripts/',
+        baseUrl: '/FFF',
         paths:{
             'a':'a'
         }
