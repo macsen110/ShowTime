@@ -14,16 +14,16 @@ var Demo = React.createClass({
 	componentWillMount() {	
 		console.log('componentWillMount')
 	},
-	componentWillUpdate() {
-		console.log('componentWillUpdate')
+    componentWillReceiveProps() {
+		console.log('componentWillReceiveProps CommentPropList')
 	},
 	shouldComponentUpdate(nextProps, nextState) {
 		console.log(nextProps)
 		console.log(nextState)
 		return false;
 	},
-	componentWillReceiveProps() {
-		console.log('componentWillReceiveProps CommentPropList')
+    componentWillUpdate() {
+		console.log('componentWillUpdate')
 	},
 	componentDidMount() {
 		console.log('componentDidMount');
