@@ -1,0 +1,86 @@
+@import 'lib/common';
+.bgrule(@url, @bgSize) {
+    background: url(@url) no-repeat;
+    background-size: @bgSize
+}
+.position(@value, @z-index:1, @top:0, @left: 0) {
+    position: @value;
+    z-index: @z-index;
+    top: @top;
+    left: @left
+}
+html {
+    height: 100%;
+    width: 100%;
+}
+body {
+    width: 100%;
+    min-height: 100%;
+    .bgrule('/images/bg_body.png', cover)
+}
+
+/******ui dialog*******/
+.dialog {
+    .position(absolute, 1, 0, 0);
+    width: 100%;
+    height: 100%;    
+}
+
+.dialog .mask {
+    .position(fixed, 1, 0, 0);
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .3);
+}
+
+.dialog-container .widget {
+    .position(absolute, 2, 0, 0);
+    .flexbox();
+    .justify-content(center);
+    .align-items(center);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+   
+}
+.dialog-container .widget .widget-icon {
+    width: 30.4%;
+    padding-top: 72%;
+    margin-right: -6.934%;
+    z-index: 3;
+    .bgrule('/images/bg_widget_icon.png', cover)
+}
+.dialog-container .widget .main {
+    position: relative;
+    width: 70%;
+    padding-top: 72%;
+    .bgrule('/images/bg_dialog_main.png', cover)
+}
+.dialog-container .widget .main > div {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%)
+}
+.dialog-container .widget .main .content {
+    top: 22.22%;
+    width: 75.76%;
+    height: 53.03%;
+    overflow-y: auto;   
+}
+
+.dialog-container .widget .main  .foot {
+    bottom: 0;
+    height: 25.18%;
+    width: 75.76%;
+    .box-shadow(0 -4px 0 0 rgba(255,255,255,.6));
+    .flexbox();
+    .justify-content(center);
+    .align-items(center);
+}
+
+.dialog-container .widget .main  .foot .btn-close {
+    display: block;
+    width: 48.43%;
+    height: 52.94%;
+    .bgrule('/images/bg_btn_close.png', contain) 
+}
