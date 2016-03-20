@@ -1,86 +1,201 @@
 @import 'lib/common';
-.bgrule(@url, @bgSize) {
-    background: url(@url) no-repeat;
-    background-size: @bgSize
-}
-.position(@value, @z-index:1, @top:0, @left: 0) {
-    position: @value;
-    z-index: @z-index;
-    top: @top;
-    left: @left
-}
 html {
     height: 100%;
     width: 100%;
 }
-body {
-    width: 100%;
+body{
     min-height: 100%;
-    .bgrule('/images/bg_body.png', cover)
+    min-width: 100%;
+    box-sizing: border-box;
+    background-color: #f7b137;
+    background-image: url('/images/bg_body.png');
+    background-size: cover
 }
-
-/******ui dialog*******/
-.dialog {
-    .position(absolute, 1, 0, 0);
-    width: 100%;
-    height: 100%;    
+.clear { 
+	zoom:1;
 }
-
-.dialog .mask {
-    .position(fixed, 1, 0, 0);
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0, 0, 0, .3);
+.clear:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
 }
-
-.dialog-container .widget {
-    .position(absolute, 2, 0, 0);
-    .flexbox();
-    .justify-content(center);
-    .align-items(center);
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100%;
-   
-}
-.dialog-container .widget .widget-icon {
-    width: 30.4%;
-    padding-top: 72%;
-    margin-right: -6.934%;
-    z-index: 3;
-    .bgrule('/images/bg_widget_icon.png', cover)
-}
-.dialog-container .widget .main {
-    position: relative;
-    width: 70%;
-    padding-top: 72%;
-    .bgrule('/images/bg_dialog_main.png', cover)
-}
-.dialog-container .widget .main > div {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%)
-}
-.dialog-container .widget .main .content {
-    top: 22.22%;
-    width: 75.76%;
-    height: 53.03%;
-    overflow-y: auto;   
-}
-
-.dialog-container .widget .main  .foot {
+.widget-swipe {
+    position: fixed;
+    left: 0;
+    top: 0;
     bottom: 0;
-    height: 25.18%;
-    width: 75.76%;
-    .box-shadow(0 -4px 0 0 rgba(255,255,255,.6));
-    .flexbox();
-    .justify-content(center);
-    .align-items(center);
+    right: 0;
+    overflow: hidden;
+    padding-top: 11.6%;
+    .list {
+        height: 90.13%;
+        .item {
+            position: relative;
+            float: left;
+            width: 100%;
+            background-size: contain;
+            background-position: center 0;
+            background-repeat: no-repeat;
+            height: 100%;
+            .icon {
+                position: absolute;
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+        .item:first-child {
+            background-image: url('/images/bg_screne_1.png');
+            
+            .icon-person {
+                left: 0;
+                top: 17.92%;
+                width: 100%;
+                padding-top: 73.33%;                
+                background-image: url('/images/icon_screne_1_person.png');
+            }
+            .icon-haze {
+                right: 8.8%;
+                width: 51.2%;
+                padding-top:39.2%; 
+                background-image: url('/images/icon_screne_1_haze.png');
+            }
+            .icon-words {
+                top: 55.2%;  
+                right: 4.26%;    
+                width: 74.93%;
+                padding-top: 34.93%;
+                background-image: url('/images/icon_screne_1_words.png');
+            }
+            .icon-laugh {
+                top: 0;
+                left: 20.53%;
+                padding-top: 13.86%;
+                background-position: 0 0;
+                background-size: auto 100%;
+                background-image: url('/images/icon_screne_1_laugh.png');
+            }
+
+        }
+        .item:first-child.on {
+            .icon-haze {
+                -webkit-animation: screne_1_haze 1s ease forwards;
+                animation: screne_1_haze 1s ease forwards;
+            }
+            .icon-laugh {
+                -webkit-animation: screne_1_laugh 1s 1s ease forwards;
+                animation: screne_1_laugh 1s 1s ease forwards;
+            }
+            .icon-person {
+                -webkit-animation: screne_1_person 1s 2s ease forwards;
+                animation: screne_1_person 1s 2s ease backwards;
+            }
+        }
+        .item:nth-of-type(2) {
+            background-image: url('/images/bg_screne_2.png');
+            .icon-person {
+                left: 50%;
+                top: 17.92%;
+                width: 97.86%;
+                padding-top: 77.86%;                
+                background-image: url('/images/icon_screne_2_person.png');
+                transform: translate3d(-50%, 0, 0);
+            }
+            .icon-words {
+                top: 55.2%;  
+                right: 4.26%;    
+                width: 74.93%;
+                padding-top: 34.93%;
+                background-image: url('/images/icon_screne_2_words.png');
+            }
+            
+        }
+        .item:last-child {
+            background-image: url('/images/bg_screne_3.png');
+            .icon-person {
+                left: 50%;
+                top: 2%;
+                width: 97.6%;
+                padding-top: 78.13%;                
+                background-image: url('/images/icon_screne_3_person.png');
+                transform: translate3d(-50%, 0, 0);
+            }
+            .icon-words {
+                top: 55.2%;  
+                right: 4.26%;    
+                width: 80%;
+                padding-top: 56.27%;
+                background-image: url('/images/icon_screne_3_words.png');
+            }   
+        } 
+    }
+    .indicate-list {
+        margin-top: 2%;
+        text-align: center;
+        height: 8px;
+        .item {
+            display: inline-block;
+            height: 8px;
+            width: 8px;
+            margin: 0 2px;
+            border-radius: 50%;
+            background-color: #d1d1d1;
+            vertical-align: top;
+        }
+        .item.on {
+            background-color: #666
+        }
+    }
 }
 
-.dialog-container .widget .main  .foot .btn-close {
-    display: block;
-    width: 48.43%;
-    height: 52.94%;
-    .bgrule('/images/bg_btn_close.png', contain) 
+/**
+**@keyframes
+**
+************/
+@-webkit-keyframes screne_1_haze {
+    0% {      
+        top: -5%;       
+    }
+    25% {
+        top: 0%;
+    }
+    75% {
+        top: -5%;
+    }   
+    100% {
+         top: 0%     
+    }
+}
+
+@-webkit-keyframes screne_1_laugh {
+    0% {      
+        width: 10%;
+    }
+    50% {
+        width: 16%;
+    }   
+    100% {
+         width: 21.86%    
+    }
+}
+
+@-webkit-keyframes screne_1_person {
+    0% {
+        -webkit-transform:scale(1)
+    }
+    25% {
+        -webkit-transform:scale(.6)
+    }
+    50% {
+       -webkit-transform:scale(1) 
+    }
+    75% {
+        -webkit-transform:scale(.6) 
+    }
+    100% {
+        -webkit-transform:scale(1)
+    }
 }
