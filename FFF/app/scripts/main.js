@@ -1,26 +1,22 @@
 require.config({
         baseUrl: 'scripts/',
-        paths:{
+        pahts:{
             'a':'a'
         }
     }
-);
-require(['zepto','FFF','a'], function ($,FFF,a) {
-    var myTip = a.Dialog;
-    $('#click_trigger_dialog').on('click', function () {
-        new myTip({
-            isMask: false,
-            isIcon: 1,
-            className: 'dialog-container',
-            content: 'this is content info!!',
-            clickBtn: function () {
-                console.log('sspd')
-            },
-            beforeClose: function () {
-                alert('i am going close')
-            }
-        }).render();
-    })
-
-    
-});
+)
+require(['a', 'swipe_amd'], function (a, swipe) {
+    var screne = {
+        _screneId : 0,
+        get screneId() {
+            
+        },
+        set screneId(value) {
+            
+        }
+    }
+    new swipe.Swipe(document.getElementById('swipe_list'), {
+                    callback: function (index) {
+                        console.log(index)
+                    }})
+})

@@ -1,6 +1,7 @@
 define(function(require, exports, module){
     //var aaa = require('flummox/dist/flummox');
     alert(typeof Flummox);
+    
 	var LYS = require('LYS');
 	var promiseBtn = document.getElementById('promiseGet');
 	if(promiseBtn) {
