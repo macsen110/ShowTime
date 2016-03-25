@@ -1,22 +1,11 @@
 require.config({
-        baseUrl: 'scripts/',
-        pahts:{
-            'a':'a'
+        baseUrl: './',
+        paths:{
+            common:'scripts/common',
+            move:'scripts/lib/easy_move'           
         }
     }
 )
-require(['a', 'swipe_amd'], function (a, swipe) {
-    var screne = {
-        _screneId : 0,
-        get screneId() {
-            
-        },
-        set screneId(value) {
-            
-        }
-    }
-    new swipe.Swipe(document.getElementById('swipe_list'), {
-                    callback: function (index) {
-                        console.log(index)
-                    }})
+require(['common'], function (common) {
+          
 })
