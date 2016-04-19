@@ -12,7 +12,6 @@ server.on('request', function (req,res,next) {
         if (api.indexOf('.') === -1) {
             pathname += "index.html"
         }
-
         readUri.read(pathname,res);
     }
 })
@@ -22,6 +21,7 @@ function handleApi(url,req, res) {
         var research = require('./api/research');
         return research.handle(url, req, res);
     }
+    
     switch (url) {
         case 'promise' : 
             var demo = require('./api/reactdemo');
