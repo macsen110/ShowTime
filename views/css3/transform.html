@@ -3,7 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>requestanimationframe</title>
+    <link rel="stylesheet" type= "text/css" href="/style/common.css">
+
 	<style>
+        
 		#Animate {
 			position: absolute;
 			left: 0;
@@ -15,10 +18,35 @@
 			line-height: 100px;
 			-webkit-transform: translate3d(30px,30px,200px);
 		}
+        .container {
+            width: 400px;
+            padding: 20px;
+            margin: 20px auto 0;
+            border: 1px solid #ccc;
+            overflow: hidden;
+        }
+        .container .box-1 {
+            float: left;
+            height: 200px;
+            width: 80px;
+            transform: translate3d(-50%, 0, 0);
+            background-color: yellow;
+            margin-right: 20px;
+        }
+        .container .box-2 {
+            float: left;
+            height: 200px;
+            width: 80px;
+            background-color: #ccc;
+        }
 	</style>
 </head>
 <body>
-	<div id="Animate">Animate</div>
+	<!--<div id="Animate">Animate</div>-->
+    <div class="container">
+        <div class="box-1"></div>
+        <div class="box-2"></div>
+    </div>
 	<script>
 		
 	</script>
