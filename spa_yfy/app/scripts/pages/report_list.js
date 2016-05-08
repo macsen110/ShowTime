@@ -1,22 +1,86 @@
 define(['zepto', 'template'], function ($, template) {
     var isFirstReq;
-    var yfySessionReportObj;
+    var yfySessionReportObj = sessionStorage.getItem('yfySessionReportObj') ? JSON.parse(sessionStorage.getItem('yfySessionReportObj')) : null;
     
     var pageInitObj = {
         $rootDom: $('#page_container'),
-        resetReportObj: function (obj) {
-            if (!yfySessionReportObj) yfySessionReportObj = sessionStorage.getItem('yfySessionReportObj') ? JSON.parse(sessionStorage.getItem('yfySessionReportObj')) : null;
-            if (obj) {
-                if (!yfySessionReportObj) yfySessionReportObj = {page: obj.page, curNum: page.curNum};
-                else yfySessionReportObj.data
-            } 
+        setReportStore: function (obj) {
+            var filter = yfySessionReportObj.filter(function (item) {
+                return item.type == obj.type
+            })
+            var filterData = yfySessionReportObj[yfySessionReportObj.indexOf(filter[0])];
+            filterData.curNum = obj.page;
+            filterData.pageNums = obj.pageNums;
+            filterData.data.push(obj.data);
+            sessionStorage.setItem('yfySessionReportObj', yfySessionReportObj);
         }, 
+        isReportStroe: function (obj) {
+            if (!yfySessionReportObj) {
+                yfySessionReportObj = [{
+                    type: obj.type,
+                    data: []
+                }]
+                return {
+                    yfyReportStore: 0
+                }
+            }
+            else {
+                var filter = yfySessionReportObj.filter(function (item) {
+                    return item.type == obj.type
+                })
+                if (filter.length) {
+                    var filterData = yfySessionReportObj[yfySessionReportObj.indexOf(filter[0])];
+                    if (obj.pageNum) {
+                        filterData.curNum = obj.pageNum;
+                        var filterItem = filterData.filter(function (item) {
+                            return item.pageNum == obj.pageNum
+                        })
+                        if (filterItem.length) {
+                            var filterItemData = filterData[filterData.indexOf[filterItem[0]]];
+                            return {
+                                yfyReportStore: 1,
+                                typeStore: 1,
+                                typeItemStore: 1,
+                                typeCurPageNum: filterData.curNum,
+                                typeItemData: filterItemData,
+                            }
+                        }
+                        else {
+                            return {
+                                yfyReportStore: 1,
+                                typeStore: 1,
+                                typeItemStore: 0
+                            };
+                        }
+                    }
+                    else {
+                        return {
+                            yfyReportStore: 1,
+                            typeStore: 1,
+                            typeItemStore: 1,
+                            typeCurPageNum: filterData.curNum,
+                            typeItemData: filterItemData,
+                        }
+                    }
+                }
+                else {
+                    yfySessionReportObj.push({
+                        type: obj.type,
+                        data: []
+                    })
+                    return {
+                        yfyReportStore: 1,
+                        typeStore: 0
+                    }
+                }
+            }
+        },
         init: function (stateObj) {
             var self = this;
-            self.RepType = stateObj.RepType;
+            var RepType = stateObj.RepType;
             var url;
             var data = yfySessionReportObj ? {page: yfySessionReportObj.page} : {};
-
+            
             switch(RepType){
                 case '01' : //唐式
                     url = '/infanthospital/getTSReportDetail';
