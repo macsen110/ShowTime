@@ -1,0 +1,337 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>我的产检</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name = "format-detection" content = "telephone=no">
+    <link rel="stylesheet" href="styles/base.css"/>
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body data-page="antenatalCare">
+    
+    <div class="page-antenatal-care hidden" id="page_antenatal_care">
+
+    </div>
+    <script id="profile_template" type="text/html">
+        <div class="profile-box bind-location" data-href="profile.html">
+            <img class="avatar" src="images/icon_avatar_1.png" alt="avatar">
+            <div class="info">
+                <p>{{name}}(女 {{age}}岁)</p>
+                <p>预产期 :{{dateChildbirth}}</p>
+            </div>
+            <i class="sign"></i>
+        </div>
+    </script>
+    <script id="antenatal_care_bind_template" type="text/html">
+        
+        <div class="bind-card-box">
+            <header class="header">
+                <ul class="tab-con-container clear">
+                    
+                </ul>
+                <div class="wrap-easy-move">
+                    <ul class="easy-move-container clear">
+                    </ul>                
+                </div>
+                
+            </header>
+            
+            <section class="section">
+                <div class="sign-head">
+                    <span class="item"></span>
+                    <span class="sign"></span>
+                    <span class="item"></span>
+                </div>                
+                <div class="content">
+                    
+                    <p class="nav-item-name">
+                        <em class="type name">检查项目</em>
+                    </p>
+                    <ul class="tab-con-container test-list">
+                    </ul>
+                    <p class="nav-item-name">
+                        <em class="tip name">温馨提示</em>
+                    </p>
+                    <ul class="tab-con-container tip-list">
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </script>
+    <script id="antenatal_care_unbind_template" type="text/html">
+        <div class="unbind-card-box">
+            <header class="header">
+                <div class="widget-tip-box bind-location" data-href="https://h5.shqmxx.com/Template/Resource.aspx?Pri=QM.CSFP.77.DIS.UserManage-Binding&customerId=77&openId=oTqovuD48VLBqyUj8D2OKZ7SO6C4&userId=2d8ecdf71a284b1aa51556c9b5f2a43e&CheckOAuth=unAttention&rid=86899&uiserviceId=gh_f6090761f9dc&ForwardUIUserId=oTqovuHDy5NjAboPiXrhTJvls50o&IsMenu=1&applicationId=2b0ff89f27584e3ab81d44d060a4271e&IsMenu=1">绑定就诊卡,实时跟进你的孕期检查<i class="sign"></i></div>
+                <div class="wrap-easy-move">
+                    <ul class="easy-move-container clear">
+                        <li class="item finished">
+                            <div class="box">
+                                <p>>8周</p>
+                            </div>
+                        </li>
+                        <li class="item finished">
+                            <div class="box">
+                                <p>>8周</p>
+                                <p><14周</p>
+                            </div>
+                        </li>
+                        <li class="item finished">
+                            <div class="box">
+                                <p>>14周</p>
+                                <p><18周</p>
+                            </div>
+                        </li>
+                        <li class="item finished">
+                            <div class="box">
+                                <p>20周</p>
+                                
+                            </div>
+                        </li>
+                        <li class="item finished">
+                            <div class="box">
+                                <p>24周</p>
+                                
+                            </div>
+                        </li>
+                        <li class="item finished">
+                            <div class="box">
+                                <p>28周</p>
+                            </div>
+                        </li>
+                        <li class="item finished">
+                            <div class="box">
+                                <p>30周</p>
+                            </div>
+                        </li>
+                        <li class="item finished">
+                            <div class="box">
+                                <p>32周</p>
+                            </div>
+                        </li>
+                        <li class="item finished">
+                            <div class="box">
+                                <p>34周</p>
+                                
+                            </div>
+                        </li>
+                        <li class="item finished">
+                            <div class="box">
+                                <p>36周</p>
+                                
+                            </div>
+                        </li>
+                        <li class="item finished">
+                            <div class="box">
+                                <p>37周</p>
+                            </div>
+                        </li>
+                        <li class="item finished">
+                            <div class="box">
+                                <p>38周</p>
+                            </div>
+                        </li>
+                        <li class="item finished">
+                            <div class="box">
+                                <p>39周</p>
+                            </div>
+                        </li>
+                        <li class="item finished">
+                            <div class="box">
+                                <p>40周</p>
+                            </div>
+                        </li>
+                    </ul>                
+                </div>
+                
+            </header>
+            <section class="section">  
+                <div class="sign-head">
+                    <span class="item"></span>
+                    <span class="sign"></span>
+                    <span class="item"></span>
+                </div> 
+                <ul class="inner-tab-nav-list">
+                    <li class="item">经早孕门诊者</li><li class="item">未经早孕门诊者</li>
+                </ul>             
+                <div class="content">
+                    
+                    <p class="nav-item-name">
+                        <em class="type name">检查项目</em>
+                    </p>
+                    <ul class="tab-con-container test-list">
+                        <li class="item">
+                            <p>1.早孕B超, 可能需要检查多次直到显示正常妊娠</p>
+                            <p>2.套餐一：血B-HCG、甲状腺功能(TSH//FT4)、TPOAb</p>
+                            <p>3.套餐二：空腹血糖、HbA1C</p>
+                        </li>
+                        <li class="item">
+                            <p>1.套餐三：甲状腺功能(TSH//FT4)、TPOAb、空腹血糖、HbA1C</p>
+                        </li>
+                        <li class="item">
+                            <ul class="inner-tab-con-list">
+                                <li class="item">
+                                    <p>1.检验科申请单:尿液常规(分析仪测试九联以上)+镜检</p>
+                                    <p>2.肝肾功能</p>
+                                    <p>3.梅毒快速实验，HIV-抗体</p>
+                                    <p>4.维生素B12，叶酸，铁蛋白，25羟基维生素D</p>
+                                    <p>5.血常规</p>
+                                    <p>6.血型:ABO血型、Rh(D)血型、不规则抗体筛查</p>
+                                    <p>7.中期唐氏筛查</p>
+                                    <p>8.检验科申请单:淋球菌涂片+培养</p>
+                                    <p>9.病理科申请单:TCT</p>
+                                    <p>10.检验科申请单:白带常规</p>
+                                    <p>11.本科处置:产前检查+胎心音听诊</p>
+                                    <p>12.心电图申请单:多导联心电图</p>
+                                </li>
+                                <li class="item">
+                                    <p>1.检验科申请单:尿液常规(分析仪测试九联以上)+镜检</p>
+                                    <p>2.肝肾功能</p>
+                                    <p>3.梅毒快速实验，HIV-抗体</p>
+                                    <p>4.维生素B12，叶酸，铁蛋白，25羟基维生素D</p>
+                                    <p>5.血常规</p>
+                                    <p>6.血型:ABO血型、Rh(D)血型、不规则抗体筛查</p>
+                                    <p>7.空腹血糖、HbA1C</p>
+                                    <p>8.甲状腺功能(TSH//FT4)、TPOAb</p>
+                                    <p>9.中期唐氏筛查</p>
+                                    <p>10.检验科申请单:淋球菌涂片+培养</p>
+                                    <p>11.病理科申请单:TCT</p>
+                                    <p>12.检验科申请单:白带常规</p>
+                                    <p>13.本科处置:产前检查+胎心音听诊</p>
+                                    <p>14.心电图申请单:多导联心电图</p>
+                                    <p>15.超声申请单:胎儿生长检测+附件</p>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="item">
+                            <p>1.检验科申请单:尿液常规(分析仪测试九联以上)+镜检</p>
+                            <p>2.检验科申请单:糖耐量(75克)</p>
+                            <p>3.检验科申请单:血液常规</p>
+                            <p>4.本科处置:胎心音+产前检查</p>
+                            <p>5.超声申请单:胎儿大畸形筛查</p>
+                        </li>
+                        <li class="item">
+                            <p>1.检验科申请单:尿液常规(分析仪测试九联以上)+镜检;</p>
+                            <p>2.本科处置:胎心音+产前检查</p>
+                        </li>
+                        <li class="item">
+                            <p>1.检验科申请单:尿液常规(分析仪测试九联以上)+镜检;</p>
+                            <p>2.本科处置:胎心音+产前检查</p>
+                            <p>3.检验科申请单:肝功能,肾功能</p>
+                            <p>4.检验科申请单:25羟基维生素D</p>
+                            <p>5.检验科申请单:血常规</p>
+                            <p>6.检验科申请单:铁蛋白,叶酸,B12</p>
+                            <p>7.检验科申请单:胆汁酸(非空腹血)</p>
+                        </li>
+                        <li class="item">
+                            <p>1.检验科申请单:尿液常规(分析仪测试九联以上)+镜检;</p>
+                            <p>2.本科处置:胎心音+产前检查;</p>
+                            <p>3.超声申请单:胎儿生长检测+附件,胎儿脐血流检测</p>
+                        </li>
+                        <li class="item">
+                            <p>1.检验科申请单:尿液常规(分析仪测试九联以上)+镜检</p>
+                            <p>2.本科处置:胎心音+产前检查</p>
+                        </li>
+                        <li class="item">
+                            <p>1.检验科申请单:尿液常规(分析仪测试九联以上)+镜检;</p>
+                            <p>2.本科处置:胎心音+产前检查</p>
+                            <p>3.检验科申请单:肝肾功能</p>
+                            <p>4.检验科申请单:血液常规</p>
+                            <p>5.检验科申请单:凝血酶原时间*,APTT*,凝血酶时间,纤维蛋白</p>
+                            <p>6.HIV抗体</p>
+                            <p>7.梅毒血清试验(RPR)</p>
+                            <p>8.心电图申请单</p>
+                            <p>9.超声申请单:胎儿生长检测+附件,胎儿脐血流检测</p>
+                            <p>10.产科胎监申请单:胎心监护,包括双胎</p>
+                            
+                        </li>
+                        <li class="item">
+                            <p>1.检验科申请单:尿液常规(分析仪测试九联以上)+镜检;</p>
+                            <p>2.本科处置:胎心音+产前检查</p>
+                            <p>3.产科胎监申请单:胎心监护,包括双胎</p>
+                        </li>
+                        <li class="item">
+                            <p>1.检验科申请单:尿液常规(分析仪测试九联以上)+镜检;</p>
+                            <p>2.本科处置:胎心音+产前检查</p>
+                            <p>3.产科胎监申请单:胎心监护,包括双胎</p>
+                        </li>
+                        <li class="item">
+                            <p>1.检验科申请单:尿液常规(分析仪测试九联以上)+镜检;</p>
+                            <p>2.本科处置(胎心音+产前检查)</p>
+                            <p>3.超声申请单:胎儿生长检测+附件,胎儿脐血流检测;</p>
+                            <p>3.产科胎监申请单:胎心监护,包括双胎</p>
+                        </li>
+                        <li class="item ">
+                            <p>1.检验科申请单:尿液常规(分析仪测试九联以上)+镜检;</p>
+                            <p>2.本科处置(胎心音+产前检查)</p>
+                            <p>3.产科胎监申请单:胎心监护,包括双胎</p>
+                        </li>
+                        <li class="item">
+                            <p>1.检验科申请单:尿液常规(分析仪测试九联以上)+镜检;</p>
+                            <p>2.本科处置(胎心音+产前检查)</p>
+                            <p>3.产科胎监申请单:胎心监护,包括双胎</p>
+                        </li>
+                    </ul>
+                    <p class="nav-item-name">
+                        <em class="tip name">温馨提示</em>
+                    </p>
+                    <ul class="tab-con-container tip-list">
+                        <li class="item">
+                            <p>1.外院二级及以上医院早孕B超可以参考，需要确保早孕B超当天能做到，另外可以享受医保</p>
+                            <p>2.套餐一报告结果出来后，再次看早孕门诊</p>
+                            <p>3.套餐二空腹，需要预约空腹抽血日期和时间段</p>
+                        </li>
+                        <li class="item">
+                            <p>1.套餐三空腹，需要预约空腹抽血日期和时间段</p>
+                            <p>2.需要预约建卡时间</p>
+                        </li>
+                        <li class="item">
+                            <ul class="inner-tip-con-list">
+                                <li class="item">
+                                    <p>尿液常规(分析仪测试九联以上)+镜检一次用于本次检查，一次用于20周检查</p>
+                                </li>
+                                <li class="item">
+                                    <p>1.尿液常规(分析仪测试九联以上)+镜检一次用于本次检查，一次用于20周检查</p>
+                                    <p>2.胎儿生长检测+附件预约在20周内</p>
+                                </li>
+                            </ul>                        
+                        </li>
+                        <li class="item">
+                            <p>1.糖耐量(75克))预约下次空腹抽血;</p>
+                            <p>2.血脂预约下次空腹抽血;</p>
+                            <p>3.超声申请单:胎儿大畸形筛查)预约在预约在20~24周间</p>
+                        </li>
+                        <li class="item"></li>
+                        <li class="item"></li>
+                        <li class="item"></li>
+                        <li class="item"></li>
+                        <li class="item"></li>
+                        <li class="item"></li>
+                        <li class="item"></li>
+                        <li class="item"></li>
+                        <li class="item"></li>
+                        <li class="item"></li>                    
+                    </ul>
+                </div>
+            </section>
+        </div>    
+    </script>
+
+    <div class="widget-bottom-nav">
+        <ul class="container">
+            <li class="item active"><a href="javascript:void(0)">我的产检</a></li>
+            <li class="item bind-location" data-href="waiting_doctor.html"><a href="javascript:void(0)">候诊</a></li>
+        </ul>
+    </div>
+    <script src="scripts/lib/FFF.fc.template.min.js"></script>
+    <!-- build:js scripts/main.js -->
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+    <script>
+        require(['scripts/pages/antenatal'])
+    </script>
+  </body>
+</html>

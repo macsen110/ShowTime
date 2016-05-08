@@ -1,0 +1,32 @@
+<script id="profile_template" type="text/template">
+    <div class="profile-box">
+        <div class="box avatar-container">
+            <img class="avatar" src="images/icon_avatar_1.png" alt="avatar">
+            <span class="info">
+                <em class="name">{{name}}</em><em>女 {{age}}岁</em>
+            </span>
+        </div>  
+        <ul class="box">
+            <li class="item">
+                <i class="icon icon-1"></i>
+                <p class="content"><span class="key">末次月经:</span>{{dateLmp}}</p>
+            </li>
+            <li class="item">
+                <i class="icon icon-2"></i>
+                <p class="content"><span class="key">预产期:</span>{{dateChildbirth}}</p>
+            </li>
+        </ul> 
+        <ul class="box">
+            <li class="item">
+                <i class="icon icon-3"></i>
+                <p class="content"><span class="key">手机号:</span>{{mobile}}</p>
+            </li>
+        </ul>        
+    </div>
+</script>
+<div class="widget-bottom-nav">
+    <ul class="container">
+        <li class="item bind-location" data-href="antenatal"><a href="javascript:void(0)">我的产检</a></li>
+        <li class="item bind-location" data-href="waiting_doctor"><a href="javascript:void(0)">候诊</a></li>
+    </ul>
+</div>

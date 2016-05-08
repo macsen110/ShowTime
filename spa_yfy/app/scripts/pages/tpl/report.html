@@ -1,0 +1,136 @@
+<script id="report_template" type="text/template">
+    <div class="report-container report-type-1">
+        <header class="header border-bottom">
+            <div class="item">
+                <span class="key">检查项目:</span>
+                <span class="info">{{checkItem}}</span>
+            </div>
+            <div class="item">
+                <span class="key">检查时间:</span>
+                <span class="info">{{checkDate}}</span>
+                <span class="bind-location" data-href="report_list" data-options='{"RepType": "{{RepType}}"}'>查看历史记录 ></span>
+            </div>
+        </header>
+        <!-- 唐氏 -->
+        {{if RepType == '01'}}
+        <div class="report-content type-1 border-horizontal">
+            <div class="box border-bottom">
+                <div class="title">样本信息</div>
+                <table class="comm-table report-table report-table2">
+                    <thead>
+                        <tr>
+                            <td>标记物</td>
+                            <td>结果</td>
+                            <td>单位</td>
+                            <td>矫正值MOM</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{each sampleInformationList as value}}
+                        <tr>
+                            <td>{{value.correctionMOM}}</td>
+                            <td>{{value.result}}</td>
+                            <td>{{value.tag}}</td>
+                            <td>{{value.unit}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="box border-bottom">
+                <div class="title">风险计算项目</div>
+                <table class="comm-table report-table">
+                    <thead>
+                        <tr>
+                            <td>筛查项目</td>
+                            <td>风险值</td>
+                            <td>风险结果</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{each riskComputation as value}}
+                        <tr>
+                            <td>{{value.riskResult}}</td>
+                            <td>{{value.riskValue}}</td>
+                            <td>{{value.screening}}</td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="report-tip">
+            <p>{{illustrate}}</p>
+        </div>
+        <!-- 超声报告 -->
+        {{else if RepType == '02'}}
+        <div class="report-content type-1 border-horizontal">
+            <div class="box border-bottom">
+                <div class="title">诊断提示</div>
+                <div class="con">
+                    {{each diagnosticTips as value}}
+                    <p>{{value}}</p>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="box border-bottom">
+                <div class="title">超声结果</div>
+                <div class="con">
+                    {{each ultrasonicResult as value}}
+                    <p>{{value}}</p>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        {{else if RepType == '04'}}
+        <div class="report-content type-1 border-horizontal">
+            <div class="box border-bottom">
+                <div class="title details-title">病理诊断</div>
+                <div class="con details-table">
+                    <table>
+                        <tr>
+                            <td>标本满意度：{{pathologicDiagnosis.specimenSatisfaction}}</td>
+                            <td>细胞量：{{pathologicDiagnosis.metaplasiaCells}}</td>
+                        </tr>
+                        <tr>
+                            <td>颈管细胞：{{pathologicDiagnosis.cellMass}}</td>
+                            <td>化生细胞：{{pathologicDiagnosis.BacterialTransformation}}</td>
+                        </tr>
+                        <tr>
+                            <td>菌群转变：{{pathologicDiagnosis.neckCanalCell}}</td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </div> 
+            </div>
+            <div class="box border-bottom">
+                <div class="title details-title">细胞学</div>
+                <div class="con details-table">
+                    <table>
+                        <tr>
+                            <td>滴虫感染提示：{{cytology.herpesInfection}}</td>
+                            <td>念珠感染提示：{{cytology.trichomonasInfection}}</td>
+                        </tr>
+                        <tr>
+                            <td>HPV感染提示：{{cytology.candidaInfection}}</td>
+                            <td>疱疹感染提示：{{cytology.HPVInfection}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="box border-bottom">
+                <div class="title details-title">TBS诊断</div>
+                <div class="con">
+                    <p>{{TBSDiagnosis}}</p>
+                </div>
+            </div>
+        </div>
+        {{ /if }}
+    </div>
+</script>
+<div class="widget-bottom-nav">
+    <ul class="container">
+        <li class="item bind-location" data-href="antenatal"><a href="javascript:void(0)">我的产检</a></li>
+        <li class="item bind-location" data-href="waiting_doctor"><a href="javascript:void(0)">候诊</a></li>
+    </ul>
+</div>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="http://yzued.111.com.cn/FFF/zepto/v0.2/style/base.css"/>
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <style>
+        .container {
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        .button {
+            background: #ccc;
+            width: 200px;
+            height: 50px;
+            line-height: 50px;
+            color: #fff;
+        }
+        .box {
+            border: 1px solid #dcdddd;
+            padding: 20px;
+            margin-top: 20px;
+            word-wrap: break-word
+        }
+    </style>
+  </head>
+  <body>
+    <ul class="container">
+        <li class="item">
+            <button class="button" data-type="getPublicKey">getPublicKey</button>
+            <div class="box"></div>
+        </li>
+        <li class="item">
+            <button class="button" data-type="isBindPatientCard">isBindPatientCard</button>
+            <div class="box"></div>
+        </li>
+        <li class="item">
+            <button class="button" data-type="getCustomerInfo">getCustomerInfo</button>
+            <div class="box"></div>
+        </li>
+
+        <li class="item">
+            <button class="button" data-type="getQueueInfo">getQueueInfo</button>
+            <div class="box"></div>
+        </li>
+    </ul>    
+    
+    <script src="http://yzued.111.com.cn/FFF/zepto/v0.2/FFF.fc.template.min.js"></script>
+    <!-- build:js scripts/main.js -->
+    <script src="scripts/main.js"></script>
+    <!-- endbuild -->
+    <script>
+        require(['scripts/pages/api_test'])
+    </script>
+  </body>
+</html>

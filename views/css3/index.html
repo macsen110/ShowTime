@@ -154,11 +154,26 @@
             height: 100vh;
             background-color: blue;         
         }
+        
+        .test-just{
+            text-align: justify;
+            width: 100px;
+        }
+        .test-just > .item {
+            display: inline-block;
+            width: 40%;
+            padding: 10px 0;
+            background-color: red;
+            
+        }
+        
 	</style>
 
 </head>
 <body>
-
+    <ul class="test-just">
+        <li class="item"></li> <li class="item"></li>
+    </ul>
 	<div class="trans" id="watchme">
 		aaaa
 	</div>

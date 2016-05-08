@@ -1,0 +1,74 @@
+<script id="report_list_template" type="text/template">
+    <div class="report-list-container">
+        <header class="header">
+            <i class="icon-sign-left"></i>
+            <em class="cur-num">1</em>/<em class="total-num">{{total}}</em><i class="icon-sign-right"></i>
+        </header>
+        {{if RepType == '01'}}
+        <div class="box border-bottom">
+            <table class="comm-table report-table report-table2">
+                <thead>
+                    <tr>
+                        <td>标记物</td>
+                        <td>结果</td>
+                        <td>单位</td>
+                        <td>矫正值MOM</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{each sampleInformationList as value}}
+                    <tr>
+                        <td>{{value.correctionMOM}}</td>
+                        <td>{{value.result}}</td>
+                        <td>{{value.tag}}</td>
+                        <td>{{value.unit}}</td>
+                    </tr>
+                    {{/each}}
+                    <tr>
+                        <td>11</td>
+                        <td>22</td>
+                        <td>33</td>
+                        <td>44</td>
+                    </tr>
+                    <tr>
+                        <td>11</td>
+                        <td>22</td>
+                        <td>33</td>
+                        <td>44</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {{else if RepType == '02'}}
+        <div class="report-list">
+            <table class="comm-table report-table">
+                <thead>
+                    <tr>
+                        <td>项目</td>
+                        <td>结果</td>
+                        <td>参考值</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>胆红素</td>
+                        <td>--</td>
+                        <td>阴性</td>
+                    </tr>
+                    <tr>
+                        <td>颜色</td>
+                        <td>淡黄</td>
+                        <td>淡黄色-琥珀色</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        {{ /if }}
+    </div>
+</script>
+<div class="widget-bottom-nav">
+    <ul class="container">
+        <li class="item bind-location" data-href="antenatal"><a href="javascript:void(0)">我的产检</a></li>
+        <li class="item bind-location" data-href="waiting_doctor"><a href="javascript:void(0)">候诊</a></li>
+    </ul>
+</div>

@@ -1,0 +1,109 @@
+<script id="wait_unbind_card_template" type="text/html">
+    <div class="unbind-card-container">
+        <a class="widget-tip-box" href="https://h5.shqmxx.com/Template/Resource.aspx?Pri=QM.CSFP.77.DIS.UserManage-Binding&customerId=77&openId={{uid}}&userId=2d8ecdf71a284b1aa51556c9b5f2a43e&CheckOAuth=unAttention&rid=86899&uiserviceId=gh_f6090761f9dc&ForwardUIUserId=oTqovuHDy5NjAboPiXrhTJvls50o&IsMenu=1&applicationId=2b0ff89f27584e3ab81d44d060a4271e&IsMenu=1">
+            <p>绑定就诊卡，智能提醒，轻松候诊</p>
+            <i class="sign"></i>
+        </a>
+        <div class="wrap-list-test">
+            
+            <ul class="list">
+                <li class="item">
+                    <p class="desc"><span class="fr"><i class="icon"></i><em class="address">门诊2楼抽血中心</em></span>验血</p>
+                </li>
+                <li class="item">
+                    <p class="desc"><span class="fr"><i class="icon"></i><em class="address">门诊1楼B超</em></span>B超</p>
+                </li>
+                <li class="item">
+                    <p class="desc"><span class="fr"><i class="icon"></i><em class="address">门诊1楼标本收集处</em></span>尿检</p>
+                </li>
+                <li class="item">
+                    <p class="desc"><span class="fr"><i class="icon"></i><em class="address">门诊1楼产科A区</em></span>胎心</p>
+                </li>
+                <li class="item">
+                    <p class="desc"><span class="fr"><i class="icon"></i><em class="address">门诊2楼心电图室</em></span>心电图</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</script>
+<script id="wait_bind_card_template" type="text/html">
+    <div class="bind-card-container">
+        <div class="widget-head-avatar">
+            <img class="avatar" src="images/icon_avatar_2.png" alt="avatar">
+            <div class="content">
+                <p>{{isToday ? '今日产检' : '下次产检'}}<em class="status">已孕{{weekPregnant}}周</em></p>
+                <p>{{queueDate}} {{checkWeek}} {{checkTime}}</p>
+            </div>
+        </div>
+        {{if isToday }}
+        <div class="tip-container">
+            <i class="icon"></i>
+            已推荐候诊顺序，若有过号项请咨询护士台
+        </div>
+        <ul class="list">
+            {{each queueList}}
+            {{if $value.id != 5 && $value.id !=6 }}
+            <li class="item type-{{$value.id}} status-{{$value.queueStatus}} {{$value.queueNumberCurrent == $value.queueNumberMine ? 'cur' : ''}}">
+                <i class="icon"></i>
+                <div class="content">
+                    <p class="desc"><em class="test-item-key">检查项目</em>{{if $value.queueStatus == 1}}<strong>(请尽快取号)</strong>{{/if}}<em class="icon icon-location"></em></p>
+                    <p class="desc">{{$value.name}}<span class="fr">{{$value.departmentAddress}}</span></p>
+                    {{if $value.queueStatus != 1}}
+                    
+                    <ul class="queue-list">
+                            <li class="item">
+                            <p>{{$value.queueNumberCurrent}}</p>
+                            <p>当前叫号</p>
+                        </li>
+                        <li class="item">
+                            <p>{{$value.queueNumberMine}}</p>
+                            <p>我的诊号</p>
+                        </li>
+                        <li class="item">
+                            {{if $value.queueStatus == 2}}
+                            <p>{{$value.queueNumberCurrent == $value.queueNumberMine ? '已到号' : $value.queueWaitingNumber}}</p> 
+                            {{/if}}
+                            {{if $value.queueStatus == 3}}<p>已过号</p> {{/if}}
+                            {{if $value.queueStatus == 4}}<p>已完成</p> {{/if}}
+                            {{if $value.queueStatus == 5}}<p>已到期</p> {{/if}}
+                            <p>前面人数</p>
+                        </li>
+                    </ul>
+                    {{/if}}
+                </div>
+            </li>
+            {{/if}}
+            {{if $value.id == 5 || $value.id ==6}}
+            <li class="item type-{{$value.id}}">
+                <i class="icon"></i>
+                <div class="content">
+                    <p class="desc"><em class="test-item-key">检查项目</em><strong>(现场排队)</strong><em class="icon icon-location"></em></p>
+                    <p class="desc">{{$value.name}}<span class="fr">{{$value.departmentAddress}}</span></p>
+                </div>
+            </li>
+            {{/if}}
+            {{/each}}
+        </ul>
+        {{/if}}
+        {{if !isToday }}
+        <ul class="list">
+            {{each queueList}}
+            <li class="item type-{{$value.id}} status-{{$value-queueStatus}}">
+                <i class="icon"></i>
+                <div class="content">
+                    <p class="desc"><em class="test-item-key">检查项目</em>{{if $value.id == 5 || $value.id == 6}}<strong>(现场排队)</strong>{{/if}}<em class="icon icon-location"></em></p>
+                    <p class="desc">{{$value.name}}<span class="fr">{{$value.departmentAddress}}</span></p>
+                    
+                </div>
+            </li>
+            {{/each}}
+        </ul>
+        {{/if}}
+    </div>
+</script>
+<div class="widget-bottom-nav">
+    <ul class="container">
+        <li class="item bind-location" data-href="antenatal"><a href="javascript:void(0)">我的产检</a></li>
+        <li class="item active" ><a href="javascript:void(0)">候诊</a></li>
+    </ul>
+</div>

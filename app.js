@@ -2,6 +2,7 @@ var url  = require("url"),
     http = require('http'),
     readUri = require('./readUri'),
     server = new http.Server();
+    global.api = {yfy: {emStatus: 0}}
 server.on('request', function (req,res,next) {
     var pathname=__dirname+url.parse(req.url).pathname;
     var api = req.url;
@@ -21,7 +22,10 @@ function handleApi(url,req, res) {
         var research = require('./api/research');
         return research.handle(url, req, res);
     }
-    
+    else if (url.indexOf('/yfy/') !== -1) {
+        var yfy = require('./api/yfy');
+        return yfy.handle(url, req, res);
+    }
     switch (url) {
         case 'promise' : 
             var demo = require('./api/reactdemo');
