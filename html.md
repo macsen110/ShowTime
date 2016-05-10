@@ -37,7 +37,8 @@ HTML和XML结合，使用XML 1.0改写自HTML 4.01的独立语言。它不再被
 
 ###下面我们交流下网页的三大要素之一  结构层###
 
-一.  doctype并不是一个HTML标签；它只是一个指令，告知浏览器当前页面是遵循哪种标记语言编写的。   
+一.  文档类型声明（doctype声明）应被置于HTML文档的开头，标签之前。doctype并不是一个HTML标签；它只是一个指令，告知浏览器当前页面是遵循哪种标记语言编写的。   
+
 HTML 4.01严格版（Strict）
 ><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">  
 
@@ -55,6 +56,7 @@ HTML 4.01过渡版（Transitional）
 ><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 
 HTML5
+><!DOCTYPE html>
 
 
 
