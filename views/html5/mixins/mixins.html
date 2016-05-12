@@ -3,42 +3,85 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Mixins</title>
+    <link type="text/css" rel="stylesheet" href="/style/common.css" />
+    <style>
+        body {
+            background-color: #fff;
+        }
+        .test-page {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-page .box {
+            border: 1px solid #dcdddd;
+            margin-bottom: 20px;
+        }
+        .test-page .box .title {
+            line-height: 40px;
+            background-color: #dcdddd;
+            padding: 0 0 0 20px;
+            
+        }
+        .test-page .container {
+            padding: 20px;
+            background-color: #fff;
+        }
+    </style>
 </head>
 <body>
-    <p class="title">Accordion</p>
-    <details>
-        <summary>一级目录</summary>  
-        <ul>
-            <li>二级菜单</li>
-            <li>二级菜单</li>
-            <li>二级菜单</li>
-        </ul> 
-        <details>
-            <summary>二级菜单</summary>  
-            <ul>
-                <li>三级菜单</li>
-                <li>三级菜单</li>
-                <li>三级菜单</li>
-            </ul> 
-        </details>  
-    </details>
-
-    <p class="title">datalist</p>
-    <input type="text" list="pasta">
-    <datalist id="pasta">
-        <option>Bavette</option>
-        <option>Cannelloni</option>
-        <option>Fiorentine</option>
-        <option>Gnocchi</option>
-        <option>Pappardelle</option>
-        <option>Penne lisce</option>
-        <option>Pici</option>
-        <option>Rigatoni</option>
-        <option>Spaghetti</option>
-        <option>Tagliatelle</option>
-    </datalist>
-    <p class="title">srcset</p>
-    <img src="../images/hero.png" srcset="../images/icon_avatar_1.png 2x"> 
-    <a href="../images/hero.png" download="hreo.png">down load</a>
+    <div class="test-page">
+        <div class="box">
+            <h3 class="title">Accordion</h3>
+            <div class="container">
+                <details>
+                    <summary>一级目录</summary>  
+                    <ul>
+                        <li>二级菜单</li>
+                        <li>二级菜单</li>
+                        <li>二级菜单</li>
+                    </ul> 
+                    <details>
+                        <summary>二级菜单</summary>  
+                        <ul>
+                            <li>三级菜单</li>
+                            <li>三级菜单</li>
+                            <li>三级菜单</li>
+                        </ul> 
+                    </details>  
+                </details>
+                
+            </div>
+        </div>
+        <div class="box">
+            <p class="title">datalist</p>
+            <div class="container">
+                <input type="text" list="pasta">
+                <datalist id="pasta">
+                    <option>Bavette</option>
+                    <option>Cannelloni</option>
+                    <option>Fiorentine</option>
+                    <option>Gnocchi</option>
+                    <option>Pappardelle</option>
+                    <option>Penne lisce</option>
+                    <option>Pici</option>
+                    <option>Rigatoni</option>
+                    <option>Spaghetti</option>
+                    <option>Tagliatelle</option>
+                </datalist>
+                
+            </div>
+        </div>
+        <div class="box">
+            <p class="title">srcset</p>
+            <div class="container">
+                <img src="../images/hero.png" srcset="../images/icon_avatar_1.png 200w" size="(min-width: 400px) 200px, 50vw">
+            </div>
+        </div>
+        <div class="box">
+            <h3 class="title">download</h3>
+            <div class="container"><a href="../images/hero.png" download="hreo.png" ></a></div>
+        </div>
+    </div>
+    
 </body>
 </html>
