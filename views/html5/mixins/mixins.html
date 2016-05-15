@@ -74,13 +74,22 @@
         <div class="box">
             <p class="title">srcset</p>
             <div class="container">
-                <img src="../images/hero.png" srcset="../images/icon_avatar_1.png 200w" size="(min-width: 400px) 200px, 50vw">
+                <img src="../images/hero.png" sizes="(min-width: 600px) 200px, 50vw" srcset="../images/icon_avatar_1.png 2x" >
+                <img src="../images/hero.png" 
+      alt="Clock" 
+      srcset="../images/hero.png, ../images/icon_avatar_1.png"
+      sizes="(min-width: 600px) 200px, 50vw">
             </div>
         </div>
         <div class="box">
             <h3 class="title">download</h3>
             <div class="container"><a href="../images/hero.png" download="hreo.png" ></a></div>
         </div>
+        <picture>
+            <source srcset="../images/hero.png" media="(max-width: 400px)" />
+            <source srcset="../images/icon_avatar_1.png" />
+            <img src="../images/icon_avatar_1.png" alt="">
+        </picture>
     </div>
     
 </body>

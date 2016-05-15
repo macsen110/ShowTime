@@ -60,6 +60,10 @@ Geolocation API：用户可共享地理位置，并在Web应用的协助下享�
 文件API：处理文件上传和操纵文件<br />
 目录和文件系统：这个API是为了满足客户端在没有好的数据库支持情况下存储要求<br />
 文件写入：从网络应用程序向文件里写内容<br />
+全屏API
+requestAnimationFrame
+web animation APi
+page visibility api 多tab 下切换激活还是隐藏
 所以说,html5 的到来将取代老牌flash 并不是没有道理
 
 10. 案例分析<br />
@@ -76,3 +80,9 @@ drag, <br />
 `<svg></svg>`<br />
 
 11. ending...
+
+12. input file 控件在ios上获取文件时可以调用摄像头, 在android上调用不了, input 中file accect 属性
+13. 在支持 srcset 的用户代理中，当使用 'w' 描述符时，src 属性会被忽略。当匹配了媒体条件 (min-width: 600px) 时，图像将宽 200px，否则宽 50vw（视图宽度的50%）。
+14. 前端基础知识资源
+https://developer.mozilla.org/zh-CN/docs/Web
+http://www.w3school.com.cn/
