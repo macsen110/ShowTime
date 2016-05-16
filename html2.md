@@ -7,12 +7,16 @@
     <head>
         <meta charset="UTF-8">
         <title>I am title</title>
-        <link rel="stylesheet" type= "text/css" href="/style/common.css">
+        <link rel="stylesheet" type= "text/css" href="common.css">
     </head>
     <body>
-        <header></header>
-        <section></section>
-        <footer></footer>
+        <div class="container">
+            <header></header>
+            <section></section>
+            <footer></footer>
+        </div>
+        <script src="common.js"></script>
+        
     </body>
     </html>
     
