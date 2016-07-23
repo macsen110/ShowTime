@@ -3,9 +3,101 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Mixins</title>
+    <link type="text/css" rel="stylesheet" href="/style/common.css" />
+    <style>
+        body {
+            background-color: #fff;
+        }
+        .test-page {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-page .box {
+            border: 1px solid #dcdddd;
+            margin-bottom: 20px;
+        }
+        .test-page .box .title {
+            line-height: 40px;
+            background-color: #dcdddd;
+            padding: 0 0 0 20px;
+            
+        }
+        .test-page .container {
+            padding: 20px;
+            background-color: #fff;
+        }
+    </style>
 </head>
 <body>
+<<<<<<< HEAD
     
+=======
+<<<<<<< HEAD
+    <div class="test-page">
+        <div class="box">
+            <h3 class="title">Accordion</h3>
+            <div class="container">
+                <details>
+                    <summary>一级目录</summary>  
+                    <ul>
+                        <li>二级菜单</li>
+                        <li>二级菜单</li>
+                        <li>二级菜单</li>
+                    </ul> 
+                    <details>
+                        <summary>二级菜单</summary>  
+                        <ul>
+                            <li>三级菜单</li>
+                            <li>三级菜单</li>
+                            <li>三级菜单</li>
+                        </ul> 
+                    </details>  
+                </details>
+                
+            </div>
+        </div>
+        <div class="box">
+            <p class="title">datalist</p>
+            <div class="container">
+                <input type="text" list="pasta">
+                <datalist id="pasta">
+                    <option>Bavette</option>
+                    <option>Cannelloni</option>
+                    <option>Fiorentine</option>
+                    <option>Gnocchi</option>
+                    <option>Pappardelle</option>
+                    <option>Penne lisce</option>
+                    <option>Pici</option>
+                    <option>Rigatoni</option>
+                    <option>Spaghetti</option>
+                    <option>Tagliatelle</option>
+                </datalist>
+                
+            </div>
+        </div>
+        <div class="box">
+            <p class="title">srcset</p>
+            <div class="container">
+                <img src="../images/hero.png" sizes="(min-width: 600px) 200px, 50vw" srcset="../images/icon_avatar_1.png 2x" >
+                <img src="../images/hero.png" 
+      alt="Clock" 
+      srcset="../images/hero.png, ../images/icon_avatar_1.png"
+      sizes="(min-width: 600px) 200px, 50vw">
+            </div>
+        </div>
+        <div class="box">
+            <h3 class="title">download</h3>
+            <div class="container"><a href="../images/hero.png" download="hreo.png" ></a></div>
+        </div>
+        <picture>
+            <source srcset="../images/hero.png" media="(max-width: 400px)" />
+            <source srcset="../images/icon_avatar_1.png" />
+            <img src="../images/icon_avatar_1.png" alt="">
+        </picture>
+    </div>
+    
+=======
+>>>>>>> 2dd097c490e8a853bc6294067672b0e8cd9e9d16
     <p class="title">Accordion</p>
     <details>
         <summary>一级目录</summary>  
@@ -43,5 +135,6 @@
     
     <input type="date" style="width: 100px; height: 30px; background-color: red" />
     <img src="../images/hero.png" srcset="../images/monster.png 2x"> 
+>>>>>>> 500588ccf61916a1399d7529d7c2285f196b17c7
 </body>
 </html>
