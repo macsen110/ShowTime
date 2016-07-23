@@ -1,5 +1,5 @@
 /**
- * Created by wudi on 15/11/30.
+ * Created by Macsen110 on 15/11/30.
  */
 define(['zepto'], function($){  
     //初始化page  

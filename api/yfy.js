@@ -8,7 +8,7 @@ exports.handle = function (api, req, res) {
         }), 'utf-8')
     }
     else if (api.indexOf('yfy/infanthospital/initCustomer') !== -1) {
-        emStatus = 1;
+        
         res.end(JSON.stringify({
             status: 0,
             emStatus:2,

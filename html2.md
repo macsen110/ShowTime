@@ -80,3 +80,5 @@ drag, <br />
 `<svg></svg>`<br />
 
 11. ending...
+
+12. <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
