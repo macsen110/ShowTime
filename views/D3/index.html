@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>D3</title>
+    <link rel="stylesheet" type= "text/css" href="/style/common.css">
+
+</head>
+<body>
+    <script src="/script/d3/d3.v4.min.js"></script>
+    <script>
+        d3.select("body").append("h1")
+            .text("Hello, world!")
+            .style("text-align", "center")
+            .style("line-height", "320px")
+            .style("font-size", "100px")
+            .style("transform", "rotate(-180deg) scale(0.001, 0.001)")
+            .transition()
+            .duration(1500)
+            .style("transform", null);
+    </script>
+</body>
+</html>
