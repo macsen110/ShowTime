@@ -20,18 +20,33 @@
 			background: #f7f7f7;
 			color: #444;
 		}
+		tip {
+			color: red
+		}
 	</style>
 </head>
 <body>
-	<input type="text" id="regDemo">
-	<button id="regBtn">click</button>
+	<ul class="list">
+		<li class="item">
+			<input type="text" id="reg_Email_ipt" placeholder="reg email"><span class="tip"></span>
+			<button id="reg_Email_btn">click</button>
+		</li>
+	</ul>
+	
 	<script type="text/javascript">
-		var reg = /\w+@\w+\.\w+/i;
-		var regBtn = document.getElementById('regBtn');
-		regBtn.addEventListener('click', function () {
-			var value = document.getElementById('regDemo').value;
-			console.log(reg.test(value));
+		/**
+		 * *valid Email
+		 * *
+		 * ***************/
+		var regEmail = /\w+@\w+\.\w+/i;
+		var regEmailBtn = document.getElementById('reg_Email_btn');
+		var regEmailIpt = document.getElementById('reg_Email_ipt');
+		regEmailBtn.addEventListener('click', function () {
+			var value = regEmailIpt.value;
+			console.log(regEmailIpt.nextSiblingElement)
+			regEmailIpt.nextElementSibling.innerHTML = regEmail.test(value)
 		})
+		var regLastWords = /\//;
 	</script>
 </body>
 </html>
