@@ -1,0 +1,23 @@
+{
+  "name": "async_await",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "wonderhwang",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-loader": "^6.4.1",
+    "babel-preset-env": "^1.4.0",
+    "promise-polyfill": "^6.0.2",
+    "react": "^15.6.1",
+    "regenerator-runtime": "^0.10.3",
+    "webpack": "^2.4.1"
+  },
+  "dependencies": {
+    "underscore": "^1.8.3"
+  }
+}
