@@ -1,7 +1,6 @@
 exports.read = function (pathname, res) {
 	var fs = require('fs');
 	var path = require('path');
-    console.log(11)
     fs.exists(pathname, function (exists) {
         if (exists) {
             res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");

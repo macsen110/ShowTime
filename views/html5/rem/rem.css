@@ -1,0 +1,20 @@
+.cpt{
+    width: 0.5rem;
+    height: 0.5rem;
+    background-image: url(rem.png);
+    background-size: 2rem 100%;
+    border: 1px solid #dcdddd;
+
+}
+.cpt.status1{
+    background-position: 0 0;
+}
+.cpt.status2{
+    background-position: -0.5rem 0;
+}
+.cpt.status3{
+    background-position: -1rem 0;
+}
+.cpt.status4{
+    background-position: -1.5rem 0;
+}

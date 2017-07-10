@@ -4,7 +4,6 @@ class Greeter {
 	constructor(message) {
 		this.message = message;
 	}
-	
 	greet() {
 		var element = document.querySelector('#message');
 		element.innerHTML = this.message;
@@ -115,7 +114,7 @@ var {foo, bar} = {foo:'xxxx', bar:'yyyy'};
 
 if (2>1) {
 	let bLet = [3,2,1];
-	bLet.forEach(x => {console.log('箭头函数',x);5})
+	bLet.forEach(x => {console.log('箭头函数',x);})
 }
 
 

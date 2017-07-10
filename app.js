@@ -1,8 +1,9 @@
 var url  = require("url"),
     http = require('http'),
     readUri = require('./readUri'),
+    net = require('net'),
     server = new http.Server();
-    global.api = {yfy: {emStatus: 0}}
+    global.api = {yfy: {emStatus: 0}};
 server.on('request', function (req,res,next) {
     var pathname=__dirname+url.parse(req.url).pathname;
     var api = req.url;
