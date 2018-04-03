@@ -201,7 +201,7 @@
 			key: 'countLeftTime',
 			value: function countLeftTime(secondsRemaining) {
 				var dd = parseInt(secondsRemaining / 60 / 60 / 24 % 60); //计算剩余的天数
-				var hh = parseInt(secondsRemaining / 3600 % 24); //计算剩余的小时数
+				var hh = parseInt(secondsRemaining / 3600); //计算剩余的小时数
 				var mm = parseInt(secondsRemaining / 60) % 60; //计算剩余的分钟数
 				var ss = parseInt(secondsRemaining % 60, 10); //计算剩余的秒数
 				return {
